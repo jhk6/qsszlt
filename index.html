@@ -36,6 +36,8 @@
   button{font-family:inherit;cursor:pointer;border:none;background:none}
   input,select,textarea{font-family:inherit;font-size:inherit;outline:none}
 
+  mark{background:#fff2b0;color:inherit;padding:0 2px;border-radius:3px}
+
   .container{max-width:1160px;margin:0 auto;padding:0 20px}
 
   /* ============ 顶部导航 ============ */
@@ -72,10 +74,15 @@
     display:flex;align-items:center;gap:8px;
     background:#f0f4f2;border:1px solid transparent;
     padding:8px 14px;border-radius:999px;
-    transition:.2s;width:230px;
+    transition:.2s;width:250px;
   }
   .search:focus-within{background:#fff;border-color:var(--green-500);box-shadow:0 0 0 3px rgba(34,160,107,.12)}
-  .search svg{flex-shrink:0;color:#8fa39b}
+  .search svg{flex-shrink:0}
+  .search-btn{
+    display:grid;place-items:center;color:#8fa39b;
+    flex-shrink:0;transition:.18s;
+  }
+  .search-btn:hover{color:var(--green-600)}
   .search input{border:none;background:none;width:100%;font-size:14px;color:var(--ink)}
   .search input::placeholder{color:#9db0a8}
 
@@ -235,6 +242,21 @@
     color:#fff;border-color:transparent;font-weight:600;
   }
 
+  /* ============ 搜索结果页 ============ */
+  .search-view{display:none;padding:28px 0 56px}
+  .back-link{
+    display:inline-flex;align-items:center;gap:6px;
+    font-size:13.5px;color:var(--muted);
+    padding:7px 14px;border-radius:10px;
+    background:var(--card);border:1px solid var(--line);
+    transition:.18s;margin-bottom:18px;
+  }
+  .back-link:hover{color:var(--green-700);border-color:var(--green-500);transform:translateX(-2px)}
+  .search-view h2{font-size:22px;letter-spacing:.3px;margin-bottom:6px}
+  .search-meta{font-size:13.5px;color:var(--muted)}
+  .search-meta b{color:var(--green-700);font-weight:600}
+  .search-view .post-list{margin-top:18px}
+
   /* ============ 侧栏 ============ */
   .side-col{display:flex;flex-direction:column;gap:16px}
 
@@ -327,13 +349,13 @@
   }
   @media (max-width:820px){
     .nav{display:none}
-    .search{width:150px}
+    .search{width:180px}
     .hero h1{font-size:24px}
   }
   @media (max-width:640px){
     .header-inner{height:58px;gap:12px}
     .logo-text small{display:none}
-    .search{width:120px;padding:7px 11px}
+    .search{width:130px;padding:7px 11px}
     .btn-ghost.login{display:none}
     .hero{padding:32px 0}
     .hero-stats{width:100%}
@@ -352,7 +374,7 @@
 <!-- ================= 顶部导航 ================= -->
 <header class="site-header">
   <div class="container header-inner">
-    <a href="#" class="logo">
+    <a href="#/" class="logo">
       <span class="logo-mark">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M3 20l6.2-10.5 4 6.2 2.8-4 5 8.3z"/>
@@ -363,122 +385,141 @@
     </a>
 
     <nav class="nav">
-      <a href="#" class="active">首页</a>
+      <a href="#/" class="active">首页</a>
       <a href="#">板块</a>
       <a href="#">排行榜</a>
       <a href="#">校园动态</a>
     </nav>
 
     <div class="header-right">
-      <label class="search">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
-          <circle cx="11" cy="11" r="7"/><path d="M20 20l-3.2-3.2"/>
-        </svg>
-        <input id="searchInput" type="search" placeholder="搜索帖子 / 话题">
-      </label>
+      <form class="search" id="searchForm" role="search">
+        <button type="submit" class="search-btn" aria-label="搜索">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+            <circle cx="11" cy="11" r="7"/><path d="M20 20l-3.2-3.2"/>
+          </svg>
+        </button>
+        <input id="searchInput" type="search" placeholder="搜索帖子 / 话题" autocomplete="off">
+      </form>
       <button class="btn btn-ghost login">登录</button>
       <button class="btn btn-primary" data-dev>发帖</button>
     </div>
   </div>
 </header>
 
-<!-- ================= Hero ================= -->
-<section class="hero">
-  <div class="container hero-inner">
-    <div>
-      <h1>欢迎来到 <span>青山实中论坛</span></h1>
-      <p>青山实验中学师生交流社区 —— 分享学习心得，记录校园生活，结识志同道合的同学。</p>
-      <div class="hero-tags">
-        <span># 学习交流</span>
-        <span># 校园生活</span>
-        <span># 社团活动</span>
-        <span># 二手市场</span>
+<!-- ================= 首页视图 ================= -->
+<div id="homeView">
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container hero-inner">
+      <div>
+        <h1>欢迎来到 <span>青山实中论坛</span></h1>
+        <p>青山实验中学师生交流社区 —— 分享学习心得，记录校园生活，结识志同道合的同学。</p>
+        <div class="hero-tags">
+          <span># 学习交流</span>
+          <span># 校园生活</span>
+          <span># 社团活动</span>
+          <span># 二手市场</span>
+        </div>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><b>2,486</b><small>主题</small></div>
+        <div class="hero-stat"><b>18,932</b><small>帖子</small></div>
+        <div class="hero-stat"><b>1,205</b><small>会员</small></div>
       </div>
     </div>
-    <div class="hero-stats">
-      <div class="hero-stat"><b>2,486</b><small>主题</small></div>
-      <div class="hero-stat"><b>18,932</b><small>帖子</small></div>
-      <div class="hero-stat"><b>1,205</b><small>会员</small></div>
+  </section>
+
+  <!-- 主体 -->
+  <main class="container layout">
+    <!-- 左：帖子区 -->
+    <div class="main-col">
+      <div class="toolbar">
+        <div class="cats" id="cats"></div>
+        <div class="sort">
+          <button class="on">最新</button>
+          <button>热门</button>
+        </div>
+      </div>
+
+      <div class="post-list" id="postList"></div>
+
+      <div class="pager">
+        <button>上一页</button>
+        <button class="on">1</button>
+        <button>2</button>
+        <button>3</button>
+        <button>…</button>
+        <button>下一页</button>
+      </div>
     </div>
+
+    <!-- 右：侧栏 -->
+    <aside class="side-col">
+      <div class="card post-cta">
+        <h3>一起来聊聊吧</h3>
+        <p>把你的问题、心得和校园见闻分享给同学</p>
+        <button class="btn" data-dev>✏️ 发布新帖</button>
+      </div>
+
+      <div class="card">
+        <h3>论坛数据</h3>
+        <div class="stat-grid">
+          <div class="stat-item"><b>18,932</b><small>帖子总数</small></div>
+          <div class="stat-item"><b>1,205</b><small>注册会员</small></div>
+          <div class="stat-item"><b>36</b><small>今日新帖</small></div>
+          <div class="stat-item"><b>128</b><small>当前在线</small></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>今日热议</h3>
+        <div class="hot-list">
+          <div class="hot-item"><span class="no">1</span><a href="#">食堂三楼新开的麻辣香锅好吃吗？在线等</a></div>
+          <div class="hot-item"><span class="no">2</span><a href="#">高二数学圆锥曲线大题有没有通用思路？</a></div>
+          <div class="hot-item"><span class="no">3</span><a href="#">校运会照片合集｜青春就是要燃起来</a></div>
+          <div class="hot-item"><span class="no">4</span><a href="#">求组队｜数学建模社招新啦，还差两位队友</a></div>
+          <div class="hot-item"><span class="no">5</span><a href="#">英语听力总是跟不上怎么办？</a></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>活跃同学</h3>
+        <div class="user-list" id="userList"></div>
+      </div>
+
+      <div class="card">
+        <h3>热门标签</h3>
+        <div class="tag-cloud">
+          <a href="#">#期中复习</a>
+          <a href="#">#社团招新</a>
+          <a href="#">#校园美食</a>
+          <a href="#">#错题本</a>
+          <a href="#">#运动会</a>
+          <a href="#">#晚自习</a>
+          <a href="#">#英语角</a>
+          <a href="#">#二手书</a>
+        </div>
+      </div>
+    </aside>
+  </main>
+</div>
+
+<!-- ================= 搜索结果视图 ================= -->
+<div class="search-view" id="searchView">
+  <div class="container">
+    <a href="#/" class="back-link">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M15 18l-6-6 6-6"/>
+      </svg>
+      返回首页
+    </a>
+
+    <h2>搜索结果</h2>
+    <p class="search-meta" id="searchMeta"></p>
+
+    <div class="post-list" id="searchResults"></div>
   </div>
-</section>
-
-<!-- ================= 主体 ================= -->
-<main class="container layout">
-
-  <!-- 左：帖子区 -->
-  <div class="main-col">
-    <div class="toolbar">
-      <div class="cats" id="cats"></div>
-      <div class="sort">
-        <button class="on">最新</button>
-        <button>热门</button>
-      </div>
-    </div>
-
-    <div class="post-list" id="postList"></div>
-
-    <div class="pager">
-      <button>上一页</button>
-      <button class="on">1</button>
-      <button>2</button>
-      <button>3</button>
-      <button>…</button>
-      <button>下一页</button>
-    </div>
-  </div>
-
-  <!-- 右：侧栏 -->
-  <aside class="side-col">
-
-    <div class="card post-cta">
-      <h3>一起来聊聊吧</h3>
-      <p>把你的问题、心得和校园见闻分享给同学</p>
-      <button class="btn" data-dev>✏️ 发布新帖</button>
-    </div>
-
-    <div class="card">
-      <h3>论坛数据</h3>
-      <div class="stat-grid">
-        <div class="stat-item"><b>18,932</b><small>帖子总数</small></div>
-        <div class="stat-item"><b>1,205</b><small>注册会员</small></div>
-        <div class="stat-item"><b>36</b><small>今日新帖</small></div>
-        <div class="stat-item"><b>128</b><small>当前在线</small></div>
-      </div>
-    </div>
-
-    <div class="card">
-      <h3>今日热议</h3>
-      <div class="hot-list">
-        <div class="hot-item"><span class="no">1</span><a href="#">食堂三楼新开的麻辣香锅好吃吗？在线等</a></div>
-        <div class="hot-item"><span class="no">2</span><a href="#">高二数学圆锥曲线大题有没有通用思路？</a></div>
-        <div class="hot-item"><span class="no">3</span><a href="#">校运会照片合集｜青春就是要燃起来</a></div>
-        <div class="hot-item"><span class="no">4</span><a href="#">求组队｜数学建模社招新啦，还差两位队友</a></div>
-        <div class="hot-item"><span class="no">5</span><a href="#">英语听力总是跟不上怎么办？</a></div>
-      </div>
-    </div>
-
-    <div class="card">
-      <h3>活跃同学</h3>
-      <div class="user-list" id="userList"></div>
-    </div>
-
-    <div class="card">
-      <h3>热门标签</h3>
-      <div class="tag-cloud">
-        <a href="#">#期中复习</a>
-        <a href="#">#社团招新</a>
-        <a href="#">#校园美食</a>
-        <a href="#">#错题本</a>
-        <a href="#">#运动会</a>
-        <a href="#">#晚自习</a>
-        <a href="#">#英语角</a>
-        <a href="#">#二手书</a>
-      </div>
-    </div>
-
-  </aside>
-</main>
+</div>
 
 <!-- ================= 页脚 ================= -->
 <footer class="site-footer">
@@ -564,8 +605,21 @@ function escapeHTML(str){
   }[s]));
 }
 
+function escapeRegExp(s){
+  return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+/* 关键词高亮（先转义再匹配，避免 XSS） */
+function highlight(text, q){
+  const safe = escapeHTML(text);
+  if (!q) return safe;
+  const kw = escapeRegExp(escapeHTML(q));
+  if (!kw) return safe;
+  return safe.replace(new RegExp('(' + kw + ')', 'gi'), '<mark>$1</mark>');
+}
+
 /* ================= 状态 ================= */
-const state = { cat:'全部', q:'' };
+const state = { cat:'全部' };
 
 /* ================= 渲染分类 ================= */
 const catsEl = document.getElementById('cats');
@@ -578,35 +632,13 @@ catsEl.addEventListener('click', e => {
   if (!btn) return;
   state.cat = btn.dataset.cat;
   [...catsEl.children].forEach(b => b.classList.toggle('active', b === btn));
-  render();
+  renderHome();
 });
 
-/* ================= 渲染帖子 ================= */
-const postListEl = document.getElementById('postList');
-
-function render(){
-  let list = posts.slice();
-
-  if (state.cat !== '全部') list = list.filter(p => p.category === state.cat);
-
-  if (state.q.trim()){
-    const q = state.q.trim().toLowerCase();
-    list = list.filter(p =>
-      p.title.toLowerCase().includes(q) ||
-      p.excerpt.toLowerCase().includes(q) ||
-      p.author.toLowerCase().includes(q)
-    );
-  }
-
-  // 置顶优先
-  list.sort((a, b) => (b.top ? 1 : 0) - (a.top ? 1 : 0));
-
-  if (!list.length){
-    postListEl.innerHTML = `<div class="empty">😶 没有找到相关帖子，换个关键词试试吧</div>`;
-    return;
-  }
-
-  postListEl.innerHTML = list.map(p => `
+/* ================= 帖子卡片模板 ================= */
+function postCardHTML(p, q){
+  const hl = t => highlight(t, q);
+  return `
     <article class="post">
       <div class="avatar" style="background:${avatarColor(p.author)}">${escapeHTML(p.author[0])}</div>
       <div class="post-main">
@@ -614,9 +646,9 @@ function render(){
           ${p.top ? '<span class="badge badge-top">置顶</span>' : ''}
           ${p.essence ? '<span class="badge badge-essence">精华</span>' : ''}
           ${p.hot ? '<span class="badge badge-hot">热</span>' : ''}
-          <a href="#">${escapeHTML(p.title)}</a>
+          <a href="#">${hl(p.title)}</a>
         </div>
-        <p class="post-excerpt">${escapeHTML(p.excerpt)}</p>
+        <p class="post-excerpt">${hl(p.excerpt)}</p>
         <div class="post-meta">
           <span class="cat">${escapeHTML(p.category)}</span>
           <span>${escapeHTML(p.author)}</span>
@@ -631,30 +663,27 @@ function render(){
         </button>
       </div>
     </article>
-  `).join('');
+  `;
 }
 
-/* ================= 点赞（事件委托） ================= */
-postListEl.addEventListener('click', e => {
-  const btn = e.target.closest('.like');
-  if (!btn) return;
-  e.preventDefault();
+/* ================= 渲染首页帖子 ================= */
+const postListEl = document.getElementById('postList');
 
-  const post = posts.find(p => p.id === Number(btn.dataset.id));
-  if (!post) return;
+function renderHome(){
+  let list = posts.slice();
 
-  const active = btn.classList.toggle('active');
-  post.likes += active ? 1 : -1;
+  if (state.cat !== '全部') list = list.filter(p => p.category === state.cat);
 
-  btn.querySelector('.heart').textContent = active ? '♥' : '♡';
-  btn.querySelector('.num').textContent = post.likes;
-});
+  // 置顶优先
+  list.sort((a, b) => (b.top ? 1 : 0) - (a.top ? 1 : 0));
 
-/* ================= 搜索 ================= */
-document.getElementById('searchInput').addEventListener('input', e => {
-  state.q = e.target.value;
-  render();
-});
+  if (!list.length){
+    postListEl.innerHTML = `<div class="empty">😶 该板块暂时还没有帖子</div>`;
+    return;
+  }
+
+  postListEl.innerHTML = list.map(p => postCardHTML(p, '')).join('');
+}
 
 /* ================= 活跃用户 ================= */
 document.getElementById('userList').innerHTML = users.map(u => `
@@ -683,14 +712,115 @@ document.querySelectorAll('[data-dev]').forEach(b =>
   b.addEventListener('click', () => toast('🚧 发帖功能正在开发中～'))
 );
 
+/* ================= 点赞（全局委托，首页 + 搜索页通用） ================= */
+document.addEventListener('click', e => {
+  const btn = e.target.closest('.like');
+  if (!btn) return;
+  e.preventDefault();
+
+  const post = posts.find(p => p.id === Number(btn.dataset.id));
+  if (!post) return;
+
+  const active = btn.classList.toggle('active');
+  post.likes += active ? 1 : -1;
+
+  // 同一篇帖子的两个视图按钮同步（一般只存在一个）
+  document.querySelectorAll('.like[data-id="' + post.id + '"]').forEach(b => {
+    b.classList.toggle('active', active);
+    b.querySelector('.heart').textContent = active ? '♥' : '♡';
+    b.querySelector('.num').textContent = post.likes;
+  });
+});
+
 /* ================= 阻止 href="#" 链接跳转（全局，静默） ================= */
 document.addEventListener('click', e => {
   const a = e.target.closest('a[href="#"]');
   if (a) e.preventDefault();
 });
 
+/* ================= 视图切换 & 搜索路由 ================= */
+const homeView      = document.getElementById('homeView');
+const searchView    = document.getElementById('searchView');
+const searchResults = document.getElementById('searchResults');
+const searchMeta    = document.getElementById('searchMeta');
+const searchForm    = document.getElementById('searchForm');
+const searchInput   = document.getElementById('searchInput');
+
+function showHome(){
+  searchView.style.display = 'none';
+  homeView.style.display = '';
+  document.title = '青山实中论坛 · 青山实验中学师生交流社区';
+}
+
+function showSearch(q){
+  homeView.style.display = 'none';
+  searchView.style.display = 'block';
+  searchInput.value = q;
+
+  const ql = q.trim().toLowerCase();
+  let list = posts.slice();
+
+  if (ql){
+    list = list.filter(p =>
+      p.title.toLowerCase().includes(ql) ||
+      p.excerpt.toLowerCase().includes(ql) ||
+      p.author.toLowerCase().includes(ql) ||
+      p.category.toLowerCase().includes(ql)
+    );
+  }
+
+  list.sort((a, b) => (b.top ? 1 : 0) - (a.top ? 1 : 0));
+
+  if (!list.length){
+    searchMeta.innerHTML = `关键词 <b>“${escapeHTML(q)}”</b> · 共 0 条结果`;
+    searchResults.innerHTML = `<div class="empty">😶 没有找到相关帖子，换个关键词试试吧</div>`;
+  } else {
+    searchMeta.innerHTML = `关键词 <b>“${escapeHTML(q)}”</b> · 共 ${list.length} 条结果`;
+    searchResults.innerHTML = list.map(p => postCardHTML(p, q)).join('');
+  }
+
+  document.title = `“${q}” 的搜索结果 · 青山实中论坛`;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+/* 路由解析：#/search?q=xxx → 搜索页，其它 → 首页 */
+function route(){
+  const hash = location.hash || '';
+  const m = hash.match(/^#\/search(?:\?(.*))?$/);
+
+  if (m){
+    const params = new URLSearchParams(m[1] || '');
+    showSearch(params.get('q') || '');
+  } else {
+    showHome();
+  }
+}
+
+window.addEventListener('hashchange', route);
+
+/* ================= 搜索提交 ================= */
+searchForm.addEventListener('submit', e => {
+  e.preventDefault();
+  const q = searchInput.value.trim();
+
+  if (!q){
+    toast('请输入搜索关键词～');
+    return;
+  }
+
+  const target = '#/search?q=' + encodeURIComponent(q);
+
+  if (location.hash === target){
+    // hash 未变化时不会触发 hashchange，手动刷新视图
+    showSearch(q);
+  } else {
+    location.hash = target;
+  }
+});
+
 /* ================= 初始化 ================= */
-render();
+renderHome();
+route();
 </script>
 </body>
 </html>
