@@ -160,6 +160,13 @@
     background:var(--green-100);color:var(--green-700);
     font-weight:600;border-color:rgba(34,160,107,.22);
   }
+  .cat-btn:disabled{
+    cursor:default;
+    pointer-events:none;
+    opacity:1;
+    color:#4d635a;
+    background:transparent;
+  }
   .sort{font-size:13px;color:var(--muted);display:flex;gap:10px;align-items:center}
   .sort button{font-size:13px;color:var(--muted);padding:4px 2px}
   .sort button.on{color:var(--green-700);font-weight:600}
@@ -171,8 +178,10 @@
     background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
     padding:16px 18px;box-shadow:var(--shadow);
     transition:.2s;
+    cursor:default;
   }
-  .post:hover{
+  .post.clickable{cursor:pointer}
+  .post.clickable:hover{
     transform:translateY(-2px);
     border-color:#cfe6db;
     box-shadow:0 1px 2px rgba(16,40,32,.04), 0 18px 34px -20px rgba(16,40,32,.35);
@@ -187,7 +196,7 @@
   .post-main{flex:1;min-width:0}
   .post-title{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
   .post-title a{font-size:15.5px;font-weight:600;color:#17281f;transition:.16s}
-  .post-title a:hover{color:var(--green-600)}
+  .post.clickable .post-title a:hover{color:var(--green-600)}
 
   .badge{
     font-size:11px;font-weight:700;padding:2px 7px;border-radius:6px;
@@ -219,6 +228,7 @@
     display:inline-flex;align-items:center;gap:5px;
     font-size:12.5px;color:#8ea29a;padding:3px 9px;border-radius:999px;
     transition:.18s;
+    cursor:pointer;
   }
   .like:hover{background:#ffeef0;color:#e0576b}
   .like.active{color:#e0576b;background:#ffeef0}
@@ -229,17 +239,33 @@
     background:var(--card);border:1px dashed var(--line);border-radius:var(--radius);
   }
 
+  /* ============ 分页 ============ */
   .pager{
     display:flex;justify-content:center;gap:7px;margin-top:24px;
   }
   .pager button{
     min-width:36px;height:36px;border-radius:10px;font-size:13.5px;color:#4d635a;
-    background:var(--card);border:1px solid var(--line);transition:.18s;
+    background:var(--card);border:1px solid var(--line);
+    padding:0 12px;
+    cursor:pointer;
+    transition:.18s;
   }
-  .pager button:hover{border-color:var(--green-500);color:var(--green-700)}
+  .pager button:hover{
+    border-color:var(--green-500);color:var(--green-700);
+  }
   .pager button.on{
     background:linear-gradient(140deg,var(--green-500),var(--green-700));
     color:#fff;border-color:transparent;font-weight:600;
+  }
+  .pager button.on:hover{color:#fff}
+  .pager button.dots{
+    pointer-events:none;
+    cursor:default;
+    color:#8ea29a;
+  }
+  .pager button.dots:hover{
+    border-color:var(--line);
+    color:#8ea29a;
   }
 
   /* ============ 搜索结果页 ============ */
@@ -256,6 +282,70 @@
   .search-meta{font-size:13.5px;color:var(--muted)}
   .search-meta b{color:var(--green-700);font-weight:600}
   .search-view .post-list{margin-top:18px}
+
+  /* ============ 帖子详情页 ============ */
+  .post-view{display:none;padding:28px 0 56px}
+  .detail{
+    background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    padding:30px;box-shadow:var(--shadow);
+  }
+  .detail-head{
+    display:flex;gap:14px;align-items:flex-start;
+    padding-bottom:20px;border-bottom:1px solid var(--line);margin-bottom:22px;
+  }
+  .detail-head .avatar{width:48px;height:48px;border-radius:14px;font-size:18px}
+  .detail-head .dh-main{flex:1;min-width:0}
+  .detail-title{font-size:23px;line-height:1.45;color:#0f1e17;margin-bottom:9px}
+  .detail-body{
+    font-size:14.5px;line-height:2;color:#2b3d35;
+  }
+  .detail-body p{margin:0}
+  .detail-body p.gap{height:8px}
+  .detail-body p.sec{font-weight:700;color:#17281f;margin-top:18px}
+  .detail-body p.sec:first-child{margin-top:0}
+
+  /* ============ 楼层（贴吧风格） ============ */
+  .floor-list{margin-top:26px;border-top:1px solid var(--line);padding-top:6px}
+  .floor-list-title{
+    font-size:13px;color:var(--muted);margin:12px 0 4px;
+    display:flex;align-items:center;gap:7px;
+  }
+  .floor-list-title::before{
+    content:"";width:3px;height:13px;border-radius:2px;
+    background:linear-gradient(var(--green-500),var(--green-700));
+  }
+  .floor{
+    padding:15px 0;border-bottom:1px dashed var(--line);
+  }
+  .floor:last-child{border-bottom:none}
+  .floor-head{
+    display:flex;align-items:center;gap:9px;margin-bottom:7px;font-size:12.5px;
+  }
+  .floor-no{
+    font-weight:700;color:var(--green-700);background:var(--green-50);
+    padding:1px 8px;border-radius:6px;font-size:12px;
+  }
+  .floor-author{font-weight:600;color:#3d554b}
+  .floor-tag{
+    font-size:10.5px;font-weight:700;color:#fff;background:var(--green-500);
+    padding:1px 7px;border-radius:6px;
+  }
+  .floor-content{
+    font-size:14px;color:#33473f;line-height:1.9;
+  }
+  .floor.is-op .floor-content{color:#17281f}
+  .floor.is-op{background:var(--green-50);border-radius:10px;padding:14px 16px;margin:6px 0;border-bottom:none}
+
+  .detail-foot{
+    margin-top:26px;padding-top:18px;border-top:1px solid var(--line);
+    display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;
+    font-size:12.5px;color:#8ea29a;
+  }
+  .not-found{
+    text-align:center;padding:70px 20px;color:var(--muted);
+    background:var(--card);border:1px dashed var(--line);border-radius:var(--radius);
+  }
+  .not-found b{display:block;font-size:16px;color:#3d554b;margin-bottom:6px}
 
   /* ============ 侧栏 ============ */
   .side-col{display:flex;flex-direction:column;gap:16px}
@@ -366,6 +456,10 @@
     .post-excerpt{-webkit-line-clamp:2}
     .post-stats{flex-direction:row;align-items:center;gap:12px}
     .container{padding:0 14px}
+    .detail{padding:20px}
+    .detail-title{font-size:19px}
+    .detail-body{font-size:14px;line-height:1.9}
+    .floor-content{font-size:13.5px}
   }
 </style>
 </head>
@@ -408,7 +502,6 @@
 
 <!-- ================= 首页视图 ================= -->
 <div id="homeView">
-  <!-- Hero -->
   <section class="hero">
     <div class="container hero-inner">
       <div>
@@ -429,9 +522,7 @@
     </div>
   </section>
 
-  <!-- 主体 -->
   <main class="container layout">
-    <!-- 左：帖子区 -->
     <div class="main-col">
       <div class="toolbar">
         <div class="cats" id="cats"></div>
@@ -443,17 +534,17 @@
 
       <div class="post-list" id="postList"></div>
 
-      <div class="pager">
-        <button>上一页</button>
-        <button class="on">1</button>
-        <button>2</button>
-        <button>3</button>
-        <button>…</button>
-        <button>下一页</button>
+      <!-- 分页：保留外观，“...”不可交互，其他按钮可翻页 -->
+      <div class="pager" id="pager">
+        <button data-page="prev">上一页</button>
+        <button data-page="1" class="on">1</button>
+        <button data-page="2">2</button>
+        <button data-page="3">3</button>
+        <button class="dots">...</button>
+        <button data-page="next">下一页</button>
       </div>
     </div>
 
-    <!-- 右：侧栏 -->
     <aside class="side-col">
       <div class="card post-cta">
         <h3>一起来聊聊吧</h3>
@@ -521,6 +612,20 @@
   </div>
 </div>
 
+<!-- ================= 帖子详情视图 ================= -->
+<div class="post-view" id="postView">
+  <div class="container">
+    <a href="javascript:history.back()" class="back-link">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M15 18l-6-6 6-6"/>
+      </svg>
+      返回
+    </a>
+
+    <div id="postDetail"></div>
+  </div>
+</div>
+
 <!-- ================= 页脚 ================= -->
 <footer class="site-footer">
   <div class="container">
@@ -539,47 +644,227 @@
 <script>
 /* ================= 数据 ================= */
 const posts = [
-  { id:1, title:'【版规】青山实中论坛发帖规范与新人必读',
+  /* ---------- 第 1 页 ---------- */
+  { id:1, page:1, title:'【版规】青山实中论坛发帖规范与新人必读',
     excerpt:'欢迎来到青山实中论坛！为营造良好的交流氛围，请各位同学在发帖前仔细阅读以下规范，共建友善、理性的讨论环境。',
     author:'论坛管理员', category:'公告通知', replies:236, views:15820, time:'3月1日', top:true, likes:512 },
 
-  { id:2, title:'高二数学圆锥曲线大题有没有通用思路？求大佬指点',
+  { id:2, page:1, title:'高二数学圆锥曲线大题有没有通用思路？求大佬指点',
     excerpt:'最近刷题总是卡在第二问，特别是求定值、定点那一类，有没有总结好的方法或者笔记可以推荐？',
     author:'追风少年', category:'学习交流', replies:48, views:1263, time:'12分钟前', hot:true, likes:67 },
 
-  { id:3, title:'校运会照片合集｜青春就是要燃起来',
+  { id:3, page:1, title:'校运会照片合集｜青春就是要燃起来',
     excerpt:'这次秋季运动会拍了两千多张照片，先挑一部分发出来，需要原图的同学可以在评论区留下邮箱～',
     author:'摄影社小林', category:'校园生活', replies:126, views:3894, time:'1小时前', essence:true, hot:true, likes:389 },
 
-  { id:4, title:'求组队｜数学建模社招新啦，还差两位队友',
+  { id:4, page:1, title:'求组队｜数学建模社招新啦，还差两位队友',
     excerpt:'准备参加下个月的市级比赛，目前已有三人，还缺一个擅长编程的同学，有意向的私信我！',
     author:'阿哲', category:'社团活动', replies:23, views:645, time:'2小时前', likes:31 },
 
-  { id:5, title:'出二手教辅｜五三、必刷题、英语语法书（九成新）',
+  { id:5, page:1, title:'出二手教辅｜五三、必刷题、英语语法书（九成新）',
     excerpt:'高三毕业清书柜，价格都很便宜，校内自提，多买可议价，详情见图。',
     author:'毕业的学长', category:'二手市场', replies:56, views:1892, time:'3小时前', likes:44 },
 
-  { id:6, title:'食堂三楼新开的麻辣香锅好吃吗？在线等',
+  /* ====== 浩瀚的林：位于第一页中间 ====== */
+  { id:101, page:1,
+    title: '买了副羽毛球拍，卖家第二天自杀了，钱该要回来吗？',
+    excerpt: '我在别人那里买了一副羽毛球拍，钱都已经转给他了，结果第二天他就自杀了，我该把钱要回来吗？',
+    author: '浩瀚的林', category: '二手市场', replies: 8, views: 342, time: '2026年9月22日', likes: 23,
+    hasDetail: true,
+    fullBody: '我在别人那里买了一副羽毛球拍，钱都已经转给他了，结果第二天他就自杀了，我该把钱要回来吗？',
+    floors: [
+      { no: 1, author: '临东忆',   content: '楼主你花了多少钱啊？' },
+      { no: 2, author: '浩瀚的林', content: '66元，我一周的早餐钱。' },
+      { no: 3, author: '临东忆',   content: '？' },
+      { no: 4, author: '墨云遥',   content: '你是不是虎啊楼主，我还以为多少钱呢。' },
+      { no: 5, author: '归鹤隐',   content: '死人的钱你也敢要啊楼主。' },
+      { no: 6, author: '南巷听风', content: '卖家叫什么啊？哪班的？' },
+      { no: 7, author: '浩瀚的林', content: '应该叫常峻硕，哪班我不知道。' },
+      { no: 8, author: '浩瀚的林', content: '我的早餐钱......' }
+    ]
+  },
+
+  { id:6, page:1, title:'食堂三楼新开的麻辣香锅好吃吗？在线等',
     excerpt:'看朋友圈好多人去打卡，但排队好像很久，有吃过的同学说说味道怎么样，值不值得去？',
     author:'干饭第一名', category:'校园生活', replies:89, views:2417, time:'5小时前', hot:true, likes:156 },
 
-  { id:7, title:'英语听力总是跟不上怎么办？',
+  { id:7, page:1, title:'英语听力总是跟不上怎么办？',
     excerpt:'每次听力前几句还能跟上，后面就开始走神了，有没有提高听力的具体训练方法？',
     author:'小满', category:'求助问答', replies:34, views:876, time:'昨天', likes:52 },
 
-  { id:8, title:'【物理】力学模型总结（附手写笔记扫描版）',
+  { id:8, page:1, title:'【物理】力学模型总结（附手写笔记扫描版）',
     excerpt:'整理了高中阶段常见的十二种力学模型，每个模型都配了例题和易错点，希望对大家有帮助。',
     author:'物理课代表', category:'学习交流', replies:74, views:3120, time:'昨天', essence:true, likes:278 },
 
-  { id:9, title:'校园广播站点歌通道开启啦！',
+  { id:9, page:1, title:'校园广播站点歌通道开启啦！',
     excerpt:'每周三中午的「为你点歌」栏目重新上线，想给同学或老师点歌的可以在本帖下方留言。',
     author:'广播站', category:'社团活动', replies:41, views:1105, time:'2天前', likes:88 },
 
-  { id:10, title:'图书馆自习室周末开放时间调整通知',
+  { id:10, page:1, title:'图书馆自习室周末开放时间调整通知',
     excerpt:'自本周起，图书馆自习室周末开放时间调整为 8:00—21:00，请大家合理安排时间。',
-    author:'教务处', category:'公告通知', replies:12, views:2034, time:'3天前', likes:120 }
+    author:'教务处', category:'公告通知', replies:12, views:2034, time:'3天前', likes:120 },
+
+  /* ---------- 第 2 页 ---------- */
+  /* ====== 栖景室：位于第二页靠上位置 ====== */
+  { id:102, page:2,
+    title: '听说最近有人自杀了，什么情况？',
+    excerpt: '听说最近有人自杀了，什么情况？',
+    author: '栖景室', category: '校园生活', replies: 10, views: 156, time: '2026年9月26日', likes: 18,
+    hasDetail: true,
+    fullBody: '听说最近有人自杀了，什么情况？',
+    floors: [
+      { no: 1,  author: '霏羽聆晞', content: '据说这两人是同一个寝室的。' },
+      { no: 2,  author: '南城以殇', content: '对，这两人一个是我同班同学，一个是我隔壁班的，他俩确实在一个寝室。' },
+      { no: 3,  author: '栖景室',   content: '三楼你哪班的啊？' },
+      { no: 4,  author: '南城以殇', content: '二年八班。另一个人是九班的。' },
+      { no: 5,  author: '栖景室',   content: '为什么自杀啊？' },
+      { no: 6,  author: '南城以殇', content: '不知道，我问了和他俩同寝室的人，他们也不说。' },
+      { no: 7,  author: '霏羽聆晞', content: '可能是因为高二学习压力变大了？' },
+      { no: 8,  author: '南城以殇', content: '也有可能。我们老师每天都留比别的班多上一倍的作业，每天都要写到凌晨一点，每周还有周测。' },
+      { no: 9,  author: '南城以殇', content: '但是就因为这个而自杀我觉得也太不值得了，写不完的作业不写就好了，也没必要在意考试成绩，人生还有许多美丽的风景等着我们去欣赏呢。' },
+      { no: 10, author: '霏羽聆晞', content: '楼上说得好有道理！' }
+    ]
+  },
+
+  { id:11, page:2, title:'高二英语角活动报名开始啦',
+    excerpt:'每周五下午放学后在图书馆二楼，外教老师带我们一起练口语，感兴趣的扫码进群～',
+    author:'英语社', category:'社团活动', replies:37, views:912, time:'3天前', likes:73 },
+
+  { id:12, page:2, title:'关于下周期中考试安排的通知',
+    excerpt:'下周三至周五进行期中考试，具体科目时间安排已发到各班班级群，请同学们提前做好复习准备。',
+    author:'教务处', category:'公告通知', replies:19, views:2456, time:'3天前', top:true, likes:64 },
+
+  { id:13, page:2, title:'谁能推荐几本适合高中生的课外书',
+    excerpt:'最近想读点课外书，但不知道从哪本开始，求推荐一些文笔好、有思想深度的作品。',
+    author:'书虫小陈', category:'学习交流', replies:62, views:1438, time:'4天前', likes:91 },
+
+  { id:14, page:2, title:'篮球场晚上几点关灯啊',
+    excerpt:'最近想晚上去打球，但不知道球场几点熄灯，有知道的同学吗？',
+    author:'篮球爱好者', category:'校园生活', replies:28, views:765, time:'4天前', likes:42 },
+
+  { id:15, page:2, title:'求助：化学实验题总是算错怎么办',
+    excerpt:'每次做化学实验计算题都会在最后一步出错，有没有什么好的检查方法或者练习建议？',
+    author:'化学困难户', category:'求助问答', replies:45, views:1120, time:'5天前', likes:58 },
+
+  { id:16, page:2, title:'出一双全新篮球鞋，42码',
+    excerpt:'网上买大了，全新没穿过，原价600，300出，有需要的私信我，可小刀。',
+    author:'鞋子太多', category:'二手市场', replies:33, views:891, time:'5天前', likes:27 },
+
+  { id:17, page:2, title:'学校门口新开的奶茶店测评',
+    excerpt:'今天去尝了校门口新开的那家奶茶店，点了招牌芋泥波波，甜度刚好，价格也不贵，推荐！',
+    author:'奶茶控', category:'校园生活', replies:71, views:2189, time:'6天前', hot:true, likes:134 },
+
+  { id:18, page:2, title:'有一起早起背单词的吗',
+    excerpt:'想找几个同学每天早上6点半在操场边背单词，互相监督，有意向的回复我。',
+    author:'早起鸟', category:'学习交流', replies:52, views:1327, time:'6天前', likes:88 },
+
+  { id:19, page:2, title:'关于校服换季的通知',
+    excerpt:'天气转凉，从下周一起可以穿秋季校服外套，请同学们注意保暖。',
+    author:'德育处', category:'公告通知', replies:15, views:1876, time:'1周前', likes:56 },
+
+  { id:20, page:2, title:'高三学姐的错题本分享',
+    excerpt:'整理了三年的数学错题本，扫描成PDF了，需要的同学留邮箱，我发给你们。',
+    author:'毕业的学姐', category:'学习交流', replies:98, views:3562, time:'1周前', essence:true, likes:312 },
+
+  /* ---------- 第 3 页 ---------- */
+  { id:21, page:3, title:'运动会的照片还有吗，想看跳高',
+    excerpt:'上次校运会的照片只看到跑步的，跳高和跳远的照片有同学拍了吗？',
+    author:'想看跳高', category:'校园生活', replies:24, views:678, time:'1周前', likes:41 },
+
+  { id:22, page:3, title:'求推荐好用的错题整理APP',
+    excerpt:'想用手机整理错题，但APP太多了不知道选哪个，有没有同学推荐一下？',
+    author:'APP选择困难', category:'求助问答', replies:56, views:1543, time:'1周前', likes:72 },
+
+  { id:23, page:3, title:'学校图书馆有没有《三体》',
+    excerpt:'想借《三体》看，但不知道图书馆有没有，有借过的同学吗？',
+    author:'科幻迷', category:'校园生活', replies:31, views:822, time:'1周前', likes:38 },
+
+  { id:24, page:3, title:'食堂一楼的糖醋里脊今天特别好吃',
+    excerpt:'今天中午食堂一楼的糖醋里脊炸得特别酥，酸甜也刚刚好，推荐大家去尝尝！',
+    author:'干饭人', category:'校园生活', replies:47, views:1298, time:'1周前', likes:95 },
+
+  { id:25, page:3, title:'数学竞赛班开始选拔了',
+    excerpt:'今年的数学竞赛班选拔将在下周三进行，有意向的同学到数学老师那里报名。',
+    author:'数学教研组', category:'公告通知', replies:38, views:1675, time:'1周前', likes:61 },
+
+  { id:26, page:3, title:'问一下，高三的晚自习几点结束',
+    excerpt:'想了解一下高三晚自习的结束时间，方便安排接送，谢谢。',
+    author:'家长一枚', category:'求助问答', replies:22, views:934, time:'1周前', likes:29 },
+
+  { id:27, page:3, title:'出了几本九成新的教辅，便宜出',
+    excerpt:'数学物理化学的教辅都有，基本都是九成新，价格便宜，需要的私信。',
+    author:'清书柜', category:'二手市场', replies:41, views:1087, time:'1周前', likes:35 },
+
+  { id:28, page:3, title:'有喜欢打羽毛球的同学吗，周末约',
+    excerpt:'周末想找人一起打羽毛球，水平一般，主要是锻炼身体，有意向的留言。',
+    author:'羽毛球爱好者', category:'社团活动', replies:53, views:1264, time:'1周前', likes:67 },
+
+  { id:29, page:3, title:'校园歌手大赛什么时候开始',
+    excerpt:'听说今年校园歌手大赛要开始了，有知道具体时间的同学吗？',
+    author:'爱唱歌的小王', category:'社团活动', replies:36, views:1156, time:'1周前', likes:54 },
+
+  { id:30, page:3, title:'关于教室空调使用的建议',
+    excerpt:'最近天气变化大，有些教室空调开得太冷，建议各班统一一下温度，谢谢。',
+    author:'怕冷的同学', category:'校园生活', replies:29, views:876, time:'1周前', likes:48 },
+
+  /* ====== 倾羽蔓喻：位于第三页最下面 ====== */
+  { id:103, page:3,
+    title: '我们求真社十分缺人！学弟学妹们快来报名加入吧！我们社团很意思的！',
+    excerpt: '我们求真社十分缺人！学弟学妹们快来报名加入吧！我们社团很意思的！',
+    author: '倾羽蔓喻', category: '社团活动', replies: 7, views: 98, time: '2026年9月28日', likes: 12,
+    hasDetail: true,
+    fullBody: '我们求真社十分缺人！学弟学妹们快来报名加入吧！我们社团很意思的！',
+    floors: [
+      { no: 1, author: '霏羽聆晞', content: '加入社团有什么要求吗？' },
+      { no: 2, author: '倾羽蔓喻', content: '胆子大并且有好奇心就可以。' },
+      { no: 3, author: '霏羽聆晞', content: '社团有什么活动吗？' },
+      { no: 4, author: '倾羽蔓喻', content: '我们社团每天都会搜集身边许多反常的灵异事件，并互相分享和探讨这其中的真相。' },
+      { no: 5, author: '墨云遥',   content: '谁家《走近科学》来了？' },
+      { no: 6, author: '蓝莲花',   content: '社长和副社长你俩就别在这自娱自乐了，零个人想加入我们求真社。' },
+      { no: 7, author: '倾羽蔓喻', content: '有意向的邮箱联系我，想投稿的或者想询问最近的灵异事件也可以联系我！我的邮箱是：yqryx@jhk.ccwu.cc' }
+    ]
+  },
+
+  /* ---------- 隐藏公告：仅搜索指定关键词时出现在搜索结果里 ---------- */
+  {
+    id: 100, page:1,
+    title: '关于成立“尖刀班”的公告',
+    excerpt: '为深入贯彻因材施教原则，进一步挖掘学生潜能，提升拔尖创新人才培养质量，经学校研究决定，自2026年8月30日起正式成立“尖刀班”，面向全校开展分层培优教学。现将有关事项公告如下：',
+    author: '论坛管理员',
+    category: '公告通知',
+    replies: 0,
+    views: 1,
+    time: '2026年8月23日',
+    likes: 0,
+    hidden: true,
+    hasDetail: true,
+    keywords: ['二年八班', '二年九班'],
+    fullBody: [
+      '全体师生、家长：',
+      '为深入贯彻因材施教原则，进一步挖掘学生潜能，提升拔尖创新人才培养质量，经学校研究决定，自2026年8月30日起正式成立“尖刀班”，面向全校开展分层培优教学。现将有关事项公告如下：',
+      '一、办班宗旨',
+      '坚持“面向全体、尊重差异、因材施教、全面发展”，在开齐开足国家规定课程的基础上，为学有余力、学科特长突出的学生提供更高阶的学习内容与思维训练平台，培养其自主学习能力、创新意识和综合素养，同时带动年级整体学风建设。',
+      '二、组建原则',
+      '录取原则：以考试排名作为录取标准，排名靠前者录取。',
+      '综合考量：以学业水平为基础，兼顾学习态度、意志品质与心理素质，不搞“一次考试定终身”。',
+      '动态管理：实行滚动进出机制，每学期评估一次，能进能出，保持班级活力。',
+      '规模适度：每班不超过30人，计划开设2个班。每年级的八班和九班分别为文科尖刀班和理科尖刀班。',
+      '三、培养措施',
+      '课程优化：在完成国家课程基础上，增设思维拓展、竞赛辅导、阅读写作、科学探究等校本课程与专题讲座。',
+      '学法指导：重点培养自主学习、时间管理与反思总结能力，避免简单增加作业量与考试频次。',
+      '活动拓展：组织学科竞赛、课题研究、研学实践及校际交流，拓宽视野。',
+      '心理关怀：关注学生学习压力与情绪状态，定期开展心理辅导和团体活动，促进身心健康发展。',
+      '四、师资保障',
+      '由校内外骨干教师、学科带头人及具有竞赛辅导经验的教师组成教学团队，学校将统筹安排教研与培训，确保教学质量。',
+      '本公告自发布之日起施行，具体解释权归学校教务处。',
+      '特此公告。',
+      '青山市实验中学',
+      '2026年8月23日'
+    ].join('\n')
+  }
 ];
 
+/* 活跃同学：来自普通帖子的楼主 */
 const users = [
   { name:'追风少年', desc:'今天也在刷题', online:true },
   { name:'摄影社小林', desc:'分享校园日常', online:true },
@@ -609,7 +894,6 @@ function escapeRegExp(s){
   return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
-/* 关键词高亮（先转义再匹配，避免 XSS） */
 function highlight(text, q){
   const safe = escapeHTML(text);
   if (!q) return safe;
@@ -618,35 +902,79 @@ function highlight(text, q){
   return safe.replace(new RegExp('(' + kw + ')', 'gi'), '<mark>$1</mark>');
 }
 
-/* ================= 状态 ================= */
-const state = { cat:'全部' };
+function renderBody(text, q){
+  if (!text) return '';
+  const hl = t => highlight(t, q);
+  return text.split('\n').map(line => {
+    const t = line.trim();
+    if (!t) return '<p class="gap"></p>';
+    const isSec = /^[一二三四五六七八九十]+、/.test(t);
+    return `<p${isSec ? ' class="sec"' : ''}>${hl(t)}</p>`;
+  }).join('');
+}
 
-/* ================= 渲染分类 ================= */
+function renderFloors(p){
+  if (!p.floors || !p.floors.length) return '';
+
+  const items = p.floors.map(f => {
+    const isOp = f.author === p.author;
+    return `
+      <div class="floor${isOp ? ' is-op' : ''}">
+        <div class="floor-head">
+          <span class="floor-no">${f.no}F</span>
+          <span class="floor-author">${escapeHTML(f.author)}</span>
+          ${isOp ? '<span class="floor-tag">楼主</span>' : ''}
+        </div>
+        <div class="floor-content">${escapeHTML(f.content)}</div>
+      </div>
+    `;
+  }).join('');
+
+  return `
+    <div class="floor-list">
+      <div class="floor-list-title">全部回复（${p.floors.length}）</div>
+      ${items}
+    </div>
+  `;
+}
+
+/* ================= 状态 ================= */
+const TOTAL_PAGES = 3;
+const state = { cat:'全部', page:1 };
+
+/* ================= 渲染分类（只有“全部”可交互） ================= */
 const catsEl = document.getElementById('cats');
-catsEl.innerHTML = categories.map(c =>
-  `<button class="cat-btn${c === '全部' ? ' active' : ''}" data-cat="${c}">${c}</button>`
-).join('');
+catsEl.innerHTML = categories.map(c => {
+  const isAll = c === '全部';
+  return `<button class="cat-btn${isAll ? ' active' : ''}" data-cat="${c}" ${isAll ? '' : 'disabled'}>${c}</button>`;
+}).join('');
 
 catsEl.addEventListener('click', e => {
   const btn = e.target.closest('.cat-btn');
-  if (!btn) return;
+  if (!btn || btn.disabled) return;
   state.cat = btn.dataset.cat;
-  [...catsEl.children].forEach(b => b.classList.toggle('active', b === btn));
+  state.page = 1;
   renderHome();
 });
 
 /* ================= 帖子卡片模板 ================= */
 function postCardHTML(p, q){
   const hl = t => highlight(t, q);
+
+  const canDetail = !!p.hasDetail;
+  const href = canDetail ? `#/post?id=${p.id}` : '#';
+  const cls  = canDetail ? 'post clickable' : 'post';
+  const detailAttr = canDetail ? ' data-detail="1"' : '';
+
   return `
-    <article class="post">
+    <article class="${cls}" data-post-id="${p.id}"${detailAttr}>
       <div class="avatar" style="background:${avatarColor(p.author)}">${escapeHTML(p.author[0])}</div>
       <div class="post-main">
         <div class="post-title">
           ${p.top ? '<span class="badge badge-top">置顶</span>' : ''}
           ${p.essence ? '<span class="badge badge-essence">精华</span>' : ''}
           ${p.hot ? '<span class="badge badge-hot">热</span>' : ''}
-          <a href="#">${hl(p.title)}</a>
+          <a href="${href}">${hl(p.title)}</a>
         </div>
         <p class="post-excerpt">${hl(p.excerpt)}</p>
         <div class="post-meta">
@@ -666,24 +994,54 @@ function postCardHTML(p, q){
   `;
 }
 
-/* ================= 渲染首页帖子 ================= */
+/* ================= 渲染首页帖子（按页过滤，隐藏帖不显示） ================= */
 const postListEl = document.getElementById('postList');
 
 function renderHome(){
-  let list = posts.slice();
+  let list = posts.filter(p => !p.hidden && p.page === state.page);
 
   if (state.cat !== '全部') list = list.filter(p => p.category === state.cat);
 
-  // 置顶优先
   list.sort((a, b) => (b.top ? 1 : 0) - (a.top ? 1 : 0));
 
   if (!list.length){
-    postListEl.innerHTML = `<div class="empty">😶 该板块暂时还没有帖子</div>`;
-    return;
+    postListEl.innerHTML = `<div class="empty">😶 本页暂时没有相关帖子</div>`;
+  } else {
+    postListEl.innerHTML = list.map(p => postCardHTML(p, '')).join('');
   }
 
-  postListEl.innerHTML = list.map(p => postCardHTML(p, '')).join('');
+  updatePager();
 }
+
+/* ================= 更新分页高亮 ================= */
+const pagerEl = document.getElementById('pager');
+
+function updatePager(){
+  pagerEl.querySelectorAll('button[data-page]').forEach(btn => {
+    const v = btn.dataset.page;
+    if (v === 'prev' || v === 'next') return;
+    btn.classList.toggle('on', Number(v) === state.page);
+  });
+}
+
+/* ================= 分页点击（“...”不绑定事件） ================= */
+pagerEl.addEventListener('click', e => {
+  const btn = e.target.closest('button[data-page]');
+  if (!btn) return;
+
+  const v = btn.dataset.page;
+
+  if (v === 'prev'){
+    state.page = Math.max(1, state.page - 1);
+  } else if (v === 'next'){
+    state.page = Math.min(TOTAL_PAGES, state.page + 1);
+  } else {
+    state.page = Number(v);
+  }
+
+  renderHome();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
 
 /* ================= 活跃用户 ================= */
 document.getElementById('userList').innerHTML = users.map(u => `
@@ -712,11 +1070,12 @@ document.querySelectorAll('[data-dev]').forEach(b =>
   b.addEventListener('click', () => toast('🚧 发帖功能正在开发中～'))
 );
 
-/* ================= 点赞（全局委托，首页 + 搜索页通用） ================= */
+/* ================= 点赞（全局委托） ================= */
 document.addEventListener('click', e => {
   const btn = e.target.closest('.like');
   if (!btn) return;
   e.preventDefault();
+  e.stopPropagation();
 
   const post = posts.find(p => p.id === Number(btn.dataset.id));
   if (!post) return;
@@ -724,12 +1083,22 @@ document.addEventListener('click', e => {
   const active = btn.classList.toggle('active');
   post.likes += active ? 1 : -1;
 
-  // 同一篇帖子的两个视图按钮同步（一般只存在一个）
   document.querySelectorAll('.like[data-id="' + post.id + '"]').forEach(b => {
     b.classList.toggle('active', active);
     b.querySelector('.heart').textContent = active ? '♥' : '♡';
     b.querySelector('.num').textContent = post.likes;
   });
+});
+
+/* ================= 点击卡片进入详情：仅 data-detail 的帖子生效 ================= */
+document.addEventListener('click', e => {
+  if (e.target.closest('.like')) return;
+  if (e.target.closest('.pager')) return;
+
+  const card = e.target.closest('.post[data-detail]');
+  if (!card) return;
+
+  location.hash = '#/post?id=' + card.dataset.postId;
 });
 
 /* ================= 阻止 href="#" 链接跳转（全局，静默） ================= */
@@ -738,35 +1107,54 @@ document.addEventListener('click', e => {
   if (a) e.preventDefault();
 });
 
-/* ================= 视图切换 & 搜索路由 ================= */
+/* ================= 搜索匹配逻辑 ================= */
+function matchPost(p, ql){
+  if (p.hidden){
+    if (!p.keywords || !p.keywords.length) return false;
+    return p.keywords.some(k => {
+      const kl = k.toLowerCase();
+      return kl.includes(ql) || ql.includes(kl);
+    });
+  }
+
+  return p.title.toLowerCase().includes(ql) ||
+         p.excerpt.toLowerCase().includes(ql) ||
+         p.author.toLowerCase().includes(ql) ||
+         p.category.toLowerCase().includes(ql);
+}
+
+/* ================= 视图切换 & 路由 ================= */
 const homeView      = document.getElementById('homeView');
 const searchView    = document.getElementById('searchView');
+const postView      = document.getElementById('postView');
+const postDetail    = document.getElementById('postDetail');
 const searchResults = document.getElementById('searchResults');
 const searchMeta    = document.getElementById('searchMeta');
 const searchForm    = document.getElementById('searchForm');
 const searchInput   = document.getElementById('searchInput');
 
-function showHome(){
+function hideAllViews(){
+  homeView.style.display   = 'none';
   searchView.style.display = 'none';
+  postView.style.display   = 'none';
+}
+
+function showHome(){
+  hideAllViews();
   homeView.style.display = '';
   document.title = '青山实中论坛 · 青山实验中学师生交流社区';
 }
 
 function showSearch(q){
-  homeView.style.display = 'none';
+  hideAllViews();
   searchView.style.display = 'block';
   searchInput.value = q;
 
   const ql = q.trim().toLowerCase();
-  let list = posts.slice();
+  let list = [];
 
   if (ql){
-    list = list.filter(p =>
-      p.title.toLowerCase().includes(ql) ||
-      p.excerpt.toLowerCase().includes(ql) ||
-      p.author.toLowerCase().includes(ql) ||
-      p.category.toLowerCase().includes(ql)
-    );
+    list = posts.filter(p => matchPost(p, ql));
   }
 
   list.sort((a, b) => (b.top ? 1 : 0) - (a.top ? 1 : 0));
@@ -783,17 +1171,76 @@ function showSearch(q){
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-/* 路由解析：#/search?q=xxx → 搜索页，其它 → 首页 */
+function showPost(id){
+  hideAllViews();
+  postView.style.display = 'block';
+
+  const p = posts.find(x => x.id === Number(id));
+
+  if (!p || !p.hasDetail){
+    postDetail.innerHTML = `<div class="not-found"><b>帖子不存在</b>该帖子可能已被删除或链接有误</div>`;
+    document.title = '帖子不存在 · 青山实中论坛';
+    return;
+  }
+
+  const bodyHTML = renderBody(p.fullBody || p.excerpt, '');
+  const floorsHTML = renderFloors(p);
+
+  postDetail.innerHTML = `
+    <article class="detail">
+      <div class="detail-head">
+        <div class="avatar" style="background:${avatarColor(p.author)}">${escapeHTML(p.author[0])}</div>
+        <div class="dh-main">
+          <h1 class="detail-title">
+            ${p.top ? '<span class="badge badge-top">置顶</span>' : ''}
+            ${p.essence ? '<span class="badge badge-essence">精华</span>' : ''}
+            ${p.hot ? '<span class="badge badge-hot">热</span>' : ''}
+            ${escapeHTML(p.title)}
+          </h1>
+          <div class="post-meta">
+            <span class="cat">${escapeHTML(p.category)}</span>
+            <span>楼主：${escapeHTML(p.author)}</span>
+            <span>${escapeHTML(p.time)}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="detail-body">${bodyHTML}</div>
+
+      ${floorsHTML}
+
+      <div class="detail-foot">
+        <span><b>${p.replies}</b> 回复 · <b>${p.views}</b> 浏览</span>
+        <button class="like" data-id="${p.id}">
+          <span class="heart">♡</span><span class="num">${p.likes}</span>
+        </button>
+      </div>
+    </article>
+  `;
+
+  document.title = p.title + ' · 青山实中论坛';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+/* 路由解析 */
 function route(){
   const hash = location.hash || '';
-  const m = hash.match(/^#\/search(?:\?(.*))?$/);
 
+  let m = hash.match(/^#\/search(?:\?(.*))?$/);
   if (m){
     const params = new URLSearchParams(m[1] || '');
     showSearch(params.get('q') || '');
-  } else {
-    showHome();
+    return;
   }
+
+  m = hash.match(/^#\/post(?:\?(.*))?$/);
+  if (m){
+    const params = new URLSearchParams(m[1] || '');
+    showPost(params.get('id') || '');
+    return;
+  }
+
+  showHome();
 }
 
 window.addEventListener('hashchange', route);
@@ -811,7 +1258,6 @@ searchForm.addEventListener('submit', e => {
   const target = '#/search?q=' + encodeURIComponent(q);
 
   if (location.hash === target){
-    // hash 未变化时不会触发 hashchange，手动刷新视图
     showSearch(q);
   } else {
     location.hash = target;
