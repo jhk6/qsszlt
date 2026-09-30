@@ -177,15 +177,10 @@
     display:flex;gap:14px;align-items:center;
     background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
     padding:16px 18px;box-shadow:var(--shadow);
-    transition:.2s;
     cursor:default;
   }
+  /* 可点击帖子：只保留手型光标，去掉所有悬停动画和高亮 */
   .post.clickable{cursor:pointer}
-  .post.clickable:hover{
-    transform:translateY(-2px);
-    border-color:#cfe6db;
-    box-shadow:0 1px 2px rgba(16,40,32,.04), 0 18px 34px -20px rgba(16,40,32,.35);
-  }
 
   .avatar{
     width:42px;height:42px;border-radius:12px;flex-shrink:0;
@@ -195,8 +190,7 @@
 
   .post-main{flex:1;min-width:0}
   .post-title{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
-  .post-title a{font-size:15.5px;font-weight:600;color:#17281f;transition:.16s}
-  .post.clickable .post-title a:hover{color:var(--green-600)}
+  .post-title a{font-size:15.5px;font-weight:600;color:#17281f}
 
   .badge{
     font-size:11px;font-weight:700;padding:2px 7px;border-radius:6px;
@@ -686,6 +680,24 @@ const posts = [
   { id:10, page:1, _order:8, title:'图书馆自习室周末开放时间调整通知',
     excerpt:'自本周起，图书馆自习室周末开放时间调整为 8:00—21:00，请大家合理安排时间。',
     author:'教务处', category:'公告通知', replies:12, views:2034, time:'3天前', likes:120 },
+
+  /* ====== 臭泡茶的：第 1 页靠下位置，可打开 ====== */
+  { id:109, page:1, _order:8.5,
+    title: '打听一个二年级的漂亮小姑娘',
+    excerpt: '求助，理科班第一排那个带绿色发箍的女生叫什么名字啊，我感觉她好好看。',
+    author: '臭泡茶的', category: '求助问答', replies: 7, views: 583, time: '2天前', likes: 26,
+    hasDetail: true,
+    floors: [
+      { no: 1, author: '臭泡茶的', content: '求助，理科班第一排那个带绿色发箍的女生叫什么名字啊，我感觉她好好看。' },
+      { no: 2, author: '临东忆',   content: '绿色发箍？是不是头发有点卷、经常穿白色外套那个？我好像有印象。' },
+      { no: 3, author: '墨云遥',   content: '楼主你这是要展开追求了吗？板凳搬好，瓜子备好。' },
+      { no: 4, author: '归鹤隐',   content: '我好像知道，是不是二年七班的？姓王？但我不确定全名。' },
+      { no: 5, author: '南巷听风', content: '建议直接去问，别在这打听，小心被当成变态。' },
+      { no: 6, author: '霏羽聆晞', content: '我对这个人有印象！我之前跟她一个考场，人挺好的，学习也好。' },
+      { no: 7, author: '臭泡茶的', content: '谢谢大家！我就想认识一下，没别的意思，大家别误会。' },
+      { no: 8, author: '臭泡茶的', content: '知道名字的可以邮箱告诉我，我可以用劲爆消息换！我的邮箱：cpcd@jhk.ccwu.cc' }
+    ]
+  },
 
   { id:4, page:1, _order:9, title:'求组队｜数学建模社招新啦，还差两位队友',
     excerpt:'准备参加下个月的市级比赛，目前已有三人，还缺一个擅长编程的同学，有意向的私信我！',
