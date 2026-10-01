@@ -1331,6 +1331,65 @@ B-250：陈欣妍、杨诗涵、赵佳宁、黄雨薇` }
       { no: 16, author: '青柠不酸', content: '有这种人在那我们学习还有什么意义？' },
       { no: 17, author: '南城以殇', content: '争取爬到比他们更高的位置整治他们呗。' }
     ]
+  },
+
+  /* ---------- 隐藏帖七：仅搜索“林圻”时出现在搜索结果里 ---------- */
+  {
+    id: 117, page:1, _order:105,
+    title: '关于给予林圻同学记大过处分的通告',
+    excerpt: '经查，一年七班学生林圻，于2025年10月13日，违反学校学生管理规定，私自携带手机（违禁品名称）进入校园，被学校安全检查人员查获。',
+    author: '论坛管理员',
+    category: '公告通知',
+    replies: 0,
+    views: 6180,
+    time: '2025年10月14日',
+    likes: 0,
+    hidden: true,
+    hasDetail: true,
+    keywords: ['林圻'],
+    floors: [
+      { no: 1, author: '论坛管理员', content:
+`关于给予林圻同学记大过处分的通告
+
+青山市实验中学〔2025〕09号
+
+全校各班级、全体师生：
+
+经查，一年七班学生林圻，于2025年10月13日，违反学校学生管理规定，私自携带手机（违禁品名称）进入校园，被学校安全检查人员查获。
+
+该生行为严重违反了《青山市实验中学学生管理规定》第七条及《青山市实验中学学生住宿管理办法》第八条之规定，性质严重，影响恶劣。为严肃校纪校规，教育本人，警示他人，经学校学生工作处研究并报校领导批准，决定给予林圻同学以下处理：
+
+1. 给予林圻同学记大过处分，处分期限为12个月，记入本人学籍档案；
+2. 对林圻同学予以全校通报批评；
+3. 根据《青山市实验中学家庭经济困难学生资助管理办法》第3条之规定，取消林圻同学贫困生资助资格，自本通告发布之日起执行，已发放的资助款项按学校相关规定处理。
+
+希望全体同学引以为戒，严格遵守学校各项规章制度，不得携带任何违禁物品进入校园，自觉维护校园安全稳定。各班级要进一步加强安全教育和管理，杜绝此类事件再次发生。
+
+特此通告。
+
+青山市实验中学学生工作处
+2025年10月14日` }
+    ]
+  },
+
+  /* ---------- 隐藏帖八：仅搜索“林圻”时出现在搜索结果里，详情页只显示文件链接 ---------- */
+  {
+    id: 118, page:1, _order:106,
+    title: '青山市实验高中贫困生补助名单',
+    excerpt: '青山市实验高中 2026-2027 学年度贫困生补助名单。制表部门：学生处 制表日期：2025年10月 编号：QSSY-2025-BZ-006',
+    author: '论坛管理员',
+    category: '公告通知',
+    replies: 0,
+    views: 7410,
+    time: '2025年10月15日',
+    likes: 0,
+    hidden: true,
+    hasDetail: true,
+    keywords: ['林圻'],
+    fileLink: '青山市实验高中贫困生补助名单.xlsx',
+    floors: [
+      { no: 1, author: '论坛管理员', content: '' }
+    ]
   }
 ];
 
@@ -1389,7 +1448,8 @@ function boldNames(escapedText){
    注意：
    - 不为楼主楼层添加 is-op 类，因此没有高亮背景和特殊颜色
    - 若楼层有 image 字段且非空，则在文字下方渲染配图
-   - 仅当帖子带 boldNames:true 时，才对该帖的人名进行加粗 */
+   - 仅当帖子带 boldNames:true 时，才对该帖的人名进行加粗
+   - 若帖子带 fileLink，则楼层内容替换为文件下载链接 */
 function renderFloors(p){
   if (!p.floors || !p.floors.length) return '';
 
@@ -1400,9 +1460,15 @@ function renderFloors(p){
       ? `<div class="floor-image"><img src="${escapeHTML(f.image)}" alt="配图" loading="lazy"></div>`
       : '';
 
-    let contentHTML = escapeHTML(f.content);
-    if (p.boldNames){
-      contentHTML = boldNames(contentHTML);
+    let contentHTML;
+    if (p.fileLink) {
+      /* 特殊处理：只显示文件链接，原有内容删除 */
+      contentHTML = `<a href="${escapeHTML(p.fileLink)}" target="_blank" rel="noopener" style="color:var(--green-700);text-decoration:underline;">${escapeHTML(p.fileLink)}</a>`;
+    } else {
+      contentHTML = escapeHTML(f.content);
+      if (p.boldNames){
+        contentHTML = boldNames(contentHTML);
+      }
     }
 
     return `
