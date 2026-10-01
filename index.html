@@ -87,7 +87,7 @@
   .nav a:hover{background:var(--green-50);color:var(--green-700)}
   .nav a.active{color:var(--green-700);font-weight:600;background:var(--green-100)}
 
-  .header-right{margin-left:auto;display:flex;align-items:center;gap:10px}
+  .header-right{margin-left:auto;display:flex;align-items:center;gap:10px;min-width:0}
 
   .search{
     display:flex;align-items:center;gap:8px;
@@ -118,6 +118,106 @@
   }
   .btn-primary:hover{filter:brightness(1.07);transform:translateY(-1px)}
   .btn-primary:active{transform:translateY(0)}
+
+  /* ============ 登录模态框 ============ */
+  .login-mask{
+    position:fixed;inset:0;z-index:300;
+    background:rgba(11,61,44,.45);
+    backdrop-filter:blur(4px);
+    display:none;
+    align-items:center;justify-content:center;
+    padding:20px;
+  }
+  .login-mask.show{display:flex;animation:maskIn .2s ease}
+  @keyframes maskIn{from{opacity:0}to{opacity:1}}
+
+  .login-box{
+    width:100%;max-width:380px;
+    background:var(--card);
+    border-radius:18px;
+    box-shadow:0 30px 60px -20px rgba(16,40,32,.4);
+    padding:32px 28px 26px;
+    position:relative;
+    animation:boxIn .28s cubic-bezier(.2,.8,.3,1);
+  }
+  @keyframes boxIn{
+    from{opacity:0;transform:translateY(14px) scale(.97)}
+    to{opacity:1;transform:none}
+  }
+
+  .login-close{
+    position:absolute;top:14px;right:14px;
+    width:30px;height:30px;border-radius:8px;
+    display:grid;place-items:center;
+    color:#9db0a8;font-size:18px;line-height:1;
+    transition:.18s;
+  }
+  .login-close:hover{background:var(--green-50);color:var(--green-700)}
+
+  .login-head{text-align:center;margin-bottom:22px}
+  .login-head .lm{
+    width:48px;height:48px;border-radius:14px;margin:0 auto 12px;
+    background:linear-gradient(140deg,var(--green-500),var(--green-700));
+    display:grid;place-items:center;color:#fff;
+    box-shadow:0 8px 18px -8px rgba(27,127,91,.8);
+  }
+  .login-head h2{font-size:19px;letter-spacing:.4px;margin-bottom:4px}
+  .login-head p{font-size:12.5px;color:var(--muted)}
+
+  .login-field{margin-bottom:14px}
+  .login-field label{
+    display:block;font-size:12.5px;color:#42564e;
+    font-weight:600;margin-bottom:6px;
+  }
+  .login-field input{
+    width:100%;padding:11px 14px;
+    border:1px solid var(--line);border-radius:11px;
+    font-size:14px;background:#fafcfb;
+    transition:.2s;
+  }
+  .login-field input:focus{
+    background:#fff;border-color:var(--green-500);
+    box-shadow:0 0 0 3px rgba(34,160,107,.12);
+  }
+
+  .login-tip{
+    font-size:11.5px;color:#9db0a8;
+    text-align:center;margin:2px 0 16px;
+    line-height:1.6;
+  }
+
+  .login-submit{
+    width:100%;padding:11px;border-radius:11px;
+    background:linear-gradient(140deg,var(--green-500),var(--green-700));
+    color:#fff;font-size:14.5px;font-weight:600;
+    box-shadow:0 10px 22px -12px rgba(27,127,91,.9);
+    transition:.2s;
+  }
+  .login-submit:hover{filter:brightness(1.07)}
+  .login-submit:active{transform:translateY(1px)}
+  .login-submit:disabled{opacity:.7;cursor:default;filter:none}
+
+  .login-error{
+    font-size:12.5px;color:#dc2626;
+    background:#ffeaea;border-radius:9px;
+    padding:8px 12px;margin-bottom:14px;
+    display:none;
+  }
+  .login-error.show{display:block}
+
+  .login-success{
+    text-align:center;padding:14px 4px 6px;
+    display:none;
+  }
+  .login-success.show{display:block}
+  .login-success .ok-icon{
+    width:52px;height:52px;border-radius:50%;margin:0 auto 14px;
+    background:var(--green-100);color:var(--green-700);
+    display:grid;place-items:center;font-size:26px;
+  }
+  .login-success h3{font-size:16px;margin-bottom:6px;color:var(--green-700)}
+  .login-success p{font-size:12.5px;color:var(--muted)}
+  .login-success b{color:var(--green-700)}
 
   /* ============ Hero ============ */
   .hero{
@@ -250,7 +350,7 @@
 
   /* ============ 分页 ============ */
   .pager{
-    display:flex;justify-content:center;gap:7px;margin-top:24px;
+    display:flex;justify-content:center;gap:7px;margin-top:24px;flex-wrap:wrap;
   }
   .pager button{
     min-width:36px;height:36px;border-radius:10px;font-size:13.5px;color:#4d635a;
@@ -335,6 +435,7 @@
   .floor-content{
     font-size:14px;color:#33473f;line-height:1.9;
     white-space:pre-line;
+    word-break:break-word;
   }
   /* 加粗的人名 */
   .floor-content strong{
@@ -449,6 +550,8 @@
     padding:12px 24px;border-radius:999px;font-size:13.5px;
     box-shadow:0 20px 40px -18px rgba(0,0,0,.6);
     opacity:0;pointer-events:none;transition:.28s;
+    max-width:calc(100vw - 40px);
+    text-align:center;
   }
   .toast.show{opacity:1;transform:translate(-50%,0)}
 
@@ -457,28 +560,125 @@
     .layout{grid-template-columns:1fr}
     .side-col{order:2}
   }
+
   @media (max-width:820px){
     .nav{display:none}
     .search{width:180px}
     .hero h1{font-size:24px}
   }
+
   @media (max-width:640px){
-    .header-inner{height:58px;gap:12px}
+    .header-inner{height:58px;gap:10px}
     .logo-text small{display:none}
     .search{width:130px;padding:7px 11px}
-    .btn-ghost.login{display:none}
-    .hero{padding:32px 0}
+    .search input{font-size:13px}
+    .btn{padding:8px 14px;font-size:13.5px}
+    .header-right{gap:8px}
+
+    .hero{padding:30px 0}
+    .hero-inner{gap:20px}
     .hero-stats{width:100%}
     .hero-stat{flex:1;min-width:0;padding:11px 8px}
     .hero-stat b{font-size:17px}
-    .post{padding:14px;gap:11px}
+
+    .toolbar{padding:12px 14px;gap:10px}
+    .cat-btn{padding:6px 12px;font-size:13px}
+
+    /* 帖子卡片改为两行布局：第一行头像+内容，第二行统计信息 */
+    .post{padding:14px;gap:11px;flex-wrap:wrap}
     .avatar{width:36px;height:36px;border-radius:10px;font-size:14px}
-    .post-stats{flex-direction:row;align-items:center;gap:12px}
+    .post-title a{font-size:14.5px}
+    .post-meta{gap:10px;font-size:11.5px;margin-top:7px}
+
+    .post-stats{
+      width:100%;
+      flex-direction:row;
+      align-items:center;
+      justify-content:flex-end;
+      gap:12px;
+      font-size:11.5px;
+      border-top:1px dashed var(--line);
+      padding-top:9px;
+      margin-top:2px;
+    }
+    .post-stats b{font-size:12.5px}
+    .like{padding:2px 8px;font-size:11.5px}
+
+    .pager{gap:6px}
+    .pager button{min-width:34px;height:34px;padding:0 10px;font-size:13px}
+
     .container{padding:0 14px}
     .detail{padding:20px}
     .detail-title{font-size:19px}
+    .detail-head{gap:12px;padding-bottom:16px;margin-bottom:18px}
+    .detail-head .avatar{width:42px;height:42px;border-radius:12px;font-size:16px}
     .floor-content{font-size:13.5px}
     .floor-image{max-width:200px}
+    .floor{padding:13px 0}
+
+    .search-view{padding:20px 0 40px}
+    .search-view h2{font-size:19px}
+    .post-view{padding:20px 0 40px}
+  }
+
+  @media (max-width:480px){
+    /* 超小屏：logo 只保留图标，控件进一步收紧 */
+    .logo-text{display:none}
+    .logo-mark{width:34px;height:34px;border-radius:10px}
+    .header-inner{gap:8px}
+    .header-right{gap:6px}
+    .search{width:110px;padding:6px 10px}
+    .search input{font-size:12.5px}
+    .btn{padding:7px 12px;font-size:12.5px}
+    .btn-ghost.login{padding:7px 10px}
+
+    .hero{padding:24px 0}
+    .hero h1{font-size:21px;letter-spacing:.6px}
+    .hero p{font-size:13px}
+    .hero-tags{margin-top:12px;gap:6px}
+    .hero-tags span{font-size:11.5px;padding:4px 10px}
+    .hero-stats{gap:8px}
+    .hero-stat{padding:9px 6px;border-radius:11px}
+    .hero-stat b{font-size:15px}
+    .hero-stat small{font-size:11px}
+
+    .toolbar{padding:10px 12px}
+    .cat-btn{padding:5px 10px;font-size:12.5px}
+    .sort{font-size:12px}
+
+    .post{padding:12px}
+    .post-title a{font-size:14px}
+    .post-meta{gap:8px;font-size:11px}
+    .post-meta .cat{padding:1px 7px}
+
+    .pager button{min-width:32px;height:32px;padding:0 8px;font-size:12px}
+    .pager{gap:5px;margin-top:20px}
+
+    .login-mask{padding:14px}
+    .login-box{padding:26px 20px 22px;border-radius:16px}
+    .login-head{margin-bottom:18px}
+    .login-head .lm{width:44px;height:44px;border-radius:12px;margin-bottom:10px}
+    .login-head h2{font-size:17px}
+    .login-head p{font-size:11.5px}
+    .login-field input{padding:10px 12px;font-size:13.5px}
+    .login-submit{padding:10px;font-size:14px}
+    .login-tip{font-size:11px;margin-bottom:14px}
+
+    .detail{padding:16px}
+    .detail-head{gap:10px}
+    .detail-head .avatar{width:36px;height:36px;border-radius:10px;font-size:14px}
+    .detail-title{font-size:17px}
+    .floor{padding:11px 0}
+    .floor-content{font-size:13px;line-height:1.8}
+    .floor-no{font-size:11px;padding:1px 6px}
+    .floor-tag{font-size:10px}
+
+    .back-link{padding:6px 12px;font-size:12.5px}
+    .search-view h2{font-size:17px}
+    .search-meta{font-size:12.5px}
+
+    .site-footer{padding:22px 0;font-size:12px}
+    .site-footer .f-links{gap:12px;font-size:12.5px}
   }
 </style>
 </head>
@@ -486,6 +686,49 @@
 
 <!-- 闪屏层 -->
 <div class="screen-flash" id="screenFlash"></div>
+
+<!-- ================= 登录模态框 ================= -->
+<div class="login-mask" id="loginMask">
+  <div class="login-box">
+    <button class="login-close" id="loginClose" aria-label="关闭">✕</button>
+
+    <div id="loginFormWrap">
+      <div class="login-head">
+        <div class="lm">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+            <circle cx="12" cy="7" r="4"/>
+          </svg>
+        </div>
+        <h2>登录青山实中论坛</h2>
+        <p>请使用你的校园账号登录</p>
+      </div>
+
+      <div class="login-error" id="loginError"></div>
+
+      <form id="loginForm" autocomplete="off">
+        <div class="login-field">
+          <label for="loginUser">账号</label>
+          <input id="loginUser" type="text" placeholder="请输入账号" autocomplete="off">
+        </div>
+        <div class="login-field">
+          <label for="loginPass">密码</label>
+          <input id="loginPass" type="password" placeholder="请输入密码" autocomplete="off">
+        </div>
+
+        <p class="login-tip">账号为姓名全拼，密码为五位英文</p>
+
+        <button type="submit" class="login-submit" id="loginSubmit">登 录</button>
+      </form>
+    </div>
+
+    <div class="login-success" id="loginSuccess">
+      <div class="ok-icon">✓</div>
+      <h3>登录成功</h3>
+      <p><b id="countdownNum">3</b> 秒后进入……</p>
+    </div>
+  </div>
+</div>
 
 <!-- ================= 顶部导航 ================= -->
 <header class="site-header">
@@ -516,7 +759,7 @@
         </button>
         <input id="searchInput" type="search" placeholder="搜索帖子 / 话题" autocomplete="off">
       </form>
-      <button class="btn btn-ghost login">登录</button>
+      <button class="btn btn-ghost login" id="loginBtn">登录</button>
       <button class="btn btn-primary" data-dev>发帖</button>
     </div>
   </div>
@@ -1407,6 +1650,12 @@ const categories = ['全部','公告通知','学习交流','校园生活','社�
 /* 宿舍名单里需要加粗的人名 */
 const BOLD_NAMES = ['常峻硕', '王乐韦', '高梓睿', '刘子轩', '林圻'];
 
+/* ================= 登录配置 ================= */
+const LOGIN_USER = 'linqi';
+const LOGIN_PASS = 'rache';
+const REDIRECT_URL = 'red.html';
+const REDIRECT_DELAY = 3;   /* 秒 */
+
 /* ================= 工具函数 ================= */
 const palette = ['#1b7f5b','#2f80ed','#9b51e0','#e2711d','#c0392b','#0f766e','#7c3aed','#b45309'];
 
@@ -1852,6 +2101,101 @@ searchForm.addEventListener('submit', e => {
     showSearch(q);
   } else {
     location.hash = target;
+  }
+});
+
+/* ================= 登录功能 ================= */
+const loginMask    = document.getElementById('loginMask');
+const loginBtn     = document.getElementById('loginBtn');
+const loginClose   = document.getElementById('loginClose');
+const loginForm    = document.getElementById('loginForm');
+const loginUser    = document.getElementById('loginUser');
+const loginPass    = document.getElementById('loginPass');
+const loginError   = document.getElementById('loginError');
+const loginSubmit  = document.getElementById('loginSubmit');
+const loginFormWrap= document.getElementById('loginFormWrap');
+const loginSuccess = document.getElementById('loginSuccess');
+const countdownNum = document.getElementById('countdownNum');
+
+let redirectTimer = null;
+
+function openLogin(){
+  /* 重置到输入状态 */
+  loginFormWrap.style.display = '';
+  loginSuccess.classList.remove('show');
+  loginError.classList.remove('show');
+  loginUser.value = '';
+  loginPass.value = '';
+  loginSubmit.disabled = false;
+  loginSubmit.textContent = '登 录';
+  if (redirectTimer){ clearInterval(redirectTimer); redirectTimer = null; }
+
+  loginMask.classList.add('show');
+  setTimeout(() => loginUser.focus(), 60);
+}
+
+function closeLogin(){
+  loginMask.classList.remove('show');
+  if (redirectTimer){ clearInterval(redirectTimer); redirectTimer = null; }
+}
+
+loginBtn.addEventListener('click', openLogin);
+loginClose.addEventListener('click', closeLogin);
+
+/* 点击遮罩空白处关闭 */
+loginMask.addEventListener('click', e => {
+  if (e.target === loginMask) closeLogin();
+});
+
+/* ESC 关闭 */
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && loginMask.classList.contains('show')){
+    closeLogin();
+  }
+});
+
+loginForm.addEventListener('submit', e => {
+  e.preventDefault();
+
+  const u = loginUser.value.trim();
+  const p = loginPass.value;
+
+  loginError.classList.remove('show');
+
+  if (!u || !p){
+    loginError.textContent = '请输入账号和密码';
+    loginError.classList.add('show');
+    return;
+  }
+
+  if (u === LOGIN_USER && p === LOGIN_PASS){
+    /* 登录成功 */
+    loginSubmit.disabled = true;
+    loginSubmit.textContent = '登录中…';
+
+    setTimeout(() => {
+      loginFormWrap.style.display = 'none';
+      loginSuccess.classList.add('show');
+
+      let left = REDIRECT_DELAY;
+      countdownNum.textContent = left;
+
+      redirectTimer = setInterval(() => {
+        left -= 1;
+        countdownNum.textContent = left;
+        if (left <= 0){
+          clearInterval(redirectTimer);
+          redirectTimer = null;
+          window.location.href = REDIRECT_URL;
+        }
+      }, 1000);
+    }, 300);
+
+  } else {
+    loginError.textContent = '账号或密码错误，请重新输入';
+    loginError.classList.add('show');
+    loginPass.value = '';
+    loginPass.focus();
   }
 });
 
