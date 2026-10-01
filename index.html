@@ -1824,7 +1824,7 @@ function route(){
 
 window.addEventListener('hashchange', route);
 
-/* ================= 搜索提交（含常峻硕闪屏） ================= */
+/* ================= 搜索提交（含常峻硕/高梓睿闪屏） ================= */
 searchForm.addEventListener('submit', e => {
   e.preventDefault();
   const q = searchInput.value.trim();
@@ -1836,8 +1836,8 @@ searchForm.addEventListener('submit', e => {
 
   const target = '#/search?q=' + encodeURIComponent(q);
 
-  /* 搜索“常峻硕”时先闪屏，再显示搜索结果 */
-  if (q === '常峻硕'){
+  /* 搜索“常峻硕”或“高梓睿”时先闪屏，再显示搜索结果 */
+  if (q === '常峻硕' || q === '高梓睿'){
     triggerFlash(() => {
       if (location.hash === target){
         showSearch(q);
