@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>青山市实验中学 · 官方网站</title>
+<style>
+  :root{
+    --blue:#0d3b66; --blue2:#1a5490; --blue3:#2c6dad;
+    --gold:#c9a227;
+    --ink:#1a1a1a; --muted:#6b7a8d; --line:#e3e8ef; --bg:#f4f7f5;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:"Microsoft YaHei","PingFang SC",sans-serif;
+    background:var(--bg); color:var(--ink); font-size:14px; line-height:1.7}
+  a{color:inherit;text-decoration:none}
+  button{font-family:inherit;cursor:pointer;border:none;background:none}
+
+  .topbar{background:#16263c;color:#a8bcd4;font-size:12px;padding:6px 0}
+  .topbar .inner{max-width:1200px;margin:0 auto;padding:0 20px;display:flex;justify-content:space-between}
+  .topbar a{color:#a8bcd4;margin-left:16px}
+  .topbar a:hover{color:#fff}
+
+  header{background:linear-gradient(135deg,#0d3b66 0%,#1a5490 55%,#2c6dad 100%);
+    color:#fff;position:relative;overflow:hidden}
+  header::after{content:"";position:absolute;right:-80px;top:-80px;
+    width:360px;height:360px;border:2px solid rgba(255,255,255,.08);border-radius:50%}
+  header::before{content:"";position:absolute;left:-60px;bottom:-100px;
+    width:260px;height:260px;border:2px solid rgba(255,255,255,.06);border-radius:50%}
+  .header-inner{max-width:1200px;margin:0 auto;padding:26px 20px;
+    display:flex;align-items:center;gap:18px;position:relative;z-index:2}
+  .emblem{width:64px;height:64px;flex-shrink:0;border-radius:50%;
+    background:radial-gradient(circle at 50% 40%,#ffd76e 0%,#e0a92c 60%,#b8860b 100%);
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 0 0 3px rgba(255,215,110,.25);font-size:30px}
+  .title-block h1{font-size:30px;letter-spacing:5px;font-weight:700;
+    text-shadow:0 2px 8px rgba(0,0,0,.35)}
+  .title-block .sub{font-size:11px;letter-spacing:3px;color:#9dc0ea;margin-top:5px}
+  .header-right{margin-left:auto;text-align:right;font-size:12px;
+    color:#9dc0ea;line-height:1.9;position:relative;z-index:2}
+  .header-right strong{color:#ffd76e;font-size:15px}
+
+  nav{background:#0f2a4d;border-top:1px solid rgba(255,255,255,.1);
+    position:sticky;top:0;z-index:50;box-shadow:0 2px 10px rgba(0,0,0,.15)}
+  nav .inner{max-width:1200px;margin:0 auto;padding:0 20px;display:flex;flex-wrap:wrap}
+  nav a{color:#d6e4f5;padding:15px 26px;font-size:15px;position:relative;transition:.2s}
+  nav a:hover,nav a.active{background:#1a5490;color:#fff}
+  nav a.active::after{content:"";position:absolute;left:26px;right:26px;bottom:0;
+    height:3px;background:#ffd76e}
+
+  .wrap{max-width:1200px;margin:0 auto;padding:18px 20px 50px}
+  .crumb{font-size:12px;color:#8a97a8;margin-bottom:14px}
+  .crumb a{color:#8a97a8}
+  .crumb a:hover{color:var(--blue2)}
+  .crumb span{margin:0 6px}
+
+  .card{background:#fff;border:1px solid var(--line);border-radius:4px;
+    box-shadow:0 1px 4px rgba(0,0,0,.04);margin-bottom:18px}
+  .card-head{padding:14px 20px;border-bottom:1px solid #eef1f6;
+    display:flex;align-items:center;justify-content:space-between}
+  .card-head h2{font-size:17px;font-weight:600;color:var(--blue);
+    padding-left:12px;position:relative}
+  .card-head h2::before{content:"";position:absolute;left:0;top:50%;
+    transform:translateY(-50%);width:4px;height:16px;background:var(--blue2);border-radius:2px}
+
+  /* ===== 校园新闻缩略图 ===== */
+  .hero-news{padding:22px 24px;display:flex;gap:20px;border-bottom:1px dashed #eef1f6}
+  .hero-news .thumb{
+    width:220px;height:140px;flex-shrink:0;border-radius:4px;
+    background:linear-gradient(135deg,#1a5490,#0d3b66);
+    display:flex;align-items:center;justify-content:center;
+    color:#fff;font-size:36px;letter-spacing:2px;
+    overflow:hidden;position:relative;
+  }
+  .hero-news .thumb img{
+    width:100%;height:100%;
+    object-fit:cover;
+    display:block;
+  }
+  .hero-news h3{font-size:17px;color:var(--blue);margin-bottom:10px;line-height:1.5}
+  .hero-news p{font-size:13px;color:var(--muted);line-height:1.85}
+  .hero-news .date{margin-top:10px;font-size:12px;color:#a0adbd}
+
+  /* ===== 列表 ===== */
+  .list{padding:6px 20px 14px}
+  .list li{list-style:none;display:flex;align-items:center;
+    padding:12px 0;border-bottom:1px dashed #eef1f6;font-size:14px}
+  .list li:last-child{border-bottom:none}
+  .list li::before{content:"";width:5px;height:5px;background:var(--blue2);
+    border-radius:50%;margin-right:12px;flex-shrink:0}
+
+  /* 有效链接 */
+  .list a{color:#333;flex:1;transition:.2s}
+  .list a:hover{color:var(--blue2)}
+
+  /* ★ 无效帖：纯文本，不跳转 */
+  .list .post-plain{
+    color:#333;flex:1;
+    cursor:default;
+  }
+
+  .list .date{color:#a0adbd;font-size:12px;margin-left:14px}
+  .list .tag-new{background:#e8f0fb;color:var(--blue2);font-size:11px;
+    padding:1px 6px;border-radius:2px;margin-left:10px}
+
+  .grid2{display:grid;grid-template-columns:1fr 320px;gap:18px}
+  .side-card .card-head{padding:12px 18px}
+  .quick{padding:14px 18px}
+  .quick a{display:flex;align-items:center;padding:10px 12px;margin-bottom:8px;
+    background:#f7f9fc;border-radius:3px;color:#334;font-size:13px;
+    border-left:3px solid var(--blue2);transition:.2s}
+  .quick a:hover{background:#e8f0fb;transform:translateX(3px)}
+  .quick a .arrow{margin-left:auto;color:#b0bccb}
+
+  .stats{padding:16px 18px}
+  .stat-row{display:flex;justify-content:space-between;align-items:baseline;
+    padding:11px 0;border-bottom:1px dashed #eef1f6}
+  .stat-row:last-child{border-bottom:none}
+  .stat-row .label{color:var(--muted);font-size:13px}
+  .stat-row .value{color:var(--blue2);font-size:20px;font-weight:700;font-family:Consolas,monospace}
+  .stat-row .value small{font-size:12px;font-weight:400;color:#8a97a8;margin-left:3px}
+
+  .doc{background:#fff;border:1px solid var(--line);border-radius:4px;
+    padding:56px 66px 70px;box-shadow:0 4px 24px rgba(0,0,0,.06);
+    font-family:"SimSun","Songti SC","Microsoft YaHei",serif;
+    color:#1a1a1a;line-height:2;position:relative}
+  .doc-head{text-align:center;padding-bottom:16px;border-bottom:3px double #c62828;margin-bottom:26px}
+  .doc-head .org{font-size:21px;font-weight:700;color:#c62828;letter-spacing:4px;font-family:"SimHei",sans-serif}
+  .doc-head .title{font-size:26px;font-weight:700;letter-spacing:10px;margin:16px 0 4px;font-family:"SimHei",sans-serif}
+  .doc-head .no{font-size:13px;color:#555;margin-top:12px;font-family:"SimSun",serif}
+  .doc p{font-size:15px;text-indent:2em;margin-bottom:10px}
+  .doc p.no-indent{text-indent:0}
+  .doc h3{font-size:15px;font-weight:700;margin:22px 0 10px;text-indent:2em;font-family:"SimHei",sans-serif}
+  .doc .u{display:inline-block;min-width:60px;padding:0 6px;border-bottom:1px solid #333;text-align:center}
+  .doc .u.long{min-width:160px;text-align:left}
+  .doc .u.xlong{min-width:260px;text-align:left}
+
+  .doc table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13.5px}
+  .doc table th,.doc table td{border:1px solid #ccc;padding:8px 10px;text-align:center}
+  .doc table th{background:#f2f6fa;font-weight:700}
+  .doc table tr:nth-child(even){background:#fafbfd}
+  .doc .strike{text-decoration:line-through;color:#999}
+  .doc .blue{color:#1a5490;font-weight:600}
+
+  /* ===== 新闻详情页顶图 ===== */
+  .doc .doc-photo{
+    margin:20px 0 24px;
+    border-radius:4px;
+    overflow:hidden;
+    border:1px solid var(--line);
+    background:#f4f7f5;
+  }
+  .doc .doc-photo img{
+    display:block;
+    width:100%;
+    height:auto;
+  }
+  .doc .doc-photo .caption{
+    padding:8px 14px;
+    font-size:12.5px;
+    color:#8a97a8;
+    text-align:center;
+    background:#f8fafc;
+    border-top:1px solid var(--line);
+    font-family:"Microsoft YaHei",sans-serif;
+    text-indent:0;
+  }
+
+  .back-bar{max-width:1200px;margin:0 auto 30px;padding:0 20px;
+    display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+  .back-bar a{display:inline-flex;align-items:center;gap:6px;
+    padding:8px 16px;border-radius:3px;font-size:13px;
+    background:#fff;border:1px solid var(--line);color:var(--muted);transition:.2s}
+  .back-bar a:hover{color:var(--blue2);border-color:var(--blue2)}
+
+  footer{background:#0f2136;color:#7d92ab;font-size:12px;padding:28px 0 20px;border-top:3px solid var(--blue2)}
+  .footer-inner{max-width:1200px;margin:0 auto;padding:0 20px}
+  .footer-links{display:flex;flex-wrap:wrap;gap:8px 22px;padding-bottom:16px;margin-bottom:16px;
+    border-bottom:1px solid rgba(255,255,255,.08)}
+  .footer-links a{color:#7d92ab}
+  .footer-links a:hover{color:#c8d9ee}
+  .footer-info{line-height:2}
+  .footer-info strong{color:#a8bcd4}
+
+  @media (max-width:900px){
+    .grid2{grid-template-columns:1fr}
+    .hero-news{flex-direction:column}
+    .hero-news .thumb{width:100%;height:180px}
+    .doc{padding:32px 22px 46px}
+    .doc-head .title{font-size:20px;letter-spacing:5px}
+    nav a{padding:13px 16px;font-size:14px}
+  }
+  @media (max-width:520px){
+    .title-block h1{font-size:22px;letter-spacing:3px}
+    .header-right{display:none}
+    .doc{padding:26px 18px 40px}
+    .doc p{font-size:14px}
+    .hero-news .thumb{height:150px}
+  }
+</style>
+</head>
+<body>
+
+<!-- 顶部条 -->
+<div class="topbar">
+  <div class="inner">
+    <div>青山市实验中学 · 官方网站</div>
+    <div>
+      <a href="#">无障碍浏览</a>
+      <a href="#">繁體</a>
+      <a href="#">EN</a>
+      <a href="index.html">返回论坛</a>
+    </div>
+  </div>
+</div>
+
+<!-- 页头 -->
+<header>
+  <div class="header-inner">
+    <div class="emblem">🏫</div>
+    <div class="title-block">
+      <h1>青山市实验中学</h1>
+      <div class="sub">QINGSHAN EXPERIMENTAL HIGH SCHOOL</div>
+    </div>
+    <div class="header-right">
+      育人为本 · 追求卓越<br>
+      <strong>厚德 · 博学 · 笃行</strong>
+    </div>
+  </div>
+</header>
+
+<!-- 导航 -->
+<nav>
+  <div class="inner">
+    <a href="#/" data-nav="home" class="active">首页</a>
+    <a href="#/notices" data-nav="notices">通知公告</a>
+    <a href="#/moral" data-nav="moral">德育管理</a>
+    <a href="#/news" data-nav="news">校园新闻</a>
+  </div>
+</nav>
+
+<div id="app"></div>
+
+<!-- 页脚 -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-links">
+      <a href="#">学校概况</a>
+      <a href="#">联系我们</a>
+      <a href="#">招生信息</a>
+      <a href="#">家校互动</a>
+      <a href="#">意见反馈</a>
+    </div>
+    <div class="footer-info">
+      <strong>主办单位：</strong>青山市实验中学 &nbsp;|&nbsp;
+      <strong>地址：</strong>青山市青河区育才路 88 号 &nbsp;|&nbsp;
+      <strong>邮编：</strong>310000<br>
+      <strong>联系电话：</strong>0571-88888888 &nbsp;|&nbsp;
+      <strong>教务处：</strong>0571-88888801 &nbsp;|&nbsp;
+      <strong>学生处：</strong>0571-88888802<br>
+      网站标识码：0000000001 &nbsp;|&nbsp;
+      备案号：青山ICP备00000001号<br>
+      <span style="color:#4a5f78;">本站为虚构世界观设定，与任何现实机构无关</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ========== 数据 ========== */
+const notices = {
+  'jiandao': {
+    title: '关于成立"尖刀班"的公告',
+    no: '青实中〔2026〕第 18 号',
+    date: '2026年8月23日',
+    body: `
+      <p class="no-indent">全体师生、家长：</p>
+      <p>为深入贯彻因材施教原则，进一步挖掘学生潜能，提升拔尖创新人才培养质量，经学校研究决定，自2026年8月30日起正式成立"尖刀班"，面向全校开展分层培优教学。现将有关事项公告如下：</p>
+      <h3>一、办班宗旨</h3>
+      <p>坚持"面向全体、尊重差异、因材施教、全面发展"，在开齐开足国家规定课程的基础上，为学有余力、学科特长突出的学生提供更高阶的学习内容与思维训练平台，培养其自主学习能力、创新意识和综合素养，同时带动年级整体学风建设。</p>
+      <h3>二、组建原则</h3>
+      <p>录取原则：以考试排名作为录取标准，排名靠前者录取。</p>
+      <p>综合考量：以学业水平为基础，兼顾学习态度、意志品质与心理素质，不搞"一次考试定终身"。</p>
+      <p>动态管理：实行滚动进出机制，每学期评估一次，能进能出，保持班级活力。</p>
+      <p>规模适度：每班不超过30人，计划开设2个班。<strong>每年级的八班和九班分别为文科尖刀班和理科尖刀班。</strong></p>
+      <h3>三、培养措施</h3>
+      <p>课程优化：在完成国家课程基础上，增设思维拓展、竞赛辅导、阅读写作、科学探究等校本课程与专题讲座。</p>
+      <p>学法指导：重点培养自主学习、时间管理与反思总结能力，避免简单增加作业量与考试频次。</p>
+      <p>活动拓展：组织学科竞赛、课题研究、研学实践及校际交流，拓宽视野。</p>
+      <p>心理关怀：关注学生学习压力与情绪状态，定期开展心理辅导和团体活动，促进身心健康发展。</p>
+      <h3>四、师资保障</h3>
+      <p>由校内外骨干教师、学科带头人及具有竞赛辅导经验的教师组成教学团队，学校将统筹安排教研与培训，确保教学质量。</p>
+      <p>本公告自发布之日起施行，具体解释权归学校教务处。</p>
+      <p class="no-indent" style="text-align:right;margin-top:30px;">青山市实验中学</p>
+      <p class="no-indent" style="text-align:right;">2026年8月23日</p>
+    `
+  },
+  'chang': {
+    title: '青山市实验中学关于学生常峻硕打架斗殴、校园霸凌事件的处理通报',
+    no: '青山市实验中学〔2025〕16号',
+    date: '2025年11月14日',
+    body: `
+      <p class="no-indent">全校师生：</p>
+      <p>2025年11月13日，我校一年级三班学生<strong>常峻硕</strong>因琐事与同学发生冲突，实施殴打、欺凌行为，造成对方受伤。事件发生后，学校高度重视，立即成立调查组，配合公安机关开展调查取证，并第一时间安排受伤学生就医、心理疏导及家校沟通。</p>
+      <p>经调查核实，常峻硕的行为已构成打架斗殴、校园霸凌，并造成他人轻微伤，性质恶劣，情节严重，严重违反校规校纪，涉嫌违法。经学校学生欺凌治理委员会认定，并根据《青山市实验中学学生违纪处分办法》第十条及相关规定，经学校研究决定：</p>
+      <p>一、给予常峻硕劝退处理，按程序办理离校手续。</p>
+      <p>二、将该生涉嫌违法线索及相关材料移交公安机关依法处理，学校全力配合警方后续工作。</p>
+      <p>三、对受伤学生及家属做好安抚、医疗、心理辅导和后续帮扶工作。</p>
+      <p>四、在全校开展防校园欺凌、法治教育专项活动，加强排查和预警，坚决防止类似事件再次发生。</p>
+      <p>警方现已立案，案号为：<strong>QS20251113004</strong>。学校对校园霸凌、打架斗殴等暴力行为坚持"零容忍"。希望全体学生引以为戒，遇到矛盾应通过老师、家长或学校渠道依法依规解决，严禁以暴力方式处理。全体教师和家长要切实履行教育、监护责任，共同维护安全、文明、和谐的校园环境。</p>
+      <p class="no-indent" style="text-align:right;margin-top:30px;">青山市实验中学</p>
+      <p class="no-indent" style="text-align:right;">2025年11月14日</p>
+    `
+  },
+  'linqi': {
+    title: '关于给予林圻同学记大过处分的通告',
+    no: '青山市实验中学〔2025〕09号',
+    date: '2025年10月14日',
+    body: `
+      <p class="no-indent">全校各班级、全体师生：</p>
+      <p>经查，一年七班学生<strong>林圻</strong>，于2025年10月13日，违反学校学生管理规定，私自携带手机（违禁品名称）进入校园，被学校安全检查人员查获。</p>
+      <p>该生行为严重违反了《青山市实验中学学生管理规定》第七条及《青山市实验中学学生住宿管理办法》第八条之规定，性质严重，影响恶劣。为严肃校纪校规，教育本人，警示他人，经学校学生工作处研究并报校领导批准，决定给予林圻同学以下处理：</p>
+      <p>1. 给予林圻同学记大过处分，处分期限为12个月，记入本人学籍档案；</p>
+      <p>2. 对林圻同学予以全校通报批评；</p>
+      <p>3. 根据《青山市实验中学家庭经济困难学生资助管理办法》第3条之规定，<strong>取消林圻同学贫困生资助资格</strong>，自本通告发布之日起执行，已发放的资助款项按学校相关规定处理。</p>
+      <p>希望全体同学引以为戒，严格遵守学校各项规章制度，不得携带任何违禁物品进入校园，自觉维护校园安全稳定。各班级要进一步加强安全教育和管理，杜绝此类事件再次发生。</p>
+      <p class="no-indent" style="text-align:right;margin-top:30px;">青山市实验中学学生工作处</p>
+      <p class="no-indent" style="text-align:right;">2025年10月14日</p>
+    `
+  },
+  'poverty': {
+    title: '青山市实验高中 2026-2027 学年度贫困生补助名单',
+    no: 'QSSY-2025-BZ-006',
+    date: '2025年10月15日',
+    body: `
+      <p class="no-indent">制表部门：学生处 &nbsp;&nbsp; 制表日期：2025年10月</p>
+      <table>
+        <thead>
+          <tr><th>序号</th><th>姓名</th><th>班级</th><th>学号</th><th>补助类别</th><th>金额（元）</th><th>备注</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td>王明轩</td><td>高一（3）班</td><td>20260301</td><td>特困补助</td><td>1500</td><td>单亲家庭</td></tr>
+          <tr><td>2</td><td>李思涵</td><td>高一（5）班</td><td>20260508</td><td>困难补助</td><td>1000</td><td>低保家庭</td></tr>
+          <tr><td>3</td><td class="strike">林圻</td><td>高一（7）班</td><td>20250112</td><td>困难补助</td><td>1000</td><td class="strike">涉嫌违纪</td></tr>
+          <tr><td>4</td><td class="blue">常峻硕</td><td>高一（7）班</td><td>20250115</td><td>特困补助</td><td>1500</td><td class="blue">接替林圻（新增）</td></tr>
+          <tr><td>5</td><td class="blue">高梓睿</td><td>高一（7）班</td><td>20250203</td><td>特困补助</td><td>1500</td><td class="blue">接替林圻（新增）</td></tr>
+          <tr><td>6</td><td>张雨桐</td><td>高二（4）班</td><td>20250416</td><td>临时补助</td><td>800</td><td>突发困难</td></tr>
+          <tr><td>7</td><td>陈子墨</td><td>高三（2）班</td><td>20240207</td><td>困难补助</td><td>1000</td><td>残疾家庭</td></tr>
+          <tr><td>8</td><td>赵欣怡</td><td>高三（5）班</td><td>20240521</td><td>特困补助</td><td>1500</td><td>孤儿</td></tr>
+          <tr><td colspan="5" style="text-align:right;font-weight:700">合计</td><td>8800</td><td>共7人</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:12.5px;color:#666;text-indent:0;">说明：蓝色字体表示本次新增补录人员；删除线字体表示已调出/取消补助人员。</p>
+      <p class="no-indent" style="margin-top:30px;">制表人：王志刚 &nbsp;&nbsp; 审核人：高启强 &nbsp;&nbsp; 日期：2025年10月15日</p>
+    `
+  },
+  'dorm': {
+    title: '住宿生寝室分配名单',
+    no: '青实中〔2025〕学工字第 07 号',
+    date: '2025年8月21日',
+    body: `
+      <p class="no-indent">男生宿舍 A栋（50间，200人）</p>
+      <table>
+        <tbody>
+          <tr><td><strong>A-101</strong></td><td><strong>常峻硕、王乐韦、高梓睿、刘子轩</strong></td></tr>
+          <tr><td><strong>A-102</strong></td><td><strong>林圻、杨泽宇、赵明远、黄博文</strong></td></tr>
+          <tr><td>A-103</td><td>周凯旋、吴天佑、徐嘉豪、孙立诚</td></tr>
+          <tr><td>A-104</td><td>马思远、朱瑞霖、胡俊熙、郭子涵</td></tr>
+          <tr><td>A-105</td><td>何雨泽、王宇航、林嘉树、罗子豪</td></tr>
+          <tr><td>…</td><td>（其余寝室名单略，与剧情无关）</td></tr>
+          <tr><td>A-160</td><td>潘宇轩、袁泽凯、蒋子豪、蔡明远</td></tr>
+        </tbody>
+      </table>
+      <p class="no-indent">女生宿舍 B栋（50间，200人）</p>
+      <table>
+        <tbody>
+          <tr><td>B-201</td><td>王诗涵、李雨桐、张梦琪、刘欣怡</td></tr>
+          <tr><td>B-202</td><td>陈思妍、杨紫萱、赵语彤、黄雅静</td></tr>
+          <tr><td>…</td><td>（其余寝室名单略，与剧情无关）</td></tr>
+          <tr><td>B-250</td><td>陈欣妍、杨诗涵、赵佳宁、黄雨薇</td></tr>
+        </tbody>
+      </table>
+      <p class="no-indent" style="text-align:right;margin-top:30px;">青山市实验中学 学生处</p>
+      <p class="no-indent" style="text-align:right;">2025年8月21日</p>
+    `
+  }
+};
+
+const news = {
+  'leader-visit': {
+    title: '青山市公安局领导莅临我校参观指导',
+    date: '2026年9月5日',
+    source: '校办公室',
+    photo: '领导参观.png',
+    photoCaption: '青山市公安局领导一行参观我校学生宿舍',
+    body: `
+      <p>2026年9月5日上午，青山市公安局局长<strong>常陆军</strong>、副局长<strong>常海军</strong>、副局长<strong>常空军</strong>一行莅临我校参观指导工作。校长高启强、副校长王志刚及相关部门负责人陪同参观。</p>
+      <p>常陆军局长一行先后参观了教学楼、实验楼、学生宿舍、图书馆及校园安防监控中心，详细了解我校办学条件、教学管理和校园安全工作情况。在参观学生宿舍时，常局长仔细询问了住宿生的生活情况，并对我校宿舍管理工作给予肯定。</p>
+      <p>随后，双方在行政楼会议室举行座谈。高启强校长代表学校对公安局领导的到来表示热烈欢迎，并介绍了学校近年来的发展情况和办学成果。常陆军局长表示，公安机关将一如既往地支持学校工作，加强校园周边治安整治，为师生营造安全稳定的校园环境。双方还就法治教育、校园安全等议题进行了深入交流。</p>
+      <p>此次参观指导进一步加强了警校合作，为共同构建平安校园奠定了良好基础。</p>
+      <p style="text-align:right;text-indent:0;margin-top:30px;">青山市实验中学 校办公室</p>
+      <p style="text-align:right;text-indent:0;">2026年9月5日</p>
+    `
+  }
+};
+
+/* ========== 路由 ========== */
+const app = document.getElementById('app');
+
+function esc(s){
+  return String(s).replace(/[&<>"']/g, m=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[m]));
+}
+
+function setNav(name){
+  document.querySelectorAll('nav a').forEach(a=>{
+    a.classList.toggle('active', a.dataset.nav === name);
+  });
+}
+
+/* ========== 首页 ========== */
+function renderHome(){
+  setNav('home');
+  app.innerHTML = `
+    <div class="wrap">
+      <div class="crumb"><a href="#/">首页</a></div>
+      <div class="grid2">
+        <div>
+          <div class="card">
+            <div class="card-head"><h2>校园新闻</h2></div>
+            <div class="hero-news">
+              <div class="thumb">
+                <img src="领导参观.png" alt="青山市公安局领导莅临我校参观指导"
+                     onerror="this.parentNode.innerHTML='🏫';">
+              </div>
+              <div>
+                <h3><a href="#/news/leader-visit">青山市公安局领导莅临我校参观指导</a></h3>
+                <p>9月5日上午，青山市公安局局长常陆军、副局长常海军、副局长常空军一行莅临我校参观指导工作，校长高启强等陪同参观。</p>
+                <div class="date">2026-09-05 &nbsp;|&nbsp; 校办公室</div>
+              </div>
+            </div>
+            <ul class="list">
+              <li><span class="post-plain">我校2026年秋季运动会圆满落幕</span><span class="date">09-28</span></li>
+              <li><span class="post-plain">高二年级召开期中考试动员大会</span><span class="date">09-25</span></li>
+              <li><span class="post-plain">"尖刀班"新学期首次教研活动顺利开展</span><span class="tag-new">新</span><span class="date">09-20</span></li>
+              <li><span class="post-plain">我校学生在市级数学竞赛中再创佳绩</span><span class="date">09-18</span></li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <div class="card-head">
+              <h2>通知公告</h2>
+              <a href="#/notices" style="font-size:12px;color:#8a97a8">更多 &gt;</a>
+            </div>
+            <ul class="list">
+              <li><a href="#/notices/jiandao">关于成立"尖刀班"的公告</a><span class="date">08-23</span></li>
+              <li><a href="#/notices/chang">关于学生常峻硕打架斗殴、校园霸凌事件的处理通报</a><span class="date">2025-11-14</span></li>
+              <li><a href="#/notices/linqi">关于给予林圻同学记大过处分的通告</a><span class="date">2025-10-14</span></li>
+              <li><a href="#/notices/poverty">青山市实验高中贫困生补助名单</a><span class="date">2025-10-15</span></li>
+              <li><a href="#/notices/dorm">住宿生寝室分配名单</a><span class="date">2025-08-21</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="side-col">
+          <div class="card side-card">
+            <div class="card-head"><h2>快速通道</h2></div>
+            <div class="quick">
+              <a href="#/notices">通知公告 <span class="arrow">›</span></a>
+              <a href="#/moral">德育管理 <span class="arrow">›</span></a>
+              <a href="#/news">校园新闻 <span class="arrow">›</span></a>
+              <a href="index.html">返回论坛 <span class="arrow">›</span></a>
+            </div>
+          </div>
+          <div class="card side-card">
+            <div class="card-head"><h2>学校数据</h2></div>
+            <div class="stats">
+              <div class="stat-row"><span class="label">在校学生</span><span class="value">2,486 <small>人</small></span></div>
+              <div class="stat-row"><span class="label">教职工</span><span class="value">218 <small>人</small></span></div>
+              <div class="stat-row"><span class="label">教学班</span><span class="value">48 <small>个</small></span></div>
+              <div class="stat-row"><span class="label">建校年份</span><span class="value">1956</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+/* ========== 通知公告列表 ========== */
+function renderNotices(){
+  setNav('notices');
+  const items = Object.keys(notices).map(k=>{
+    const n = notices[k];
+    return `<li><a href="#/notices/${k}">${esc(n.title)}</a><span class="date">${esc(n.date)}</span></li>`;
+  }).join('');
+  app.innerHTML = `
+    <div class="wrap">
+      <div class="crumb"><a href="#/">首页</a><span>&gt;</span>通知公告</div>
+      <div class="card">
+        <div class="card-head"><h2>通知公告</h2></div>
+        <ul class="list">${items}</ul>
+      </div>
+    </div>
+  `;
+}
+
+/* ========== 通知公告详情 ========== */
+function renderNoticeDetail(key){
+  setNav('notices');
+  const n = notices[key];
+  if(!n){ renderNotices(); return; }
+  app.innerHTML = `
+    <div class="wrap">
+      <div class="crumb"><a href="#/">首页</a><span>&gt;</span><a href="#/notices">通知公告</a><span>&gt;</span>${esc(n.title)}</div>
+      <div class="doc">
+        <div class="doc-head">
+          <div class="org">青山市实验中学</div>
+          <div class="title">${esc(n.title)}</div>
+          <div class="no">${esc(n.no)}</div>
+        </div>
+        ${n.body}
+      </div>
+      <div class="back-bar" style="margin-top:20px;">
+        <a href="#/notices">← 返回通知公告</a>
+        <a href="index.html">← 返回论坛</a>
+      </div>
+    </div>
+  `;
+  window.scrollTo(0,0);
+}
+
+/* ========== 德育管理 ========== */
+function renderMoral(){
+  setNav('moral');
+  app.innerHTML = `
+    <div class="wrap">
+      <div class="crumb"><a href="#/">首页</a><span>&gt;</span>德育管理</div>
+      <div class="card">
+        <div class="card-head"><h2>德育管理</h2></div>
+        <ul class="list">
+          <li><a href="#/notices/dorm">住宿生寝室分配名单</a><span class="date">2025-08-21</span></li>
+          <li><a href="#/notices/chang">关于学生常峻硕打架斗殴、校园霸凌事件的处理通报</a><span class="date">2025-11-14</span></li>
+          <li><a href="#/notices/linqi">关于给予林圻同学记大过处分的通告</a><span class="date">2025-10-14</span></li>
+        </ul>
+      </div>
+    </div>
+  `;
+}
+
+/* ========== 校园新闻列表 ========== */
+function renderNewsList(){
+  setNav('news');
+  app.innerHTML = `
+    <div class="wrap">
+      <div class="crumb"><a href="#/">首页</a><span>&gt;</span>校园新闻</div>
+      <div class="card">
+        <div class="card-head"><h2>校园新闻</h2></div>
+        <ul class="list">
+          <li><a href="#/news/leader-visit">青山市公安局领导莅临我校参观指导</a><span class="tag-new">新</span><span class="date">2026-09-05</span></li>
+          <li><span class="post-plain">我校2026年秋季运动会圆满落幕</span><span class="date">09-28</span></li>
+          <li><span class="post-plain">高二年级召开期中考试动员大会</span><span class="date">09-25</span></li>
+          <li><span class="post-plain">"尖刀班"新学期首次教研活动顺利开展</span><span class="date">09-20</span></li>
+        </ul>
+      </div>
+    </div>
+  `;
+}
+
+/* ========== 校园新闻详情 ========== */
+function renderNewsDetail(key){
+  setNav('news');
+  const n = news[key];
+  if(!n){ renderNewsList(); return; }
+
+  const photoHTML = n.photo
+    ? `<div class="doc-photo">
+         <img src="${esc(n.photo)}" alt="${esc(n.title)}"
+              onerror="this.parentNode.style.display='none';">
+         ${n.photoCaption ? `<div class="caption">${esc(n.photoCaption)}</div>` : ''}
+       </div>`
+    : '';
+
+  app.innerHTML = `
+    <div class="wrap">
+      <div class="crumb"><a href="#/">首页</a><span>&gt;</span><a href="#/news">校园新闻</a><span>&gt;</span>${esc(n.title)}</div>
+      <div class="doc">
+        <div class="doc-head">
+          <div class="org">青山市实验中学</div>
+          <div class="title" style="font-size:22px;letter-spacing:4px;">${esc(n.title)}</div>
+          <div class="no">${esc(n.date)} &nbsp;|&nbsp; 来源：${esc(n.source)}</div>
+        </div>
+        ${photoHTML}
+        ${n.body}
+      </div>
+      <div class="back-bar" style="margin-top:20px;">
+        <a href="#/news">← 返回校园新闻</a>
+        <a href="index.html">← 返回论坛</a>
+      </div>
+    </div>
+  `;
+  window.scrollTo(0,0);
+}
+
+/* ========== 路由 ========== */
+function route(){
+  const hash = location.hash || '#/';
+  let m;
+
+  if(hash === '#/' || hash === ''){ renderHome(); return; }
+
+  m = hash.match(/^#\/notices\/(.+)$/);
+  if(m){ renderNoticeDetail(m[1]); return; }
+
+  if(hash === '#/notices'){ renderNotices(); return; }
+
+  if(hash === '#/moral'){ renderMoral(); return; }
+
+  m = hash.match(/^#\/news\/(.+)$/);
+  if(m){ renderNewsDetail(m[1]); return; }
+
+  if(hash === '#/news'){ renderNewsList(); return; }
+
+  renderHome();
+}
+
+window.addEventListener('hashchange', route);
+route();
+
+/* ================= 阻止占位链接跳转 ================= */
+/* 点击 href="#" 时不做任何事，避免 hash 变成 # 触发 route() 渲染首页 */
+document.addEventListener('click', function(e){
+  const a = e.target.closest('a[href="#"]');
+  if(a){ e.preventDefault(); }
+});
+</script>
+</body>
+</html>

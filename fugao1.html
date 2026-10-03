@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>讣告 · 青山实中论坛</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{background:#050608;overflow-x:hidden;
+    font-family:"Songti SC","SimSun","Noto Serif SC",Georgia,serif;color:#b8bcc2}
+  body{display:block;min-height:100vh;padding:40px 20px;position:relative}
+
+  .bg{position:fixed;inset:0;z-index:0;
+    background:
+      radial-gradient(ellipse 70% 50% at 50% 30%, rgba(40,50,62,.35), transparent 70%),
+      radial-gradient(ellipse 50% 40% at 50% 105%, rgba(60,18,18,.22), transparent 72%),
+      linear-gradient(180deg,#040507 0%,#080c12 50%,#030405 100%);
+  }
+  .bg::after{content:"";position:absolute;inset:-50%;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity:.05;mix-blend-mode:overlay;pointer-events:none;animation:grain 8s steps(10) infinite}
+  @keyframes grain{
+    0%,100%{transform:translate(0,0)} 10%{transform:translate(-4%,-3%)}
+    30%{transform:translate(3%,-5%)} 50%{transform:translate(-3%,4%)}
+    70%{transform:translate(4%,2%)} 90%{transform:translate(-2%,-2%)}
+  }
+  .vignette{position:fixed;inset:0;pointer-events:none;z-index:1;
+    box-shadow:inset 0 0 260px 90px #000, inset 0 0 110px 30px rgba(0,0,0,.9)}
+  .scan{position:fixed;inset:0;pointer-events:none;z-index:1;
+    background:repeating-linear-gradient(0deg,
+      rgba(255,255,255,.018) 0,rgba(255,255,255,.018) 1px,
+      transparent 1px,transparent 3px);opacity:.6}
+
+  .paper{
+    position:relative;z-index:2;
+    width:min(620px,100%);
+    margin:0 auto;
+    padding:56px 52px 48px;
+    background:rgba(10,12,16,.82);
+    border:1px solid rgba(140,150,165,.14);
+    border-radius:2px;
+    backdrop-filter:blur(4px);
+    box-shadow:0 40px 90px -40px rgba(0,0,0,.9);
+  }
+
+  .paper::before,.paper::after{
+    content:"";position:absolute;left:24px;right:24px;height:1px;
+    background:linear-gradient(90deg,transparent,rgba(160,170,185,.25),transparent);
+  }
+  .paper::before{top:20px}
+  .paper::after{bottom:20px}
+
+  .head{text-align:center;padding-bottom:26px;margin-bottom:30px;
+    border-bottom:1px solid rgba(140,150,165,.18)}
+  .head h1{font-size:34px;letter-spacing:18px;text-indent:18px;color:#e4e5e8;
+    font-weight:600;text-shadow:0 0 30px rgba(150,180,205,.22)}
+  .head .sub{margin-top:12px;font-size:12px;letter-spacing:6px;color:#5d6670}
+
+  .portrait-wrap{
+    display:flex;
+    justify-content:center;
+    margin-bottom:36px;
+    position:relative;
+  }
+  .portrait-wrap::before,
+  .portrait-wrap::after{
+    content:"";
+    position:absolute;
+    top:50%;
+    width:60px;
+    height:1px;
+    background:linear-gradient(90deg, transparent, rgba(180,180,180,.25));
+  }
+  .portrait-wrap::before{ left:0; }
+  .portrait-wrap::after{ right:0; transform:scaleX(-1); }
+
+  .portrait{
+    width:180px;
+    height:240px;
+    border-radius:2px;
+    overflow:hidden;
+    border:1px solid rgba(160,170,185,.28);
+    background:#0a0c10;
+    position:relative;
+    box-shadow:
+      0 0 0 6px rgba(10,12,16,.85),
+      0 0 0 7px rgba(160,170,185,.18),
+      0 20px 40px -20px rgba(0,0,0,.9);
+  }
+  .portrait img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+    filter: grayscale(1) contrast(1.05) brightness(.92);
+    transition: filter .6s ease;
+  }
+  .portrait img:hover{
+    filter: grayscale(.35) contrast(1.05) brightness(1);
+  }
+  .portrait::after{
+    content:"";
+    position:absolute;inset:0;
+    background:linear-gradient(180deg, rgba(0,0,0,.15) 0%, transparent 30%, transparent 70%, rgba(0,0,0,.35) 100%);
+    pointer-events:none;
+  }
+
+  .portrait-name{
+    text-align:center;
+    margin-top:16px;
+    font-size:16px;
+    letter-spacing:6px;
+    color:#c8cdd3;
+    text-indent:6px;
+  }
+  .portrait-name::before,
+  .portrait-name::after{
+    content:"·";
+    margin:0 10px;
+    color:#5d6670;
+  }
+
+  .body p{font-size:15px;line-height:2.3;color:#a8afb8;text-indent:2em;margin-bottom:14px}
+  .body p.no-indent{text-indent:0}
+  .body .name{color:#dde3e8;font-weight:600}
+
+  .body .meta{
+    margin:34px 0;
+    padding:20px 24px;
+    background:rgba(20,24,30,.6);
+    border-left:2px solid rgba(160,170,185,.22);
+    font-size:14px;line-height:2.1;color:#98a0aa;
+    text-indent:0;
+  }
+  .body .meta .k{color:#6c757f;display:inline-block;width:96px}
+  .body .meta .v{color:#c8cdd3}
+
+  .sign{margin-top:44px;text-align:right;font-size:14px;line-height:2.2;color:#878f99}
+  .sign .org{color:#b8bfc6}
+
+  .clue-wrap{
+    margin-top:46px;
+    padding:18px 22px;
+    border:1px dashed rgba(201,162,39,.32);
+    background:rgba(40,32,10,.22);
+    text-indent:0;
+  }
+  .clue-label{
+    font-size:11px;letter-spacing:3px;color:#8a7540;margin-bottom:10px;
+    font-family:"PingFang SC","Microsoft YaHei",sans-serif;
+  }
+  .clue{
+    font-family:Consolas,"Courier New",monospace;
+    font-size:15px;letter-spacing:1.5px;
+    color:#d4b34a;
+    user-select:all;
+    word-break:break-all;
+    text-shadow:0 0 14px rgba(212,179,74,.28);
+  }
+
+  .footer{margin-top:40px;text-align:center;font-size:11px;
+    color:#3f464e;letter-spacing:4px}
+
+  /* ===== 全屏「恭喜」遮罩 ===== */
+  .congrats{
+    position:fixed;
+    inset:0;
+    z-index:99999;
+    background:#000;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .9s ease;
+    cursor:pointer;
+    overflow:hidden;
+  }
+  .congrats.show{
+    opacity:1;
+    pointer-events:auto;
+  }
+  .congrats::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+      radial-gradient(ellipse 60% 40% at 50% 50%, rgba(120,10,10,.55), transparent 70%),
+      radial-gradient(ellipse 100% 100% at 50% 50%, transparent 40%, rgba(0,0,0,.9) 100%);
+    pointer-events:none;
+  }
+  .congrats::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background-image:repeating-linear-gradient(0deg,
+      rgba(255,255,255,.02) 0,rgba(255,255,255,.02) 1px,
+      transparent 1px,transparent 3px);
+    opacity:.5;
+    pointer-events:none;
+    z-index:2;
+  }
+
+  .congrats-text{
+    position:relative;
+    z-index:3;
+    font-family:"SimHei","Heiti SC","Microsoft YaHei",sans-serif;
+    font-weight:900;
+    font-size:clamp(120px, 28vw, 360px);
+    letter-spacing:.05em;
+    color:#d81e1e;
+    text-indent:.05em;
+    text-shadow:
+      0 0 20px rgba(255,40,40,.95),
+      0 0 60px rgba(220,20,20,.75),
+      0 0 120px rgba(180,0,0,.55),
+      0 0 220px rgba(120,0,0,.4);
+    animation:congratsPulse 2.4s ease-in-out infinite;
+    user-select:none;
+    line-height:1;
+  }
+  @keyframes congratsPulse{
+    0%,100%{
+      transform:scale(1);
+      opacity:.92;
+      text-shadow:
+        0 0 20px rgba(255,40,40,.9),
+        0 0 60px rgba(220,20,20,.7),
+        0 0 120px rgba(180,0,0,.5),
+        0 0 220px rgba(120,0,0,.35);
+    }
+    50%{
+      transform:scale(1.04);
+      opacity:1;
+      text-shadow:
+        0 0 30px rgba(255,60,60,1),
+        0 0 80px rgba(255,30,30,.85),
+        0 0 160px rgba(200,0,0,.65),
+        0 0 280px rgba(140,0,0,.45);
+    }
+  }
+
+  .congrats-hint{
+    position:absolute;
+    bottom:40px;
+    left:0;
+    right:0;
+    text-align:center;
+    font-size:12px;
+    letter-spacing:6px;
+    color:#5a1a1a;
+    font-family:"PingFang SC","Microsoft YaHei",sans-serif;
+    animation:hintBlink 3s ease-in-out infinite;
+    z-index:3;
+    user-select:none;
+  }
+  @keyframes hintBlink{
+    0%,100%{opacity:.25}
+    50%{opacity:.85}
+  }
+</style>
+</head>
+<body>
+
+<div class="bg"></div>
+<div class="scan"></div>
+<div class="vignette"></div>
+
+<div class="paper">
+  <div class="head">
+    <h1>讣告</h1>
+    <div class="sub">FUGUE · 2026</div>
+  </div>
+
+  <div class="body">
+    <!-- 遗像 -->
+    <div class="portrait-wrap">
+      <div class="portrait">
+        <img src="常峻硕.png" alt="常峻硕"
+             onerror="this.parentNode.style.display='none';">
+      </div>
+    </div>
+    <div class="portrait-name">常峻硕</div>
+
+    <p class="no-indent" style="margin-top:32px;">
+      <span class="name">常峻硕</span>，男，青山市实验中学学生。
+    </p>
+
+    <div class="meta">
+      <div><span class="k">姓　　名</span><span class="v">常峻硕</span></div>
+      <div><span class="k">性　　别</span><span class="v">男</span></div>
+      <div><span class="k">出生日期</span><span class="v">2009 年 9 月 5 日</span></div>
+      <div><span class="k">发现时间</span><span class="v">2026 年 9 月 23 日 07 时 06 分</span></div>
+      <div><span class="k">发现地点</span><span class="v">青山市实验中学 仓库</span></div>
+      <div><span class="k">死亡原因</span><span class="v">缢死</span></div>
+      <div><span class="k">案件编号</span><span class="v">QS20260923001</span></div>
+    </div>
+
+    <p>经公安机关调查，认定常峻硕系自杀身亡。</p>
+    <p>生前同学、好友如有悼念之言，可于本文下方留言。</p>
+    <p>愿逝者安息。</p>
+
+    <div class="clue-wrap">
+      <div class="clue-label">遗物 · 手写便签</div>
+      <div class="clue">01. aHR0cHM6Ly9x</div>
+    </div>
+
+    <div class="sign">
+      <div class="org">青山市实验中学 治丧委员会</div>
+      <div>2026 年 9 月 24 日</div>
+    </div>
+  </div>
+
+  <div class="footer">— 论 坛 帖 子 · 禁 止 回 复 —</div>
+</div>
+
+<!-- 全屏「恭喜」 -->
+<div class="congrats" id="congrats">
+  <div class="congrats-text">恭喜</div>
+  <div class="congrats-hint">— 点击任意位置继续 —</div>
+</div>
+
+<script>
+  (function(){
+    var paper    = document.querySelector('.paper');
+    var congrats = document.getElementById('congrats');
+    var shown    = false;
+
+    /* 条件一：paper 底部滚入视口 */
+    function checkScroll(){
+      if (shown) return;
+      var rect  = paper.getBoundingClientRect();
+      var viewH = window.innerHeight;
+      if (rect.bottom < viewH + 80){
+        show();
+      }
+    }
+
+    /* 条件二：页面不够长（没有滚动条） */
+    function checkHeight(){
+      if (shown) return;
+      var docH  = document.documentElement.scrollHeight;
+      var viewH = window.innerHeight;
+      if (docH <= viewH + 60){
+        show();
+      }
+    }
+
+    function show(){
+      shown = true;
+      congrats.classList.add('show');
+    }
+
+    window.addEventListener('scroll', checkScroll, { passive:true });
+    window.addEventListener('resize', function(){ checkScroll(); checkHeight(); });
+
+    setTimeout(function(){ checkScroll(); checkHeight(); }, 300);
+    window.addEventListener('load', function(){
+      setTimeout(function(){ checkScroll(); checkHeight(); }, 200);
+    });
+
+    congrats.addEventListener('click', function(){
+      congrats.classList.remove('show');
+      shown = false;
+    });
+  })();
+</script>
+
+</body>
+</html>
