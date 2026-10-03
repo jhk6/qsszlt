@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>青山实中论坛 · 私密频道</title>
+<title>个人中心 · 青山实中论坛</title>
 <style>
   :root{
     color-scheme:dark;
@@ -26,9 +26,7 @@
   }
 
   *{box-sizing:border-box;margin:0;padding:0}
-
   html,body{background:var(--bg)}
-
   body{
     font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
     background:
@@ -42,7 +40,6 @@
     min-height:100vh;
     overflow-x:hidden;
   }
-
   body::before{
     content:"";
     position:fixed;inset:0;pointer-events:none;z-index:1;
@@ -51,33 +48,12 @@
     opacity:.6;
     mix-blend-mode:screen;
   }
-
   a{color:inherit;text-decoration:none}
   button{font-family:inherit;cursor:pointer;border:none;background:none}
-  input,select,textarea{font-family:inherit;font-size:inherit;outline:none}
-
+  input{font-family:inherit;font-size:inherit;outline:none}
   mark{background:#4a0808;color:#ff9a9a;padding:0 2px;border-radius:3px}
 
-  .container{max-width:1160px;margin:0 auto;padding:0 20px;position:relative;z-index:2}
-
-  /* ============ 闪屏 ============ */
-  .screen-flash{
-    position:fixed;
-    inset:0;
-    background:#e01a1a;
-    z-index:9999;
-    pointer-events:none;
-    opacity:0;
-  }
-  .screen-flash.active{
-    animation:screenFlash .7s cubic-bezier(.2,.7,.3,1) forwards;
-  }
-  @keyframes screenFlash{
-    0%{opacity:0}
-    15%{opacity:.95}
-    40%{opacity:.7}
-    100%{opacity:0}
-  }
+  .container{max-width:900px;margin:0 auto;padding:0 20px;position:relative;z-index:2}
 
   /* ============ 顶部导航 ============ */
   .site-header{
@@ -97,7 +73,6 @@
     0%,100%{opacity:.25}
     50%{opacity:.9}
   }
-
   .header-inner{
     display:flex;align-items:center;gap:20px;height:64px;
   }
@@ -111,52 +86,7 @@
   .logo-text{font-size:18px;font-weight:700;letter-spacing:.4px;white-space:nowrap;color:#f0dada}
   .logo-text small{display:block;font-size:10px;font-weight:500;color:#9a5858;letter-spacing:1.6px}
 
-  .nav{display:flex;gap:4px;margin-left:8px}
-  .nav a{
-    padding:8px 12px;border-radius:9px;font-size:14.5px;color:#a88888;
-    transition:.18s;
-  }
-  .nav a:hover{background:var(--red-50);color:var(--red-700)}
-  .nav a.active{color:#ffb3b3;font-weight:600;background:var(--red-100)}
-
-  .header-right{margin-left:auto;display:flex;align-items:center;gap:10px;min-width:0}
-
-  .search{
-    display:flex;align-items:center;gap:8px;
-    background:#180404;border:1px solid #2a0808;
-    padding:8px 14px;border-radius:999px;
-    transition:background .2s, border-color .2s, box-shadow .2s;
-    width:250px;
-    position:relative;
-    z-index:2;
-  }
-  .search:focus-within{background:#220606;border-color:var(--red-500);box-shadow:0 0 0 3px rgba(200,30,30,.18)}
-  .search svg{flex-shrink:0}
-  .search-btn{
-    display:grid;place-items:center;color:#8a5858;
-    flex-shrink:0;transition:.18s;
-    padding:0;
-    background:none;
-  }
-  .search-btn:hover{color:var(--red-500)}
-
-  .search input{
-    border:none;
-    background:none;
-    flex:1 1 auto;
-    min-width:0;
-    width:100%;
-    font-size:14px;
-    color:#e8d5d5;
-    -webkit-appearance:none;
-    appearance:none;
-    -webkit-text-fill-color:#e8d5d5;
-    line-height:1.4;
-    padding:2px 0;
-  }
-  .search input::placeholder{color:#7a4a4a}
-  .search input::-webkit-search-cancel-button,
-  .search input::-webkit-search-decoration{-webkit-appearance:none;appearance:none}
+  .header-right{margin-left:auto;display:flex;align-items:center;gap:10px}
 
   .btn{
     display:inline-flex;align-items:center;justify-content:center;gap:6px;
@@ -172,241 +102,212 @@
   .btn-primary:hover{filter:brightness(1.15);transform:translateY(-1px)}
   .btn-primary:active{transform:translateY(0)}
 
-  .user-avatar{
+  /* ============ 用户信息卡 ============ */
+  .user-card{
+    margin-top:28px;
+    background:
+      radial-gradient(600px 200px at 20% -30%, rgba(200,30,30,.28), transparent 65%),
+      linear-gradient(135deg,#1a0404,#0d0202);
+    border:1px solid var(--line);
+    border-radius:18px;
+    padding:28px 30px;
+    display:flex;align-items:center;gap:22px;
+    box-shadow:var(--shadow), inset 0 0 40px rgba(200,30,30,.06);
     position:relative;
-    width:38px;height:38px;border-radius:50%;
-    background:radial-gradient(circle at 32% 28%, #3a0a0a, #120202 75%);
-    border:1px solid #4a0c0c;
-    display:grid;place-items:center;
-    color:#c81e1e;
-    transition:.2s;
-    flex-shrink:0;
+    overflow:hidden;
   }
-  .user-avatar svg{width:22px;height:22px;display:block}
-  .user-avatar::after{
+  .user-card::after{
     content:"";
-    position:absolute;right:-2px;bottom:-2px;
-    width:10px;height:10px;border-radius:50%;
+    position:absolute;right:-80px;top:-80px;
+    width:240px;height:240px;border-radius:50%;
+    border:1px solid rgba(200,30,30,.15);
+    pointer-events:none;
+  }
+  .user-avatar-large{
+    width:84px;height:84px;border-radius:50%;flex-shrink:0;
+    background:radial-gradient(circle at 32% 28%, #3a0a0a, #120202 75%);
+    border:2px solid #4a0c0c;
+    display:grid;place-items:center;color:#c81e1e;
+    box-shadow:0 0 24px -4px rgba(200,30,30,.6), inset 0 0 20px rgba(200,30,30,.2);
+    position:relative;
+  }
+  .user-avatar-large svg{width:48px;height:48px;display:block}
+  .user-avatar-large::after{
+    content:"";
+    position:absolute;right:2px;bottom:2px;
+    width:16px;height:16px;border-radius:50%;
     background:#e04444;
-    border:2px solid #0a0202;
-    box-shadow:0 0 10px #c81e1e, 0 0 4px #ff5555;
+    border:3px solid #0a0202;
+    box-shadow:0 0 12px #c81e1e;
     animation:avatarPulse 2.2s ease-in-out infinite;
   }
   @keyframes avatarPulse{
     0%,100%{opacity:1;transform:scale(1)}
     50%{opacity:.5;transform:scale(.85)}
   }
-  .user-avatar:hover{
-    border-color:var(--red-500);
-    box-shadow:0 0 16px rgba(200,30,30,.65), inset 0 0 12px rgba(200,30,30,.2);
-    color:#ff6666;
-  }
-  .user-avatar:active{transform:scale(.95)}
 
-  /* ============ Hero ============ */
-  .hero{
-    position:relative;overflow:hidden;color:#fff;
-    background:
-      radial-gradient(900px 320px at 12% -30%, rgba(200,30,30,.6), transparent 62%),
-      radial-gradient(700px 280px at 92% -10%, rgba(90,8,8,.55), transparent 60%),
-      linear-gradient(135deg,#0a0101,#2a0606 55%,#4a0c0c);
-    padding:46px 0 42px;
-    border-bottom:1px solid var(--line);
+  .user-info{flex:1;min-width:0}
+  .user-info h1{
+    font-size:24px;color:#f5e0e0;letter-spacing:.5px;
+    text-shadow:0 0 18px rgba(200,30,30,.4);
+    margin-bottom:4px;
   }
-  .hero::after{
-    content:"";position:absolute;inset:0;
-    background-image:radial-gradient(rgba(255,80,80,.1) 1px, transparent 1px);
-    background-size:22px 22px;
-    opacity:.55;pointer-events:none;
-    mask-image:radial-gradient(700px 400px at 30% 20%, #000 20%, transparent 75%);
+  .user-info .handle{
+    font-size:13.5px;color:#8a6060;letter-spacing:.3px;
+    margin-bottom:14px;
   }
-  .hero-inner{
-    position:relative;z-index:1;
-    display:flex;align-items:center;justify-content:space-between;gap:36px;flex-wrap:wrap;
-  }
-  .hero h1{
-    font-size:30px;letter-spacing:1px;margin-bottom:8px;
-    text-shadow:0 0 24px rgba(200,30,30,.6);
-  }
-  .hero h1 span{color:#ff8080;text-shadow:0 0 20px rgba(255,80,80,.85)}
-  .hero p{color:rgba(240,210,210,.8);font-size:14.5px;max-width:520px}
-  .hero-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
-  .hero-tags span{
-    font-size:12.5px;padding:5px 12px;border-radius:999px;
-    background:rgba(200,30,30,.14);border:1px solid rgba(200,30,30,.32);
-    color:#ffb3b3;
-  }
-  .hero-stats{display:flex;gap:12px}
-  .hero-stat{
-    min-width:96px;padding:14px 18px;border-radius:14px;text-align:center;
-    background:rgba(200,30,30,.09);
-    border:1px solid rgba(200,30,30,.24);
-    backdrop-filter:blur(6px);
-  }
-  .hero-stat b{display:block;font-size:21px;letter-spacing:.5px;color:#ffdada;text-shadow:0 0 14px rgba(200,30,30,.7)}
-  .hero-stat small{font-size:12px;color:rgba(255,180,180,.7)}
+  .user-info .handle b{color:#a88888;font-weight:600}
 
-  /* ============ 布局 ============ */
-  .layout{
-    display:grid;grid-template-columns:minmax(0,1fr) 316px;
-    gap:22px;padding:26px 0 56px;
+  .user-stats{display:flex;gap:22px;flex-wrap:wrap}
+  .user-stats .stat{
+    font-size:12px;color:#7a5050;letter-spacing:.5px;
+  }
+  .user-stats .stat b{
+    display:block;
+    font-size:19px;color:#ff9a9a;font-weight:700;
+    margin-bottom:2px;
+    font-family:Consolas,monospace;
+    text-shadow:0 0 14px rgba(200,30,30,.5);
   }
 
-  /* ============ 主栏 ============ */
-  .toolbar{
-    background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
-    padding:14px 16px;box-shadow:var(--shadow);
-    display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+  /* ============ 区块标题 ============ */
+  .section-head{
+    margin-top:34px;margin-bottom:16px;
+    display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;
   }
-  .cats{display:flex;gap:6px;flex-wrap:wrap;flex:1}
-  .cat-btn{
-    padding:7px 14px;border-radius:999px;font-size:13.5px;color:#a88888;
-    transition:.18s;border:1px solid transparent;
+  .section-head h2{
+    font-size:17px;letter-spacing:.5px;color:#f0dada;
+    display:flex;align-items:center;gap:10px;
   }
-  .cat-btn:hover{background:var(--red-50);color:var(--red-700)}
-  .cat-btn.active{
-    background:var(--red-100);color:#ffb3b3;
-    font-weight:600;border-color:rgba(200,30,30,.4);
-    box-shadow:0 0 14px -4px rgba(200,30,30,.5);
+  .section-head h2::before{
+    content:"";width:3px;height:16px;border-radius:2px;
+    background:linear-gradient(var(--red-500),#4a0c0c);
+    box-shadow:0 0 8px rgba(200,30,30,.7);
   }
-  .cat-btn:disabled{
-    cursor:default;
-    pointer-events:none;
-    opacity:1;
-    color:#a88888;
-    background:transparent;
+  .section-head .hint{
+    font-size:12px;color:#7a3a3a;letter-spacing:.6px;
   }
-  .sort{font-size:13px;color:var(--muted);display:flex;gap:10px;align-items:center}
-  .sort button{font-size:13px;color:var(--muted);padding:4px 2px}
-  .sort button.on{color:var(--red-700);font-weight:600}
 
-  .post-list{display:flex;flex-direction:column;gap:12px;margin-top:14px}
-
-  .post{
-    display:flex;gap:14px;align-items:center;
-    background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
-    padding:16px 18px;box-shadow:var(--shadow);
-    cursor:default;
+  /* ============ 私密帖列表 ============ */
+  .private-posts{
+    display:flex;flex-direction:column;gap:14px;
+  }
+  .private-post{
+    display:flex;gap:16px;align-items:center;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:20px 22px;
+    cursor:pointer;
+    transition:.2s;
     position:relative;
     overflow:hidden;
+    box-shadow:var(--shadow);
   }
-  .post::before{
+  .private-post::before{
     content:"";position:absolute;left:0;top:0;bottom:0;width:2px;
-    background:linear-gradient(180deg,transparent,rgba(200,30,30,.55),transparent);
-    opacity:0;transition:.25s;
+    background:linear-gradient(180deg,transparent,rgba(200,30,30,.7),transparent);
+    opacity:.5;
   }
-  .post.clickable{cursor:pointer}
-  .post.clickable:hover::before{opacity:1}
-
-  .avatar{
-    width:42px;height:42px;border-radius:12px;flex-shrink:0;
-    display:grid;place-items:center;color:#ffd7d7;font-weight:600;font-size:16px;
-    box-shadow:inset 0 -10px 20px -12px rgba(0,0,0,.7), 0 0 0 1px rgba(200,30,30,.18);
+  .private-post:hover{
+    border-color:rgba(200,30,30,.5);
+    box-shadow:0 0 24px -6px rgba(200,30,30,.65), inset 0 0 30px rgba(200,30,30,.06);
+    transform:translateX(2px);
   }
-
-  .post-main{flex:1;min-width:0}
-  .post-title{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
-  .post-title a{font-size:15.5px;font-weight:600;color:#e8d5d5}
-  .post.clickable:hover .post-title a{color:#ff9a9a}
-
-  .badge{
-    font-size:11px;font-weight:700;padding:2px 7px;border-radius:6px;
-    line-height:1.5;flex-shrink:0;
+  .private-post-lock{
+    width:46px;height:46px;border-radius:12px;flex-shrink:0;
+    display:grid;place-items:center;
+    background:radial-gradient(circle at 32% 28%, #3a0a0a, #120202 75%);
+    border:1px solid #4a0c0c;
+    color:#c81e1e;
+    box-shadow:0 0 14px -4px rgba(200,30,30,.5);
   }
-  .badge-top{background:#2a0808;color:#ff8080;border:1px solid rgba(255,80,80,.3)}
-  .badge-essence{background:#2a1405;color:#ffb066;border:1px solid rgba(255,176,102,.28)}
-  .badge-hot{background:#3a0404;color:#ff5555;border:1px solid rgba(255,85,85,.35)}
-
-  .post-meta{
-    margin-top:9px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;
-    font-size:12.5px;color:var(--muted);
+  .private-post-lock svg{width:22px;height:22px;display:block}
+  .private-post-main{flex:1;min-width:0}
+  .private-post-title{
+    font-size:17px;font-weight:600;color:#e8d5d5;
+    margin-bottom:8px;
+    letter-spacing:.3px;
+    word-break:break-word;
+    transition:.2s;
   }
-  .post-meta .cat{
+  .private-post:hover .private-post-title{color:#ff9a9a}
+  .private-post-meta{
+    display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+    font-size:12px;color:var(--muted);
+  }
+  .private-post-meta .cat{
     color:#ffb3b3;background:var(--red-50);
     padding:2px 9px;border-radius:6px;font-weight:600;
     border:1px solid rgba(200,30,30,.18);
   }
-
-  .post-stats{
-    display:flex;flex-direction:column;align-items:flex-end;gap:7px;
-    flex-shrink:0;font-size:12.5px;color:var(--muted);
+  .private-post-meta .replies{
+    color:#ff8080;
+    font-weight:600;
   }
-  .post-stats b{color:#d8b5b5;font-size:13.5px}
-  .like{
-    display:inline-flex;align-items:center;gap:5px;
-    font-size:12.5px;color:var(--muted);padding:3px 9px;border-radius:999px;
-    transition:.18s;
-    cursor:pointer;
+  .private-post-arrow{
+    color:#5a2525;
+    font-size:18px;line-height:1;
+    flex-shrink:0;
+    transition:.2s;
   }
-  .like:hover{background:#2a0505;color:#ff5555}
-  .like.active{color:#ff5555;background:#2a0505}
-  .like .heart{font-size:14px;line-height:1}
-
-  .empty{
-    text-align:center;padding:60px 20px;color:var(--muted);
-    background:var(--card);border:1px dashed var(--line);border-radius:var(--radius);
+  .private-post:hover .private-post-arrow{
+    color:#ff6666;
+    transform:translateX(3px);
   }
 
-  /* ============ 分页 ============ */
-  .pager{
-    display:flex;justify-content:center;gap:7px;margin-top:24px;flex-wrap:wrap;
-  }
-  .pager button{
-    min-width:36px;height:36px;border-radius:10px;font-size:13.5px;color:#a88888;
-    background:var(--card);border:1px solid var(--line);
-    padding:0 12px;
-    cursor:pointer;
-    transition:.18s;
-  }
-  .pager button:hover{
-    border-color:var(--red-500);color:#ffb3b3;
-    box-shadow:0 0 14px -4px rgba(200,30,30,.55);
-  }
-  .pager button.on{
-    background:linear-gradient(140deg,var(--red-500),#5c0c0c);
-    color:#fff2f2;border-color:transparent;font-weight:600;
-    box-shadow:0 0 18px -6px rgba(200,30,30,.95);
-  }
-  .pager button.on:hover{color:#fff2f2}
-  .pager button.dots{
-    pointer-events:none;
-    cursor:default;
-    color:#6a4040;
-  }
-  .pager button.dots:hover{
-    border-color:var(--line);
-    color:#6a4040;
-    box-shadow:none;
-  }
+  /* ============ 详情视图 ============ */
+  .private-detail{display:none}
+  .private-detail.show{display:block}
 
-  /* ============ 搜索结果页 ============ */
-  .search-view{display:none;padding:28px 0 56px}
-  .back-link{
+  .back-btn{
     display:inline-flex;align-items:center;gap:6px;
-    font-size:13.5px;color:var(--muted);
+    font-size:13px;color:#a88888;
     padding:7px 14px;border-radius:10px;
     background:var(--card);border:1px solid var(--line);
-    transition:.18s;margin-bottom:18px;
+    transition:.18s;
+    margin-top:24px;margin-bottom:16px;
   }
-  .back-link:hover{color:#ffb3b3;border-color:var(--red-500);transform:translateX(-2px)}
-  .search-view h2{font-size:22px;letter-spacing:.3px;margin-bottom:6px;color:#f0dada}
-  .search-meta{font-size:13.5px;color:var(--muted)}
-  .search-meta b{color:var(--red-700);font-weight:600}
-  .search-view .post-list{margin-top:18px}
+  .back-btn:hover{
+    color:#ffb3b3;
+    border-color:var(--red-500);
+    transform:translateX(-2px);
+  }
 
-  /* ============ 帖子详情页 ============ */
-  .post-view{display:none;padding:28px 0 56px}
-  .detail{
-    background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
-    padding:30px;box-shadow:var(--shadow);
+  .detail-inner{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:28px;
+    box-shadow:var(--shadow);
   }
+
   .detail-head{
     display:flex;gap:14px;align-items:flex-start;
     padding-bottom:20px;border-bottom:1px solid var(--line);margin-bottom:22px;
   }
-  .detail-head .avatar{width:48px;height:48px;border-radius:14px;font-size:18px}
+  .detail-head .avatar{
+    width:48px;height:48px;border-radius:14px;font-size:18px;
+    background:radial-gradient(circle at 32% 28%, #3a0a0a, #120202 75%);
+    border:1px solid #4a0c0c;
+    display:grid;place-items:center;color:#c81e1e;
+    flex-shrink:0;
+  }
+  .detail-head .avatar svg{width:26px;height:26px}
   .detail-head .dh-main{flex:1;min-width:0}
-  .detail-title{font-size:23px;line-height:1.45;color:#f5e0e0;margin-bottom:9px}
+  .detail-title{
+    font-size:23px;line-height:1.45;color:#f5e0e0;margin-bottom:9px;
+    text-shadow:0 0 18px rgba(200,30,30,.3);
+  }
+  .detail-head .post-meta{
+    display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+    font-size:12.5px;color:var(--muted);
+  }
+  .detail-head .post-meta .cat{
+    color:#ffb3b3;background:var(--red-50);
+    padding:2px 9px;border-radius:6px;font-weight:600;
+    border:1px solid rgba(200,30,30,.18);
+  }
 
   /* ============ 楼层 ============ */
   .floor-list{margin-top:6px}
@@ -449,6 +350,7 @@
     text-shadow:0 0 10px rgba(200,30,30,.5);
   }
 
+  /* ============ 抖动效果（保留） ============ */
   .shake-content{
     display:inline-block;
     color:#ff5555 !important;
@@ -494,13 +396,8 @@
     display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;
     font-size:12.5px;color:var(--muted);
   }
-  .not-found{
-    text-align:center;padding:70px 20px;color:var(--muted);
-    background:var(--card);border:1px dashed var(--line);border-radius:var(--radius);
-  }
-  .not-found b{display:block;font-size:16px;color:#d8b5b5;margin-bottom:6px}
 
-  /* ============ 私密帖底部按钮 ============ */
+  /* ============ 选择按钮（保留） ============ */
   .private-choice-wrap{
     margin-top:34px;
     padding-top:26px;
@@ -579,1339 +476,127 @@
     50%{opacity:.9}
   }
 
-  /* ============ 侧栏 ============ */
-  .side-col{display:flex;flex-direction:column;gap:16px}
-
-  .card{
-    background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
-    padding:18px;box-shadow:var(--shadow);
-  }
-  .card h3{
-    font-size:14px;display:flex;align-items:center;gap:7px;
-    margin-bottom:14px;color:#f0dada;
-  }
-  .card h3::before{
-    content:"";width:3px;height:14px;border-radius:2px;
-    background:linear-gradient(var(--red-500),#4a0c0c);
-    box-shadow:0 0 8px rgba(200,30,30,.7);
-  }
-
-  .post-cta{
-    background:linear-gradient(140deg,#4a0c0c,#1a0404);
-    color:#fff;border:1px solid rgba(200,30,30,.3);padding:20px;text-align:center;
-    box-shadow:var(--shadow), inset 0 0 40px rgba(200,30,30,.1);
-  }
-  .post-cta h3{justify-content:center;color:#ffdada;margin-bottom:6px}
-  .post-cta h3::before{display:none}
-  .post-cta p{font-size:13px;color:rgba(255,200,200,.7);margin-bottom:14px}
-  .post-cta .btn{
-    width:100%;background:linear-gradient(140deg,var(--red-500),#5c0c0c);color:#fff2f2;
-    border:1px solid rgba(255,120,120,.25);
-    box-shadow:0 10px 24px -14px rgba(200,30,30,.9);
-  }
-  .post-cta .btn:hover{filter:brightness(1.15)}
-
-  .stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-  .stat-item{
-    background:var(--red-50);border-radius:11px;padding:11px 12px;
-    border:1px solid rgba(200,30,30,.12);
-  }
-  .stat-item b{display:block;font-size:17px;color:#ff9a9a}
-  .stat-item small{font-size:12px;color:var(--muted)}
-
-  .hot-list{display:flex;flex-direction:column;gap:12px}
-  .hot-item{display:flex;gap:10px;align-items:flex-start;font-size:13.5px}
-  .hot-item .no{
-    width:19px;height:19px;border-radius:6px;flex-shrink:0;
-    display:grid;place-items:center;font-size:11.5px;font-weight:700;
-    background:#2a0808;color:#a88888;margin-top:2px;
-    border:1px solid rgba(200,30,30,.15);
-  }
-  .hot-item:nth-child(1) .no{background:#3a0505;color:#ff5555;border-color:rgba(255,85,85,.35)}
-  .hot-item:nth-child(2) .no{background:#2a1405;color:#e08844;border-color:rgba(224,136,68,.3)}
-  .hot-item:nth-child(3) .no{background:#2a0808;color:#e04444;border-color:rgba(224,68,68,.3)}
-  .hot-item a{color:#c9b3b3;line-height:1.5;transition:.16s}
-  .hot-item a:hover{color:#ff9a9a}
-
-  .user-list{display:flex;flex-direction:column;gap:12px}
-  .user-row{display:flex;align-items:center;gap:10px;font-size:13.5px}
-  .user-row .avatar{width:32px;height:32px;border-radius:9px;font-size:13px}
-  .user-row .u-name{font-weight:600;color:#d8b5b5}
-  .user-row .u-desc{font-size:11.5px;color:#7a5050}
-  .user-row .dot{
-    width:7px;height:7px;border-radius:50%;background:#e04444;
-    margin-left:auto;box-shadow:0 0 0 3px rgba(200,30,30,.22), 0 0 8px #c81e1e;
-  }
-
-  .tag-cloud{display:flex;flex-wrap:wrap;gap:8px}
-  .tag-cloud a{
-    font-size:12.5px;padding:5px 11px;border-radius:999px;
-    background:var(--red-50);color:#ffb3b3;transition:.18s;
-    border:1px solid rgba(200,30,30,.15);
-  }
-  .tag-cloud a:hover{background:var(--red-100);transform:translateY(-1px);border-color:rgba(200,30,30,.35)}
-
   /* ============ 页脚 ============ */
   .site-footer{
-    border-top:1px solid var(--line);background:#0a0101;
-    padding:28px 0;text-align:center;color:var(--muted);font-size:13px;
-    position:relative;z-index:2;
-  }
-  .site-footer .f-links{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin-bottom:10px}
-  .site-footer .f-links a:hover{color:#ff9a9a}
-
-  /* ============ Toast ============ */
-  .toast{
-    position:fixed;left:50%;bottom:34px;z-index:200;
-    transform:translate(-50%,18px);
-    background:#2a0606;color:#ffdada;
-    border:1px solid rgba(200,30,30,.5);
-    padding:12px 24px;border-radius:999px;font-size:13.5px;
-    box-shadow:0 20px 40px -18px rgba(0,0,0,.9), 0 0 24px -6px rgba(200,30,30,.7);
-    opacity:0;pointer-events:none;transition:.28s;
-    max-width:calc(100vw - 40px);
+    border-top:1px solid var(--line);
+    background:#0a0101;
+    padding:26px 0;
     text-align:center;
-  }
-  .toast.show{opacity:1;transform:translate(-50%,0)}
-
-  /* ============ 私密帖子面板 ============ */
-  .private-mask{
-    position:fixed;inset:0;z-index:400;
-    background:rgba(4,0,0,.82);
-    backdrop-filter:blur(6px);
-    display:none;
-    align-items:stretch;justify-content:center;
-  }
-  .private-mask.show{display:flex;animation:pmIn .26s ease}
-  @keyframes pmIn{from{opacity:0}to{opacity:1}}
-
-  .private-panel{
-    width:100%;max-width:900px;
-    background:
-      radial-gradient(800px 400px at 50% -10%, rgba(120,10,10,.35), transparent 70%),
-      #0d0202;
-    border-left:1px solid var(--line);
-    border-right:1px solid var(--line);
-    display:flex;flex-direction:column;
-    animation:ppIn .32s cubic-bezier(.2,.8,.3,1);
-    overflow:hidden;
-  }
-  @keyframes ppIn{
-    from{opacity:0;transform:translateY(18px) scale(.98)}
-    to{opacity:1;transform:none}
-  }
-
-  .private-view{
-    display:flex;flex-direction:column;
-    width:100%;height:100%;
-    min-height:0;
-  }
-
-  .private-head{
-    padding:22px 26px 18px;
-    border-bottom:1px solid var(--line);
-    background:rgba(10,2,2,.6);
-    position:relative;
-    flex-shrink:0;
-  }
-  .private-head::after{
-    content:"";position:absolute;left:0;right:0;bottom:-1px;height:1px;
-    background:linear-gradient(90deg,transparent,rgba(200,30,30,.7),transparent);
-    animation:headerPulse 3.5s ease-in-out infinite;
-  }
-
-  .private-back{
-    display:inline-flex;align-items:center;gap:6px;
-    font-size:13px;color:#a88888;
-    padding:6px 12px;border-radius:9px;
-    border:1px solid var(--line);
-    background:#1a0404;
-    transition:.18s;
-    margin-bottom:16px;
-  }
-  .private-back:hover{color:#ffb3b3;border-color:var(--red-500);transform:translateX(-2px)}
-
-  .private-title{
-    display:flex;align-items:center;gap:10px;
-    margin-bottom:14px;
-  }
-  .pt-dot{
-    width:9px;height:9px;border-radius:50%;
-    background:#e04444;
-    box-shadow:0 0 12px #c81e1e, 0 0 4px #ff5555;
-    animation:avatarPulse 2s ease-in-out infinite;
-    flex-shrink:0;
-  }
-  .private-title h2{
-    font-size:20px;letter-spacing:.5px;color:#f5e0e0;
-    text-shadow:0 0 18px rgba(200,30,30,.5);
-  }
-
-  .private-user{
-    display:flex;align-items:center;gap:12px;
-    padding:12px 14px;border-radius:12px;
-    background:rgba(200,30,30,.06);
-    border:1px solid rgba(200,30,30,.15);
-  }
-  .private-avatar{
-    width:42px;height:42px;border-radius:50%;
-    background:radial-gradient(circle at 32% 28%, #3a0a0a, #120202 75%);
-    border:1px solid #4a0c0c;
-    display:grid;place-items:center;color:#c81e1e;
-    flex-shrink:0;
-    box-shadow:0 0 14px -4px rgba(200,30,30,.6);
-  }
-  .private-avatar svg{width:24px;height:24px;display:block}
-  .pu-info b{display:block;font-size:14.5px;color:#f0dada;line-height:1.4}
-  .pu-info small{font-size:11.5px;color:#8a6060;letter-spacing:.3px}
-
-  .private-list-body{
-    flex:1;
-    padding:24px 26px;
-    overflow-y:auto;
-    min-height:0;
-  }
-
-  .private-posts{
-    display:flex;flex-direction:column;gap:12px;
-  }
-  .private-post{
-    display:flex;gap:14px;align-items:center;
-    background:#1a0404;
-    border:1px solid var(--line);
-    border-radius:12px;
-    padding:16px 18px;
-    cursor:pointer;
-    transition:.2s;
-    position:relative;
-    overflow:hidden;
-  }
-  .private-post::before{
-    content:"";position:absolute;left:0;top:0;bottom:0;width:2px;
-    background:linear-gradient(180deg,transparent,rgba(200,30,30,.7),transparent);
-    opacity:.5;
-  }
-  .private-post:hover{
-    border-color:rgba(200,30,30,.5);
-    box-shadow:0 0 20px -6px rgba(200,30,30,.65), inset 0 0 30px rgba(200,30,30,.06);
-  }
-  .private-post-lock{
-    width:40px;height:40px;border-radius:10px;flex-shrink:0;
-    display:grid;place-items:center;
-    background:radial-gradient(circle at 32% 28%, #3a0a0a, #120202 75%);
-    border:1px solid #4a0c0c;
-    color:#c81e1e;
-  }
-  .private-post-lock svg{width:20px;height:20px;display:block}
-  .private-post-main{flex:1;min-width:0}
-  .private-post-title{
-    font-size:15.5px;font-weight:600;color:#e8d5d5;
-    margin-bottom:7px;
-    word-break:break-word;
-  }
-  .private-post:hover .private-post-title{color:#ff9a9a}
-  .private-post-meta{
-    display:flex;align-items:center;gap:12px;flex-wrap:wrap;
-    font-size:12px;color:var(--muted);
-  }
-  .private-post-meta .cat{
-    color:#ffb3b3;background:var(--red-50);
-    padding:1px 8px;border-radius:6px;font-weight:600;
-    border:1px solid rgba(200,30,30,.18);
-  }
-  .private-post-meta .replies{
-    color:#ff8080;
-    font-weight:600;
-  }
-
-  .private-detail-body{
-    flex:1;
-    padding:24px 26px;
-    overflow-y:auto;
-    min-height:0;
-  }
-  .private-detail-inner{
-    background:var(--card);
-    border:1px solid var(--line);
-    border-radius:var(--radius);
-    padding:26px;
-    box-shadow:var(--shadow);
-  }
-
-  .private-detail-view .private-head{
-    padding:18px 26px 14px;
-  }
-  .private-detail-view .private-title{
-    margin-bottom:0;
-  }
-  .private-detail-view .private-back{
-    margin-bottom:12px;
+    color:var(--muted);
+    font-size:12px;
+    margin-top:50px;
+    position:relative;z-index:2;
   }
 
   /* ============ 响应式 ============ */
-  @media (max-width:980px){
-    .layout{grid-template-columns:1fr}
-    .side-col{order:2}
-  }
-
-  @media (max-width:820px){
-    .nav{display:none}
-    .search{width:200px}
-    .hero h1{font-size:24px}
-  }
-
   @media (max-width:640px){
     .header-inner{height:60px;gap:10px}
     .logo-text small{display:none}
-
-    .search{width:170px;padding:7px 12px;gap:6px}
-    .search input{font-size:16px}
-    .search input::placeholder{font-size:14px}
-
     .btn{padding:8px 14px;font-size:13.5px}
-    .header-right{gap:8px}
-    .user-avatar{width:34px;height:34px}
-    .user-avatar svg{width:20px;height:20px}
 
-    .hero{padding:30px 0}
-    .hero-inner{gap:20px}
-    .hero-stats{width:100%}
-    .hero-stat{flex:1;min-width:0;padding:11px 8px}
-    .hero-stat b{font-size:17px}
+    .user-card{padding:22px 20px;gap:16px;flex-wrap:wrap;border-radius:14px}
+    .user-avatar-large{width:66px;height:66px}
+    .user-avatar-large svg{width:38px;height:38px}
+    .user-info h1{font-size:20px}
+    .user-stats{gap:16px}
+    .user-stats .stat b{font-size:16px}
 
-    .toolbar{padding:12px 14px;gap:10px}
-    .cat-btn{padding:6px 12px;font-size:13px}
+    .private-post{padding:16px 16px;gap:12px}
+    .private-post-lock{width:40px;height:40px;border-radius:10px}
+    .private-post-lock svg{width:19px;height:19px}
+    .private-post-title{font-size:15.5px}
 
-    .post{padding:14px;gap:11px;flex-wrap:wrap}
-    .avatar{width:36px;height:36px;border-radius:10px;font-size:14px}
-    .post-title a{font-size:14.5px}
-    .post-meta{gap:10px;font-size:11.5px;margin-top:7px}
-
-    .post-stats{
-      width:100%;
-      flex-direction:row;
-      align-items:center;
-      justify-content:flex-end;
-      gap:12px;
-      font-size:11.5px;
-      border-top:1px dashed var(--line);
-      padding-top:9px;
-      margin-top:2px;
-    }
-    .post-stats b{font-size:12.5px}
-    .like{padding:2px 8px;font-size:11.5px}
-
-    .pager{gap:6px}
-    .pager button{min-width:34px;height:34px;padding:0 10px;font-size:13px}
-
-    .container{padding:0 14px}
-    .detail{padding:20px}
+    .detail-inner{padding:20px}
     .detail-title{font-size:19px}
-    .detail-head{gap:12px;padding-bottom:16px;margin-bottom:18px}
-    .detail-head .avatar{width:42px;height:42px;border-radius:12px;font-size:16px}
     .floor-content{font-size:13.5px}
-    .floor-image{max-width:200px}
-    .floor{padding:13px 0}
 
-    .search-view{padding:20px 0 40px}
-    .search-view h2{font-size:19px}
-    .post-view{padding:20px 0 40px}
-
-    .private-head{padding:18px 18px 16px}
-    .private-list-body{padding:18px}
-    .private-detail-body{padding:18px}
-    .private-detail-inner{padding:20px}
-    .private-title h2{font-size:17px}
-
-    .choice-btn{font-size:15px;padding:13px 30px;letter-spacing:2px}
+    .choice-btn{font-size:14px;padding:13px 30px;letter-spacing:2px}
+    .choice-hint{font-size:10.5px;letter-spacing:3px}
   }
 
   @media (max-width:480px){
     .logo-text{display:none}
     .logo-mark{width:34px;height:34px;border-radius:10px}
-    .header-inner{gap:8px}
-    .header-right{gap:6px}
-
-    .search{width:140px;padding:6px 10px;gap:5px}
-    .search input{font-size:16px}
-    .search input::placeholder{font-size:13.5px}
-
-    .btn{padding:7px 12px;font-size:12.5px}
-    .user-avatar{width:32px;height:32px}
-    .user-avatar svg{width:18px;height:18px}
-
-    .hero{padding:24px 0}
-    .hero h1{font-size:21px;letter-spacing:.6px}
-    .hero p{font-size:13px}
-    .hero-tags{margin-top:12px;gap:6px}
-    .hero-tags span{font-size:11.5px;padding:4px 10px}
-    .hero-stats{gap:8px}
-    .hero-stat{padding:9px 6px;border-radius:11px}
-    .hero-stat b{font-size:15px}
-    .hero-stat small{font-size:11px}
-
-    .toolbar{padding:10px 12px}
-    .cat-btn{padding:5px 10px;font-size:12.5px}
-    .sort{font-size:12px}
-
-    .post{padding:12px}
-    .post-title a{font-size:14px}
-    .post-meta{gap:8px;font-size:11px}
-    .post-meta .cat{padding:1px 7px}
-
-    .pager button{min-width:32px;height:32px;padding:0 8px;font-size:12px}
-    .pager{gap:5px;margin-top:20px}
-
-    .detail{padding:16px}
-    .detail-head{gap:10px}
-    .detail-head .avatar{width:36px;height:36px;border-radius:10px;font-size:14px}
-    .detail-title{font-size:17px}
-    .floor{padding:11px 0}
-    .floor-content{font-size:13px;line-height:1.8}
-    .floor-no{font-size:11px;padding:1px 6px}
-    .floor-tag{font-size:10px}
-
-    .back-link{padding:6px 12px;font-size:12.5px}
-    .search-view h2{font-size:17px}
-    .search-meta{font-size:12.5px}
-
-    .site-footer{padding:22px 0;font-size:12px}
-    .site-footer .f-links{gap:12px;font-size:12.5px}
-
-    .private-head{padding:14px 14px 12px}
-    .private-list-body{padding:14px}
-    .private-detail-body{padding:14px}
-    .private-detail-inner{padding:16px}
-    .private-title h2{font-size:16px}
-    .private-back{font-size:12px;padding:5px 10px;margin-bottom:12px}
-    .private-user{padding:10px 12px;gap:10px}
-    .private-avatar{width:36px;height:36px}
-    .private-avatar svg{width:20px;height:20px}
-    .pu-info b{font-size:13.5px}
-    .pu-info small{font-size:11px}
-
-    .private-post{padding:13px;gap:10px}
-    .private-post-lock{width:34px;height:34px;border-radius:9px}
-    .private-post-lock svg{width:17px;height:17px}
+    .container{padding:0 14px}
+    .private-post{padding:14px}
     .private-post-title{font-size:14.5px}
-    .private-post-meta{font-size:11px;gap:8px}
-
-    .private-choice-wrap{margin-top:26px;padding-top:20px}
-    .choice-btn{font-size:14px;padding:12px 22px;letter-spacing:1.5px;width:100%}
-    .choice-hint{font-size:10.5px;letter-spacing:3px}
+    .private-post-meta{gap:8px;font-size:11px}
   }
 </style>
 </head>
 <body>
 
-<!-- 闪屏层 -->
-<div class="screen-flash" id="screenFlash"></div>
-
-<!-- ================= 私密帖子面板 ================= -->
-<div class="private-mask" id="privateMask">
-  <div class="private-panel">
-
-    <!-- ====== 列表视图 ====== -->
-    <div class="private-view" id="privateListView">
-      <div class="private-head">
-        <button class="private-back" id="privateBack">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M15 18l-6-6 6-6"/>
-          </svg>
-          返回论坛
-        </button>
-
-        <div class="private-title">
-          <span class="pt-dot"></span>
-          <h2>我的私密帖子</h2>
-        </div>
-
-        <div class="private-user">
-          <div class="private-avatar">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-              <circle cx="12" cy="7" r="4"/>
-            </svg>
-          </div>
-          <div class="pu-info">
-            <b>林圻</b>
-            <small>私密空间 · 仅自己可见</small>
-          </div>
-        </div>
-      </div>
-
-      <div class="private-list-body">
-        <div class="private-posts" id="privatePosts"></div>
-      </div>
-    </div>
-
-    <!-- ====== 详情视图 ====== -->
-    <div class="private-view private-detail-view" id="privateDetailView" style="display:none">
-      <div class="private-head">
-        <button class="private-back" id="privateBackToList">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M15 18l-6-6 6-6"/>
-          </svg>
-          返回私密列表
-        </button>
-
-        <div class="private-title">
-          <span class="pt-dot"></span>
-          <h2 id="privateDetailTitle">私密帖子</h2>
-        </div>
-      </div>
-
-      <div class="private-detail-body" id="privateDetailContent"></div>
-    </div>
-
-  </div>
-</div>
-
 <!-- ================= 顶部导航 ================= -->
 <header class="site-header">
   <div class="container header-inner">
-    <a href="#/" class="logo">
+    <a href="https://qsszlt.pages.dev" class="logo">
       <span class="logo-mark">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M3 20l6.2-10.5 4 6.2 2.8-4 5 8.3z"/>
           <circle cx="17.5" cy="6.5" r="2.2"/>
         </svg>
       </span>
-      <span class="logo-text">青山实中论坛<small>QINGSHAN BBS</small></span>
+      <span class="logo-text">青山实中论坛<small>个人中心 · PERSONAL</small></span>
     </a>
 
-    <nav class="nav">
-      <a href="#/" class="active">首页</a>
-      <a href="#">板块</a>
-      <a href="#">排行榜</a>
-      <a href="#">校园动态</a>
-    </nav>
-
     <div class="header-right">
-      <form class="search" id="searchForm" role="search">
-        <button type="submit" class="search-btn" aria-label="搜索">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
-            <circle cx="11" cy="11" r="7"/><path d="M20 20l-3.2-3.2"/>
-          </svg>
-        </button>
-        <input id="searchInput" type="text" inputmode="search" enterkeyhint="search"
-               placeholder="搜索帖子 / 话题" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
-      </form>
-
-      <button class="user-avatar" id="userAvatar" aria-label="个人中心">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-          <circle cx="12" cy="7" r="4"/>
-        </svg>
-      </button>
-
-      <button class="btn btn-primary" data-dev>发帖</button>
+      <a href="https://qsszlt.pages.dev" class="btn btn-primary">返回论坛</a>
     </div>
   </div>
 </header>
 
-<!-- ================= 首页视图 ================= -->
-<div id="homeView">
-  <section class="hero">
-    <div class="container hero-inner">
-      <div>
-        <h1>欢迎来到 <span>青山实中论坛</span></h1>
-        <p>青山实验中学师生交流社区 —— 分享学习心得，记录校园生活，结识志同道合的同学。</p>
-        <div class="hero-tags">
-          <span># 学习交流</span>
-          <span># 校园生活</span>
-          <span># 社团活动</span>
-          <span># 二手市场</span>
-        </div>
-      </div>
-      <div class="hero-stats">
-        <div class="hero-stat"><b>2,486</b><small>主题</small></div>
-        <div class="hero-stat"><b>18,932</b><small>帖子</small></div>
-        <div class="hero-stat"><b>1,205</b><small>会员</small></div>
+<!-- ================= 主内容 ================= -->
+<main class="container" id="mainView">
+
+  <!-- 用户信息卡 -->
+  <div class="user-card">
+    <div class="user-avatar-large">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+        <circle cx="12" cy="7" r="4"/>
+      </svg>
+    </div>
+    <div class="user-info">
+      <h1>林圻</h1>
+      <div class="handle">账号 <b>@linqi</b> · 高二（7）班</div>
+      <div class="user-stats">
+        <div class="stat"><b>2</b>私密帖</div>
+        <div class="stat"><b>0</b>公开帖</div>
+        <div class="stat"><b>刚刚</b>最近活跃</div>
       </div>
     </div>
-  </section>
-
-  <main class="container layout">
-    <div class="main-col">
-      <div class="toolbar">
-        <div class="cats" id="cats"></div>
-        <div class="sort">
-          <button class="on">最新</button>
-          <button>热门</button>
-        </div>
-      </div>
-
-      <div class="post-list" id="postList"></div>
-
-      <div class="pager" id="pager">
-        <button data-page="prev">上一页</button>
-        <button data-page="1" class="on">1</button>
-        <button data-page="2">2</button>
-        <button data-page="3">3</button>
-        <button class="dots">...</button>
-        <button data-page="next">下一页</button>
-      </div>
-    </div>
-
-    <aside class="side-col">
-      <div class="card post-cta">
-        <h3>一起来聊聊吧</h3>
-        <p>把你的问题、心得和校园见闻分享给同学</p>
-        <button class="btn" data-dev>✏️ 发布新帖</button>
-      </div>
-
-      <div class="card">
-        <h3>论坛数据</h3>
-        <div class="stat-grid">
-          <div class="stat-item"><b>18,932</b><small>帖子总数</small></div>
-          <div class="stat-item"><b>1,205</b><small>注册会员</small></div>
-          <div class="stat-item"><b>36</b><small>今日新帖</small></div>
-          <div class="stat-item"><b>128</b><small>当前在线</small></div>
-        </div>
-      </div>
-
-      <div class="card">
-        <h3>今日热议</h3>
-        <div class="hot-list">
-          <div class="hot-item"><span class="no">1</span><a href="#">食堂三楼新开的麻辣香锅好吃吗？在线等</a></div>
-          <div class="hot-item"><span class="no">2</span><a href="#">高二数学圆锥曲线大题有没有通用思路？</a></div>
-          <div class="hot-item"><span class="no">3</span><a href="#">校运会照片合集｜青春就是要燃起来</a></div>
-          <div class="hot-item"><span class="no">4</span><a href="#">求组队｜数学建模社招新啦，还差两位队友</a></div>
-          <div class="hot-item"><span class="no">5</span><a href="#">英语听力总是跟不上怎么办？</a></div>
-        </div>
-      </div>
-
-      <div class="card">
-        <h3>活跃同学</h3>
-        <div class="user-list" id="userList"></div>
-      </div>
-
-      <div class="card">
-        <h3>热门标签</h3>
-        <div class="tag-cloud">
-          <a href="#">#期中复习</a>
-          <a href="#">#社团招新</a>
-          <a href="#">#校园美食</a>
-          <a href="#">#错题本</a>
-          <a href="#">#运动会</a>
-          <a href="#">#晚自习</a>
-          <a href="#">#英语角</a>
-          <a href="#">#二手书</a>
-        </div>
-      </div>
-    </aside>
-  </main>
-</div>
-
-<!-- ================= 搜索结果视图 ================= -->
-<div class="search-view" id="searchView">
-  <div class="container">
-    <a href="#/" class="back-link">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M15 18l-6-6 6-6"/>
-      </svg>
-      返回首页
-    </a>
-
-    <h2>搜索结果</h2>
-    <p class="search-meta" id="searchMeta"></p>
-
-    <div class="post-list" id="searchResults"></div>
   </div>
-</div>
 
-<!-- ================= 帖子详情视图 ================= -->
-<div class="post-view" id="postView">
-  <div class="container">
-    <a href="javascript:history.back()" class="back-link">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M15 18l-6-6 6-6"/>
-      </svg>
-      返回
-    </a>
-
-    <div id="postDetail"></div>
+  <!-- 私密帖列表 -->
+  <div class="section-head">
+    <h2>我的私密帖子</h2>
+    <span class="hint">仅自己可见 · 共 2 篇</span>
   </div>
-</div>
+  <div class="private-posts" id="privatePosts"></div>
+
+</main>
+
+<!-- ================= 详情视图 ================= -->
+<main class="container private-detail" id="detailView">
+  <button class="back-btn" id="backToList">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M15 18l-6-6 6-6"/>
+    </svg>
+    返回列表
+  </button>
+
+  <div class="detail-inner" id="detailContent"></div>
+</main>
 
 <!-- ================= 页脚 ================= -->
 <footer class="site-footer">
   <div class="container">
-    <div class="f-links">
-      <a href="#">关于论坛</a>
-      <a href="#">版规</a>
-      <a href="#">意见反馈</a>
-      <a href="#">联系管理员</a>
-    </div>
-    <div>© 2025 青山实中论坛 · 青山实验中学学生自主运营 · 用心交流，共同成长</div>
+    © 2025 青山实中论坛 · 个人中心 · 用心交流，共同成长
   </div>
 </footer>
 
-<div class="toast" id="toast"></div>
-
 <script>
-/* ================= 数据 ================= */
-const posts = [
-  { id:1, page:1, _order:0, title:'【版规】青山实中论坛发帖规范与新人必读',
-    excerpt:'欢迎来到青山实中论坛！为营造良好的交流氛围，请各位同学在发帖前仔细阅读以下规范，共建友善、理性的讨论环境。',
-    author:'论坛管理员', category:'公告通知', replies:236, views:15820, time:'3月1日', top:true, likes:512 },
-
-  { id:6, page:1, _order:1, title:'食堂三楼新开的麻辣香锅好吃吗？在线等',
-    excerpt:'看朋友圈好多人去打卡，但排队好像很久，有吃过的同学说说味道怎么样，值不值得去？',
-    author:'干饭第一名', category:'校园生活', replies:89, views:2417, time:'5小时前', hot:true, likes:156 },
-
-  { id:2, page:1, _order:2, title:'高二数学圆锥曲线大题有没有通用思路？求大佬指点',
-    excerpt:'最近刷题总是卡在第二问，特别是求定值、定点那一类，有没有总结好的方法或者笔记可以推荐？',
-    author:'追风少年', category:'学习交流', replies:48, views:1263, time:'12分钟前', hot:true, likes:67 },
-
-  { id:101, page:1, _order:3,
-    title: '买了副羽毛球拍，卖家第二天自杀了，钱该要回来吗',
-    excerpt: '我在别人那里买了一副羽毛球拍，钱都已经转给他了，结果第二天他就自杀了，我该把钱要回来吗？',
-    author: '浩瀚的林', category: '二手市场', replies: 24, views: 342, time: '4天前', likes: 23,
-    hasDetail: true,
-    floors: [
-      { no: 1,  author: '浩瀚的林', content: '我在别人那里买了一副羽毛球拍，钱都已经转给他了，结果第二天他就自杀了，我该把钱要回来吗？' },
-      { no: 2,  author: '临东忆',   content: '楼主你花了多少钱啊？' },
-      { no: 3,  author: '浩瀚的林', content: '66元，我一周的早餐钱。' },
-      { no: 4,  author: '临东忆',   content: '？' },
-      { no: 5,  author: '墨云遥',   content: '你是不是虎啊楼主，我还以为多少钱呢。' },
-      { no: 6,  author: '归鹤隐',   content: '死人的钱你也敢要啊楼主。' },
-      { no: 7,  author: '南巷听风', content: '卖家叫什么啊？哪班的？' },
-      { no: 8,  author: '浩瀚的林', content: '应该叫常峻硕，哪班我不知道。' },
-      { no: 9,  author: '浩瀚的林', content: '我的早餐钱......' },
-      { no: 10, author: '听风诉雨', content: '等等，常峻硕？这名字怎么听着这么耳熟。' },
-      { no: 11, author: '半夏微凉', content: '你是不是认识他？说说看，别藏着。' },
-      { no: 12, author: '听风诉雨', content: '我不太确定，但我好像听人提过，说有个叫常峻硕的，家里条件不太好，平时挺省吃俭用的。' },
-      { no: 13, author: '旧巷南栀', content: '那就更让人难受了……为了66块钱的东西，人就没了。' },
-      { no: 14, author: '浩瀚的林', content: '你们别乱猜了，我也不知道到底是怎么回事。' },
-      { no: 15, author: '青栀如初', content: '楼主你先别急，你确定他自杀跟这66块钱有关系吗？还是有别的原因？' },
-      { no: 16, author: '浩瀚的林', content: '我不知道。我是第二天想去问他球拍的事，才发现他账号注销了，后来听群里人说他不在了。' },
-      { no: 17, author: '浅笑心柔', content: '那跟你的钱可能也没什么直接关系，但这事确实挺让人唏嘘的。' },
-      { no: 18, author: '暮色孤舟', content: '我建议你联系一下他的同学或者老师，看能不能找到他家里人，把这事说一下。' },
-      { no: 19, author: '温酒叙余生', content: '对，但你要注意措辞，别让人家觉得你是在追债。' },
-      { no: 20, author: '南风知我意', content: '说实话，如果是我的话，我可能就不要了。人都没了，66块钱真的不算什么。' },
-      { no: 21, author: '长安烟火', content: '我也觉得，这种事还是看开点吧。' },
-      { no: 22, author: '故人叹',   content: '楼主你如果实在想要，我帮你打听打听常峻硕是哪个班的。' },
-      { no: 23, author: '白衣渡江', content: '楼上好人，我也帮你问问。不过说实话，我觉得这钱八成是要不回来了。' },
-      { no: 24, author: '墨染青衣', content: '楼主，你要是去联系他家里人，最好找个中间人一起去，别自己一个人上门，免得尴尬。' },
-      { no: 25, author: '浩瀚的林', content: '谢谢大家，我想了想，还是算了吧。就当是给常峻硕随了个份子，希望他在那边一切都好。' }
-    ]
-  },
-
-  { id:9, page:1, _order:4, title:'校园广播站点歌通道开启啦',
-    excerpt:'每周三中午的「为你点歌」栏目重新上线，想给同学或老师点歌的可以在本帖下方留言。',
-    author:'广播站', category:'社团活动', replies:41, views:1105, time:'2天前', likes:88 },
-
-  { id:3, page:1, _order:5, title:'校运会照片合集｜青春就是要燃起来',
-    excerpt:'这次秋季运动会拍了两千多张照片，先挑一部分发出来，需要原图的同学可以在评论区留下邮箱～',
-    author:'摄影社小林', category:'校园生活', replies:126, views:3894, time:'1小时前', essence:true, hot:true, likes:389 },
-
-  { id:7, page:1, _order:6, title:'英语听力总是跟不上怎么办',
-    excerpt:'每次听力前几句还能跟上，后面就开始走神了，有没有提高听力的具体训练方法？',
-    author:'小满', category:'求助问答', replies:34, views:876, time:'昨天', likes:52 },
-
-  { id:107, page:1, _order:6.5,
-    title: '牛顿和爱因斯坦谁更聪明',
-    excerpt: '牛顿和爱因斯坦谁更聪明',
-    author: '好奇的小炜', category: '学习交流', replies: 73, views: 2145, time: '2天前', likes: 61 },
-
-  { id:5, page:1, _order:7, title:'出二手教辅｜五三、必刷题、英语语法书（九成新）',
-    excerpt:'高三毕业清书柜，价格都很便宜，校内自提，多买可议价，详情见图。',
-    author:'毕业的学长', category:'二手市场', replies:56, views:1892, time:'3小时前', likes:44 },
-
-  { id:10, page:1, _order:8, title:'图书馆自习室周末开放时间调整通知',
-    excerpt:'自本周起，图书馆自习室周末开放时间调整为 8:00—21:00，请大家合理安排时间。',
-    author:'教务处', category:'公告通知', replies:12, views:2034, time:'3天前', likes:120 },
-
-  { id:109, page:1, _order:8.5,
-    title: '打听一个二年级的漂亮小姑娘',
-    excerpt: '求助，理科班第一排那个带绿色发箍的女生叫什么名字啊，我感觉她好好看。',
-    author: '臭泡茶的', category: '求助问答', replies: 7, views: 583, time: '2天前', likes: 26,
-    hasDetail: true,
-    floors: [
-      { no: 1, author: '臭泡茶的', content: '求助，理科班第一排那个带绿色发箍的女生叫什么名字啊，我感觉她好好看。' },
-      { no: 2, author: '临东忆',   content: '绿色发箍？是不是头发有点卷、经常穿白色外套那个？我好像有印象。' },
-      { no: 3, author: '墨云遥',   content: '楼主你这是要展开追求了吗？板凳搬好，瓜子备好。' },
-      { no: 4, author: '归鹤隐',   content: '我好像知道，是不是二年七班的？姓王？但我不确定全名。' },
-      { no: 5, author: '南巷听风', content: '建议直接去问，别在这打听，小心被当成变态。' },
-      { no: 6, author: '霏羽聆晞', content: '我对这个人有印象！我之前跟她一个考场，人挺好的，学习也好。' },
-      { no: 7, author: '臭泡茶的', content: '谢谢大家！我就想认识一下，没别的意思，大家别误会。' },
-      { no: 8, author: '臭泡茶的', content: '知道名字的可以邮箱告诉我，我可以用劲爆消息换！我的邮箱：cpcd@jhk.ccwu.cc' }
-    ]
-  },
-
-  { id:4, page:1, _order:9, title:'求组队｜数学建模社招新啦，还差两位队友',
-    excerpt:'准备参加下个月的市级比赛，目前已有三人，还缺一个擅长编程的同学，有意向的私信我！',
-    author:'阿哲', category:'社团活动', replies:23, views:645, time:'2小时前', likes:31 },
-
-  { id:8, page:1, _order:10, title:'【物理】力学模型总结（附手写笔记扫描版）',
-    excerpt:'整理了高中阶段常见的十二种力学模型，每个模型都配了例题和易错点，希望对大家有帮助。',
-    author:'物理课代表', category:'学习交流', replies:74, views:3120, time:'昨天', essence:true, likes:278 },
-
-  { id:102, page:2, _order:1,
-    title: '听说最近有人自杀了，什么情况',
-    excerpt: '听说最近有人自杀了，什么情况？',
-    author: '栖景室', category: '校园生活', replies: 10, views: 156, time: '4天前', likes: 18,
-    hasDetail: true,
-    floors: [
-      { no: 1,  author: '栖景室',   content: '听说最近有人自杀了，什么情况？' },
-      { no: 2,  author: '霏羽聆晞', content: '据说这两人是同一个寝室的。' },
-      { no: 3,  author: '南城以殇', content: '对，这两人一个是我同班同学，一个是我隔壁班的，他俩确实在一个寝室。' },
-      { no: 4,  author: '栖景室',   content: '三楼你哪班的啊？' },
-      { no: 5,  author: '南城以殇', content: '二年八班。另一个人是九班的。' },
-      { no: 6,  author: '栖景室',   content: '为什么自杀啊？' },
-      { no: 7,  author: '南城以殇', content: '不知道，我问了和他俩同寝室的人，他们也不说。' },
-      { no: 8,  author: '霏羽聆晞', content: '可能是因为高二学习压力变大了？' },
-      { no: 9,  author: '南城以殇', content: '也有可能。我们老师每天都留比别的班多上一倍的作业，每天都要写到凌晨一点，每周还有周测。' },
-      { no: 10, author: '南城以殇', content: '但是就因为这个而自杀我觉得也太不值得了，写不完的作业不写就好了，也没必要在意考试成绩，人生还有许多美丽的风景等着我们去欣赏呢。' },
-      { no: 11, author: '霏羽聆晞', content: '楼上说得好有道理！' }
-    ]
-  },
-
-  { id:17, page:2, _order:2, title:'学校门口新开的奶茶店测评',
-    excerpt:'今天去尝了校门口新开的那家奶茶店，点了招牌芋泥波波，甜度刚好，价格也不贵，推荐！',
-    author:'奶茶控', category:'校园生活', replies:71, views:2189, time:'6天前', hot:true, likes:134 },
-
-  { id:14, page:2, _order:3, title:'篮球场晚上几点关灯啊',
-    excerpt:'最近想晚上去打球，但不知道球场几点熄灯，有知道的同学吗？',
-    author:'篮球爱好者', category:'校园生活', replies:28, views:765, time:'4天前', likes:42 },
-
-  { id:104, page:2, _order:4,
-    title: '上课时外面突然传来诡异的响声，像是有婴儿在哭',
-    excerpt: '上课时外面突然传来诡异的响声，像是有婴儿在哭。',
-    author: '南巷听风', category: '校园生活', replies: 25, views: 287, time: '5天前', likes: 34,
-    hasDetail: true,
-    floors: [
-      { no: 1,  author: '南巷听风', content: '上课时外面突然传来诡异的响声，像是有婴儿在哭。' },
-      { no: 2,  author: '南城以殇', content: '我也听到了，好诡异。' },
-      { no: 3,  author: '追风少年', content: '当时我都要被吓晕了，不会有人这么残忍吧，婴儿哭了都不管。' },
-      { no: 4,  author: '摄影社小林', content: '咱们学校怎么可能出现婴儿？' },
-      { no: 5,  author: '小满', content: '对啊，也没听说最近哪位老师生孩子啊。' },
-      { no: 6,  author: '科幻迷', content: '该不会是......' },
-      { no: 7,  author: '南巷听风', content: '是什么？' },
-      { no: 8,  author: '科幻迷', content: '之前总能听说职高有的女生不小心搞大了肚子，然后在厕所把孩子生出来后直接扔到马桶里丢掉。' },
-      { no: 9,  author: '倾羽蔓喻', content: '这个有意思！我们求真社接了！' },
-      { no: 10, author: '南巷听风', content: '不可能吧，咱们学校可是市里最好的学校了，怎么会出现这么道德败坏的人？' },
-      { no: 11, author: '阿哲', content: '这种人就是罪该万死！' },
-      { no: 12, author: '南巷听风', content: '今天我又听到了！我好害怕，该不会有人虐待婴儿吧？' },
-      { no: 13, author: '南巷听风', content: '我感觉我昨天说的也有可能。' },
-      { no: 14, author: '小满', content: '那也太残忍了！' },
-      { no: 15, author: '摄影社小林', content: '要不咱们报警吧！' },
-      { no: 16, author: '倾羽蔓喻', content: '破案了！' },
-      { no: 17, author: '南巷听风', content: '什么破案了？警方介入调查了？' },
-      { no: 18, author: '科幻迷', content: '警察这么有速度？' },
-      { no: 19, author: '倾羽蔓喻', content: '不是，经过我们细心地调查，最终得出了结论。' },
-      { no: 20, author: '南巷听风', content: '什么结论？' },
-      { no: 21, author: '倾羽蔓喻', content: '学校里的流浪猫最近生了一窝小猫，你们听到的哭声应该是小猫的叫声。' },
-      { no: 22, author: '南巷听风', content: '什么嘛，原来只是这样，害我担惊受怕两天。' },
-      { no: 23, author: '阿哲', content: '没有人受伤就好。' },
-      { no: 24, author: '早起鸟', content: '话说之前也有过这事，之前上课总能听到咚咚咚的响声，像是在剁骨头。' },
-      { no: 25, author: '南巷听风', content: '我知道这个，最后其实是工人在修管道吧。' },
-      { no: 26, author: '早起鸟', content: '对。' }
-    ]
-  },
-
-  { id:11, page:2, _order:5, title:'高二英语角活动报名开始啦',
-    excerpt:'每周五下午放学后在图书馆二楼，外教老师带我们一起练口语，感兴趣的扫码进群～',
-    author:'英语社', category:'社团活动', replies:37, views:912, time:'3天前', likes:73 },
-
-  { id:19, page:2, _order:6, title:'关于校服换季的通知',
-    excerpt:'天气转凉，从下周一起可以穿秋季校服外套，请同学们注意保暖。',
-    author:'德育处', category:'公告通知', replies:15, views:1876, time:'1周前', likes:56 },
-
-  { id:16, page:2, _order:7, title:'出一双全新篮球鞋，42码',
-    excerpt:'网上买大了，全新没穿过，原价600，300出，有需要的私信我，可小刀。',
-    author:'鞋子太多', category:'二手市场', replies:33, views:891, time:'5天前', likes:27 },
-
-  { id:108, page:2, _order:7.5,
-    title: '哲学好难啊，谁能来教我作题方法',
-    excerpt: '哲学好难啊，谁能来教我作题方法',
-    author: '马克思', category: '学习交流', replies: 42, views: 1287, time: '3天前', likes: 38 },
-
-  { id:13, page:2, _order:8, title:'谁能推荐几本适合高中生的课外书',
-    excerpt:'最近想读点课外书，但不知道从哪本开始，求推荐一些文笔好、有思想深度的作品。',
-    author:'书虫小陈', category:'学习交流', replies:62, views:1438, time:'4天前', likes:91 },
-
-  { id:20, page:2, _order:9, title:'高三学姐的错题本分享',
-    excerpt:'整理了三年的数学错题本，扫描成PDF了，需要的同学留邮箱，我发给你们。',
-    author:'毕业的学姐', category:'学习交流', replies:98, views:3562, time:'1周前', essence:true, likes:312 },
-
-  { id:18, page:2, _order:10, title:'有一起早起背单词的吗',
-    excerpt:'想找几个同学每天早上6点半在操场边背单词，互相监督，有意向的回复我。',
-    author:'早起鸟', category:'学习交流', replies:52, views:1327, time:'6天前', likes:88 },
-
-  { id:111, page:2, _order:10.5,
-    title: '有人初中是北校的吗，还记着去年在三号楼六楼又哭又闹还要跳楼的那人吗',
-    excerpt: '有人初中是北校的吗，还记着去年在三号楼六楼又哭又闹还要跳楼的那人吗？',
-    author: 'Aru', category: '校园生活', replies: 22, views: 1638, time: '3天前', likes: 74,
-    hasDetail: true,
-    floors: [
-      { no: 1,  author: 'Aru',      content: '有人初中是北校的吗，还记着去年在三号楼六楼又哭又闹还要跳楼的那人吗？' },
-      { no: 2,  author: '夏天的风',  content: '我记得！怎么提到他了？' },
-      { no: 3,  author: '云间月',    content: '他咋了，不会真跳楼了吧？' },
-      { no: 4,  author: 'Aru',      content: '没，据说他也考上青山实中了，还在重点班。' },
-      { no: 5,  author: '夏天的风',  content: '这人这么厉害？我记着闹出这事之后他就得有一个月没来上学，在家呆着一个月都能考进重点班，那确实有实力。' },
-      { no: 6,  author: '一杯凉白开', content: '当时他家长都来了。' },
-      { no: 7,  author: '落日航班',  content: '对，他跟他妈妈吵了半天，那大嗓门，别说六楼了，三楼都能听见。' },
-      { no: 8,  author: '云间月',    content: '绷不住了。那可真是“空谷传响，哀转久绝”。' },
-      { no: 9,  author: '青柠不酸',  content: '后来好几个老师去劝他跟他妈妈，劝了半天才让他俩冷静下来。' },
-      { no: 10, author: '山海皆可平', content: '我记着当时他要跳楼的时候，他妈妈哭着央求他别跳，刚给他救下来，他妈妈就给他劈头盖脸一顿骂。' },
-      { no: 11, author: '云间月',    content: '他妈妈也是个变脸大师。' },
-      { no: 12, author: '夏天的风',  content: '他因为啥要闹成这样啊？' },
-      { no: 13, author: '北岛不眠',  content: '同问。' },
-      { no: 14, author: '柚子味的猫', content: '好像是跟老师闹矛盾了。' },
-      { no: 15, author: 'Aru',      content: '对，我是他初中同学，当时班主任说他上课睡觉，其实他没睡。班主任给他劈头盖脸一顿骂，然后他就班主任急眼了。' },
-      { no: 16, author: 'Aru',      content: '本来他就跟班主任不对付，让班主任这么一污蔑，他更生气了，然后就跟班主任一顿吵吵，给班主任都气哭了。' },
-      { no: 17, author: '北岛不眠',  content: '那这人确实狠。' },
-      { no: 18, author: '云间月',    content: '他班主任应该这辈子都不想再看见他了。' },
-      { no: 19, author: '夏天的风',  content: '这是他班主任教学生涯最大的滑铁卢。' },
-      { no: 20, author: '阿哲',      content: '总之，人没事就好。' },
-      { no: 21, author: '云间月',    content: '说了半天也没说这人叫啥啊。' },
-      { no: 22, author: 'Aru',      content: '他叫王乐韦，初中在3年39班。' },
-      { no: 23, author: '云间月',    content: '行。' }
-    ]
-  },
-
-  { id:15, page:2, _order:11, title:'求助：化学实验题总是算错怎么办',
-    excerpt:'每次做化学实验计算题都会在最后一步出错，有没有什么好的检查方法或者练习建议？',
-    author:'化学困难户', category:'求助问答', replies:45, views:1120, time:'5天前', likes:58 },
-
-  { id:12, page:2, _order:0, title:'关于下周期中考试安排的通知',
-    excerpt:'下周三至周五进行期中考试，具体科目时间安排已发到各班班级群，请同学们提前做好复习准备。',
-    author:'教务处', category:'公告通知', replies:19, views:2456, time:'3天前', top:true, likes:64 },
-
-  { id:24, page:3, _order:1, title:'食堂一楼的糖醋里脊今天特别好吃',
-    excerpt:'今天中午食堂一楼的糖醋里脊炸得特别酥，酸甜也刚刚好，推荐大家去尝尝！',
-    author:'干饭人', category:'校园生活', replies:47, views:1298, time:'1周前', likes:95 },
-
-  { id:103, page:3, _order:2,
-    title: '我们求真社十分缺人！学弟学妹们快来报名加入吧',
-    excerpt: '我们求真社十分缺人！学弟学妹们快来报名加入吧！我们社团很意思的！',
-    author: '倾羽蔓喻', category: '社团活动', replies: 7, views: 98, time: '2天前', likes: 12,
-    hasDetail: true,
-    floors: [
-      { no: 1, author: '倾羽蔓喻', content: '我们求真社十分缺人！学弟学妹们快来报名加入吧' },
-      { no: 2, author: '霏羽聆晞', content: '加入社团有什么要求吗？' },
-      { no: 3, author: '倾羽蔓喻', content: '胆子大并且有好奇心就可以。' },
-      { no: 4, author: '霏羽聆晞', content: '社团有什么活动吗？' },
-      { no: 5, author: '倾羽蔓喻', content: '我们社团每天都会搜集身边许多反常的灵异事件，并互相分享和探讨这其中的真相。' },
-      { no: 6, author: '墨云遥',   content: '谁家《走近科学》来了？' },
-      { no: 7, author: '蓝莲花',   content: '社长和副社长你俩就别在这自娱自乐了，零个人想加入我们求真社。' },
-      { no: 8, author: '倾羽蔓喻', content: '有意向的邮箱联系我，想投稿的或者想询问最近的灵异事件也可以联系我！我的邮箱是：yqryx@jhk.ccwu.cc' }
-    ]
-  },
-
-  { id:21, page:3, _order:3, title:'运动会的照片还有吗，想看跳高',
-    excerpt:'上次校运会的照片只看到跑步的，跳高和跳远的照片有同学拍了吗？',
-    author:'想看跳高', category:'校园生活', replies:24, views:678, time:'1周前', likes:41 },
-
-  { id:28, page:3, _order:4, title:'有喜欢打羽毛球的同学吗，周末约',
-    excerpt:'周末想找人一起打羽毛球，水平一般，主要是锻炼身体，有意向的留言。',
-    author:'羽毛球爱好者', category:'社团活动', replies:53, views:1264, time:'1周前', likes:67 },
-
-  { id:110, page:3, _order:4.5,
-    title: '咱们学校怎么不创立个绝区零社',
-    excerpt: '咱们学校怎么不创立个绝区零社？《绝区零》是米哈游出的动作游戏，打击感和角色设计都很顶，要是能有个社团一起玩、一起讨论剧情和配队，肯定很有意思。有没有同好？举个手看看。',
-    author: 'Aru', category: '社团活动', replies: 19, views: 1089, time: '2天前', likes: 52,
-    hasDetail: true,
-    floors: [
-      { no: 1,  author: 'Aru',      content: '咱们学校怎么不创立个绝区零社？《绝区零》是米哈游出的动作游戏，打击感和角色设计都很顶，要是能有个社团一起玩、一起讨论剧情和配队，肯定很有意思。有没有同好？举个手看看。' },
-      { no: 2,  author: '星野拾光',  content: '绝区零？我玩过一阵，战斗确实爽，但手机有点带不动，后来弃了。' },
-      { no: 3,  author: '白泽不吃鱼', content: '楼主你先把社团申请流程搞清楚再说吧，学校社团不是想建就能建的。' },
-      { no: 4,  author: '雾岛听风',  content: '我倒是挺感兴趣的，不过咱们学校已经有动漫社和电竞社了，再搞一个游戏社团，老师那边能批吗？' },
-      { no: 5,  author: 'Aru',      content: '可以挂靠在电竞社下面，或者先做兴趣小组，不一定非要正式社团。' },
-      { no: 6,  author: '七海千秋',  content: '绝区零的剧情我挺喜欢的，尤其是那种都市怪谈加科幻的风格，比一般的二次元手游有味道。' },
-      { no: 7,  author: '夜航星',    content: '我觉得可以！我身边好几个同学都在玩，只是平时没人组织。' },
-      { no: 8,  author: '拾柒',      content: '问题是，玩绝区零的人多吗？别到时候社团建起来，每次活动就三四个人。' },
-      { no: 9,  author: '清风揽月',  content: '我玩，但我主玩PC端，手机搓玻璃实在受不了。' },
-      { no: 10, author: '半盏流年',  content: '如果社团要拍宣传片或者做海报，我可以帮忙，正好练练手。' },
-      { no: 11, author: '橘子汽水',  content: '你们说的这个游戏，是不是就是那个有只叫“邦布”的？我刷到过视频，挺可爱的。' },
-      { no: 12, author: '云深不知处', content: '对，邦布是里面的智能设备，设定挺有意思的。我还写过一篇关于绝区零世界观的解析，回头可以发出来。' },
-      { no: 13, author: '沐雨橙风',  content: '我们求真社之前也讨论过绝区零里的“空洞”设定，感觉和灵异事件有点像，都是未知空间。' },
-      { no: 14, author: '沉默的螺旋', content: '社团活动可以分几块：剧情考据、战斗配队、同人创作，再加一个每周联机日。' },
-      { no: 15, author: '糖分超标',  content: '联机日放在周末下午行吗？平时晚自习结束太晚了。' },
-      { no: 16, author: '冬眠的熊',  content: '我提个现实问题：建社团要指导老师，你们谁去说服老师？' },
-      { no: 17, author: 'Aru',      content: '我可以去问一下教信息技术的张老师，他平时也玩游戏，应该好说话。' },
-      { no: 18, author: '折纸飞机',  content: '张老师？他上次还在课上吐槽学生上课偷玩手机，你确定他会支持？' },
-      { no: 19, author: '想当咸鱼',  content: '我觉得先别急着建社团，可以先在论坛发个投票，看看有多少人真的想参加。' },
-      { no: 20, author: 'Aru',      content: '行，那我先发个投票帖，人数够的话就去申请。想加入的在这层楼扣个1，我统计一下。' }
-    ]
-  },
-
-  { id:25, page:3, _order:5, title:'数学竞赛班开始选拔了',
-    excerpt:'今年的数学竞赛班选拔将在下周三进行，有意向的同学到数学老师那里报名。',
-    author:'数学教研组', category:'公告通知', replies:38, views:1675, time:'1周前', likes:61 },
-
-  { id:30, page:3, _order:6, title:'关于教室空调使用的建议',
-    excerpt:'最近天气变化大，有些教室空调开得太冷，建议各班统一一下温度，谢谢。',
-    author:'怕冷的同学', category:'校园生活', replies:29, views:876, time:'1周前', likes:48 },
-
-  { id:22, page:3, _order:7, title:'求推荐好用的错题整理APP',
-    excerpt:'想用手机整理错题，但APP太多了不知道选哪个，有没有同学推荐一下？',
-    author:'APP选择困难', category:'求助问答', replies:56, views:1543, time:'1周前', likes:72 },
-
-  { id:27, page:3, _order:8, title:'出了几本九成新的教辅，便宜出',
-    excerpt:'数学物理化学的教辅都有，基本都是九成新，价格便宜，需要的私信。',
-    author:'清书柜', category:'二手市场', replies:41, views:1087, time:'1周前', likes:35 },
-
-  { id:23, page:3, _order:9, title:'学校图书馆有没有《三体》',
-    excerpt:'想借《三体》看，但不知道图书馆有没有，有借过的同学吗？',
-    author:'科幻迷', category:'校园生活', replies:31, views:822, time:'1周前', likes:38 },
-
-  { id:105, page:3, _order:10,
-    title: '我发现我的丈夫跟我的弟弟偷情，我该怎么办',
-    excerpt: '我发现我的丈夫跟我的弟弟偷情，我该怎么办',
-    author: '寂A歪', category: '求助问答', replies: 127, views: 4562, time: '3天前', hot: true, likes: 89 },
-
-  { id:106, page:3, _order:11,
-    title: '我喜欢上我哥的老公了，怎么办',
-    excerpt: '我喜欢上我哥的老公了，怎么办',
-    author: '给给', category: '求助问答', replies: 156, views: 5218, time: '4天前', hot: true, likes: 102 },
-
-  { id:29, page:3, _order:12, title:'校园歌手大赛什么时候开始',
-    excerpt:'听说今年校园歌手大赛要开始了，有知道具体时间的同学吗？',
-    author:'爱唱歌的小王', category:'社团活动', replies:36, views:1156, time:'1周前', likes:54 },
-
-  { id:26, page:3, _order:13, title:'问一下，高三的晚自习几点结束',
-    excerpt:'想了解一下高三晚自习的结束时间，方便安排接送，谢谢。',
-    author:'家长一枚', category:'求助问答', replies:22, views:934, time:'1周前', likes:29 },
-
-  {
-    id: 100, page:1, _order:99,
-    title: '关于成立“尖刀班”的公告',
-    excerpt: '为深入贯彻因材施教原则，进一步挖掘学生潜能，提升拔尖创新人才培养质量，经学校研究决定，自2026年8月30日起正式成立“尖刀班”，面向全校开展分层培优教学。现将有关事项公告如下：',
-    author: '论坛管理员', category: '公告通知',
-    replies: 0, views: 1, time: '2026年8月23日', likes: 0,
-    hidden: true, hasDetail: true, keywords: ['二年八班', '二年九班'],
-    floors: [
-      { no: 1, author: '论坛管理员', content:
-`全体师生、家长：
-
-为深入贯彻因材施教原则，进一步挖掘学生潜能，提升拔尖创新人才培养质量，经学校研究决定，自2026年8月30日起正式成立“尖刀班”，面向全校开展分层培优教学。现将有关事项公告如下：
-
-一、办班宗旨
-坚持“面向全体、尊重差异、因材施教、全面发展”，在开齐开足国家规定课程的基础上，为学有余力、学科特长突出的学生提供更高阶的学习内容与思维训练平台，培养其自主学习能力、创新意识和综合素养，同时带动年级整体学风建设。
-
-二、组建原则
-录取原则：以考试排名作为录取标准，排名靠前者录取。
-综合考量：以学业水平为基础，兼顾学习态度、意志品质与心理素质，不搞“一次考试定终身”。
-动态管理：实行滚动进出机制，每学期评估一次，能进能出，保持班级活力。
-规模适度：每班不超过30人，计划开设2个班。每年的八班和九班分别为文科尖刀班和理科尖刀班。
-
-三、培养措施
-课程优化：在完成国家课程基础上，增设思维拓展、竞赛辅导、阅读写作、科学探究等校本课程与专题讲座。
-学法指导：重点培养自主学习、时间管理与反思总结能力，避免简单增加作业量与考试频次。
-活动拓展：组织学科竞赛、课题研究、研学实践及校际交流，拓宽视野。
-心理关怀：关注学生学习压力与情绪状态，定期开展心理辅导和团体活动，促进身心健康发展。
-
-四、师资保障
-由校内外骨干教师、学科带头人及具有竞赛辅导经验的教师组成教学团队，学校将统筹安排教研与培训，确保教学质量。
-
-本公告自发布之日起施行，具体解释权归学校教务处。
-
-特此公告。
-
-青山市实验中学
-2026年8月23日` }
-    ]
-  },
-
-  {
-    id: 112, page:1, _order:100,
-    title: '青山市实验中学关于学生常峻硕打架斗殴、校园霸凌事件的处理通报',
-    excerpt: '2025年11月13日，我校一年级三班学生常峻硕因琐事与同学发生冲突，实施殴打、欺凌行为，造成对方受伤。事件发生后，学校高度重视，立即成立调查组，配合公安机关开展调查取证，并第一时间安排受伤学生就医、心理疏导及家校沟通。',
-    author: '论坛管理员', category: '公告通知',
-    replies: 0, views: 1, time: '2025年11月14日', likes: 0,
-    hidden: true, hasDetail: true, keywords: ['常峻硕'],
-    floors: [
-      { no: 1, author: '论坛管理员', content:
-`青山市实验中学关于学生常峻硕打架斗殴、校园霸凌事件的处理通报
-
-（青山市实验中学〔2025〕16号）
-
-全校师生：
-
-2025年11月13日，我校一年级三班学生常峻硕因琐事与同学发生冲突，实施殴打、欺凌行为，造成对方受伤。事件发生后，学校高度重视，立即成立调查组，配合公安机关开展调查取证，并第一时间安排受伤学生就医、心理疏导及家校沟通。
-
-经调查核实，常峻硕的行为已构成打架斗殴、校园霸凌，并造成他人轻微伤，性质恶劣，情节严重，严重违反校规校纪，涉嫌违法。经学校学生欺凌治理委员会认定，并根据《青山市实验中学学生违纪处分办法》第十条及相关规定，经学校研究决定：
-
-一、给予常峻硕劝退处理，按程序办理离校手续。
-
-二、将该生涉嫌违法线索及相关材料移交公安机关依法处理，学校全力配合警方后续工作。
-
-三、对受伤学生及家属做好安抚、医疗、心理辅导和后续帮扶工作。
-
-四、在全校开展防校园欺凌、法治教育专项活动，加强排查和预警，坚决防止类似事件再次发生。
-
-警方现已立案，案号为：QS20251113004。学校对校园霸凌、打架斗殴等暴力行为坚持"零容忍"。希望全体学生引以为戒，遇到矛盾应通过老师、家长或学校渠道依法依规解决，严禁以暴力方式处理。全体教师和家长要切实履行教育、监护责任，共同维护安全、文明、和谐的校园环境。
-
-特此通报。
-
-青山市实验中学
-2025年11月14日` }
-    ]
-  },
-
-  {
-    id: 113, page:1, _order:101,
-    title: '听说二年七班出了个数学天才，连尖刀班都没比过',
-    excerpt: '听说二年七班出了个数学天才，连尖刀班都没比过，还去参加奥赛了。有人知道是谁吗？',
-    author: '青柠不酸', category: '学习交流',
-    replies: 19, views: 8734, time: '2天前', likes: 0,
-    hidden: true, hasDetail: true, keywords: ['二年七班'],
-    floors: [
-      { no: 1,  author: '青柠不酸', content: '听说二年七班出了个数学天才，连尖刀班都没比过，还去参加奥赛了。有人知道是谁吗？' },
-      { no: 2,  author: '云间月',   content: '二年七班？我印象里那个班不是普通班吗，怎么还有这种大神。' },
-      { no: 3,  author: '夏天的风', content: '我也听说了，好像是上次月考，数学单科年级第一不在尖刀班，在二年七班，当时就炸了。' },
-      { no: 4,  author: '北岛不眠', content: '这有什么好炸的，尖刀班又不是每科都碾压，偶尔被人超一次很正常。' },
-      { no: 5,  author: '一杯凉白开', content: '问题是听说不是偶尔，是连续两次都超过了。' },
-      { no: 6,  author: '落日航班', content: '真的假的？那这人不应该早就被挖到尖刀班去了吗？' },
-      { no: 7,  author: '柚子味的猫', content: '据说学校想让她去，她自己不去。' },
-      { no: 8,  author: '山海皆可平', content: '为什么不去？尖刀班资源那么好。' },
-      { no: 9,  author: '青柠不酸', content: '我也是听别人说的，好像是她觉得尖刀班进度太快，她喜欢自己按自己的节奏学。' },
-      { no: 10, author: '云间月',   content: '这种人是真的离谱，别人挤破头想进尖刀班，她倒好，拒绝。' },
-      { no: 11, author: '夏天的风', content: '而且我听说她奥赛也拿奖了，是省级的那种。' },
-      { no: 12, author: '北岛不眠', content: '哪个奥赛？数学联赛？' },
-      { no: 13, author: '夏天的风', content: '应该是，具体我不太清楚，反正听说挺厉害的。' },
-      { no: 14, author: '一杯凉白开', content: '那她是不是偏科特别严重？一般人搞竞赛的，其他科目都拉胯。' },
-      { no: 15, author: '柚子味的猫', content: '还真不是，听说她其他科也不差，就是不太爱说话，平时挺低调的。' },
-      { no: 16, author: '落日航班', content: '这种人最可怕了，明明实力强还不显山不露水。' },
-      { no: 17, author: '山海皆可平', content: '所以到底叫什么名字啊，说了半天没一个人说的。' },
-      { no: 18, author: '云间月',   content: '不知道，二年七班的我认识几个，但没人跟我提过这事。' },
-      { no: 19, author: '北岛不眠', content: '估计人家本人也不想被讨论吧，咱还是别打听了。' },
-      { no: 20, author: '青柠不酸', content: '行吧，就是好奇，既然人家低调那就不追问了。' }
-    ]
-  },
-
-  {
-    id: 114, page:1, _order:102,
-    title: '喜报｜青山市实验中学王小满同学荣获全国中学生数学学科奥林匹克竞赛省级赛区一等奖',
-    excerpt: '近日，2026年第27届全国中学生数学学科奥林匹克竞赛省级赛区获奖名单公布，我校高二七班王小满同学凭借扎实的学科素养和出色的竞赛能力，荣获省级赛区一等奖。指导教师：付华英老师。',
-    author: '论坛管理员', category: '公告通知',
-    replies: 0, views: 12460, time: '2026年9月14日', likes: 0,
-    hidden: true, hasDetail: true, keywords: ['奥赛'],
-    floors: [
-      { no: 1, author: '论坛管理员', content:
-`喜报｜青山市实验中学王小满同学荣获全国中学生数学学科奥林匹克竞赛省级赛区一等奖
-
-近日，2026年第27届全国中学生数学学科奥林匹克竞赛省级赛区获奖名单公布，
-
-我校高二七班王小满同学凭借扎实的学科素养和出色的竞赛能力，荣获省级赛区一等奖。指导教师：付华英老师。
-
-学校向王小满同学及指导教师表示热烈祝贺！向关心支持学校发展的家长和社会各界表示衷心感谢！
-
-希望全体同学以王小满同学为榜样，勤学笃行，锐意进取，在青春赛道上奋力跑出最好成绩！
-
-青山市实验中学
-2026年9月14日`,
-        image: '王小满.png' }
-    ]
-  },
-
-  {
-    id: 115, page:1, _order:103,
-    title: '住宿生寝室分配名单',
-    excerpt: '男生宿舍 A栋（50间，200人）：A-101 常峻硕、王乐韦、高梓睿、刘子轩；A-102 林圻、杨泽宇、赵明远、黄博文……',
-    author: '论坛管理员', category: '公告通知',
-    replies: 0, views: 8620, time: '2025年8月21日', likes: 0,
-    hidden: true, hasDetail: true, keywords: ['王乐韦'],
-    boldNames: true,
-    floors: [
-      { no: 1, author: '论坛管理员', content:
-`住宿生寝室分配名单
-
-男生宿舍 A栋（50间，200人）
-
-A-101：常峻硕、王乐韦、高梓睿、刘子轩
-A-102：林圻、杨泽宇、赵明远、黄博文
-A-103：周凯旋、吴天佑、徐嘉豪、孙立诚
-A-104：马思远、朱瑞霖、胡俊熙、郭子涵
-A-105：何雨泽、王宇航、林嘉树、罗子豪
-A-106：郑一鸣、梁世豪、谢文昊、宋子骞
-A-107：唐宇轩、许景程、韩沐阳、冯浩宇
-A-108：邓嘉航、曹俊楠、彭子墨、曾令轩
-A-109：肖泽凯、田浩辰、董家豪、潘远航
-A-110：袁宇翔、蒋子昂、蔡文轩、余俊豪
-A-111：杜明哲、叶峻熙、程嘉泽、苏浩铭
-A-112：魏子杰、吕承恩、丁俊辉、任嘉诚
-A-113：沈亦辰、姚思远、卢俊熙、姜浩然
-A-114：崔子豪、钟宇航、谭泽宇、陆明轩
-A-115：汪嘉诚、范俊杰、金泽凯、石浩宇
-A-116：廖子涵、贾明远、夏宇轩、韦嘉豪
-A-117：付思远、方浩铭、白俊楠、邹泽宇
-A-118：孟嘉航、秦子轩、邱宇航、侯浩宇
-A-119：江俊豪、尹泽凯、薛嘉诚、闫明轩
-A-120：段子涵、雷浩宇、龙俊杰、贺泽宇
-A-121：顾嘉豪、毛宇轩、郝思远、龚俊楠
-A-122：邵泽宇、万浩宇、钱嘉诚、严子轩
-A-123：覃宇航、武俊杰、戴泽凯、莫浩铭
-A-124：孔嘉豪、向宇轩、汤思远、常俊楠
-A-125：温泽宇、康浩宇、施嘉诚、洪子轩
-A-126：翟宇航、安俊杰、颜泽凯、倪浩铭
-A-127：申嘉豪、牛宇轩、樊思远、葛俊楠
-A-128：邢泽宇、齐浩宇、伍嘉诚、余子轩
-A-129：骆宇航、高俊杰、夏泽凯、蔡浩铭
-A-130：田嘉豪、胡宇轩、凌思远、霍俊楠
-A-131：虞泽宇、邬浩宇、支嘉诚、柯子轩
-A-132：管宇航、卢俊杰、莫泽凯、经浩铭
-A-133：房嘉豪、裘宇轩、解思远、应俊楠
-A-134：宗泽宇、丁浩宇、宣嘉诚、贲子轩
-A-135：邓宇航、郁俊杰、单泽凯、杭浩铭
-A-136：洪嘉豪、包宇轩、诸思远、左俊楠
-A-137：石泽宇、崔浩宇、吉嘉诚、钮子轩
-A-138：龚宇航、程俊杰、嵇泽凯、邢浩铭
-A-139：裴嘉豪、陆宇轩、荣思远、翁俊楠
-A-140：荀泽宇、羊浩宇、於嘉诚、惠子轩
-A-141：甄宇航、曲俊杰、家泽凯、封浩铭
-A-142：芮嘉豪、羿宇轩、储思远、靳俊楠
-A-143：汲泽宇、邴浩宇、糜嘉诚、松子轩
-A-144：井宇航、段俊杰、富泽凯、巫浩铭
-A-145：乌嘉豪、焦宇轩、巴思远、弓俊楠
-A-146：牧泽宇、隗浩宇、山嘉诚、谷子轩
-A-147：车宇航、侯俊杰、宓泽凯、蓬浩铭
-A-148：全嘉豪、郗宇轩、班思远、仰俊楠
-A-149：秋泽宇、宫浩宇、宁嘉诚、仇子轩
-A-150：栾宇航、暴俊杰、甘泽凯、厉浩铭
-A-151：顾承宇、谢明轩、韩子豪、唐俊熙
-A-152：赵泽宇、林浩轩、周子墨、吴俊杰
-A-153：郑宇航、王嘉豪、李泽楷、陈浩宇
-A-154：杨子轩、黄俊豪、徐明远、孙泽宇
-A-155：马嘉豪、朱宇轩、胡浩铭、郭俊杰
-A-156：何泽凯、高子豪、罗宇轩、梁思远
-A-157：宋浩宇、唐嘉豪、许子轩、韩泽宇
-A-158：冯俊豪、邓明轩、曹宇航、彭泽宇
-A-159：曾子墨、肖浩宇、田俊杰、董嘉豪
-A-160：潘宇轩、袁泽凯、蒋子豪、蔡明远
-
-女生宿舍 B栋（50间，200人）
-
-B-201：王诗涵、李雨桐、张梦琪、刘欣怡
-B-202：陈思妍、杨紫萱、赵语彤、黄雅静
-B-203：周若曦、吴婉婷、徐嘉怡、孙悦宁
-B-204：马晓琳、朱可欣、胡佳颖、郭静姝
-B-205：何雨薇、高梦瑶、林书瑶、罗心怡
-B-206：郑晓彤、梁思琪、谢雨欣、宋佳琪
-B-207：唐艺璇、许诗雅、韩雪莹、冯欣妍
-B-208：邓紫琳、曹梦洁、彭子珊、曾雅琪
-B-209：肖雨萌、田佳怡、董思彤、潘思涵
-B-210：袁梦琪、蒋欣悦、蔡文婧、余诗琪
-B-211：杜雨桐、叶晓萱、程佳宁、苏婉清
-B-212：魏子涵、吕思颖、丁雨晴、任嘉怡
-B-213：沈梦瑶、姚思彤、王可馨、李佳蓉
-B-214：陈雅雯、杨若涵、赵佳琪、黄诗琪
-B-215：周欣妍、吴梦洁、徐雨薇、孙雅琳
-B-216：马思彤、朱佳怡、胡欣怡、郭雨萱
-B-217：何梦瑶、高诗涵、林佳琪、罗雨欣
-B-218：郑雅静、梁诗琪、谢佳宁、宋雨桐
-B-219：唐欣怡、许梦琪、韩佳怡、冯雨薇
-B-220：邓思涵、曹雅琪、彭欣妍、曾梦洁
-B-221：肖佳宁、田诗琪、董雨萱、潘欣怡
-B-222：袁佳怡、蒋梦瑶、蔡雨欣、余诗涵
-B-223：杜雅琳、叶佳琪、程欣妍、苏梦洁
-B-224：魏雨桐、吕诗涵、丁佳宁、任梦琪
-B-225：沈欣怡、姚雅琪、王雨薇、李梦瑶
-B-226：陈佳琪、杨诗琪、赵欣妍、黄雨萱
-B-227：周梦洁、吴佳怡、徐诗涵、孙雨欣
-B-228：马雅琳、朱欣怡、胡梦琪、郭诗琪
-B-229：何佳宁、高雨薇、林欣妍、罗梦瑶
-B-230：郑诗涵、梁佳怡、谢雨萱、宋欣怡
-B-231：唐雅琪、许梦洁、韩诗琪、冯佳宁
-B-232：邓雨欣、曹欣妍、彭梦瑶、曾诗涵
-B-233：肖佳琪、田雨薇、董欣怡、潘梦洁
-B-234：袁诗琪、蒋佳宁、蔡雨萱、余欣妍
-B-235：杜梦瑶、叶诗涵、程佳琪、苏雨欣
-B-236：魏欣怡、吕梦洁、丁诗琪、任佳宁
-B-237：沈雨薇、姚欣妍、王梦瑶、李诗涵
-B-238：陈佳宁、杨雨萱、赵欣怡、黄梦琪
-B-239：周诗琪、吴佳琪、徐雨欣、孙梦洁
-B-240：马欣妍、朱诗涵、胡佳宁、郭雨薇
-B-241：何梦琪、高欣怡、林诗琪、罗佳琪
-B-242：郑雨萱、梁欣妍、谢梦瑶、宋诗涵
-B-243：唐佳宁、许雨薇、韩欣怡、冯梦琪
-B-244：邓诗琪、曹佳琪、彭雨欣、曾梦洁
-B-245：肖欣妍、田诗涵、董佳宁、潘雨薇
-B-246：袁佳宁、蒋欣怡、蔡诗琪、余佳琪
-B-247：杜雨萱、叶欣妍、程梦瑶、苏诗涵
-B-248：魏佳宁、吕雨薇、丁欣怡、任梦琪
-B-249：沈诗琪、姚佳琪、王雨欣、李梦洁
-B-250：陈欣妍、杨诗涵、赵佳宁、黄雨薇` }
-    ]
-  },
-
-  {
-    id: 116, page:1, _order:104,
-    title: '你们知道二年九班有个靠关系进来的吗？',
-    excerpt: '你们知道二年九班有个靠关系进来的吗？听说他爸爸是市委书记，他妈妈是市长。',
-    author: '云间月', category: '校园生活',
-    replies: 16, views: 5240, time: '3天前', likes: 0,
-    hidden: true, hasDetail: true, keywords: ['高梓睿'],
-    floors: [
-      { no: 1,  author: '云间月',   content: '你们知道二年九班有个靠关系进来的吗？' },
-      { no: 2,  author: '一杯凉白开', content: '真的假的，不是说尖刀班通过考试择优录取吗？' },
-      { no: 3,  author: '夏天的风', content: '世上哪有那么多公平？' },
-      { no: 4,  author: '一杯凉白开', content: '咱们学校不是一向都是以公平著称吗？' },
-      { no: 5,  author: '一杯凉白开', content: '这人是谁啊？他得有多大的背景才能靠关系进尖刀班？' },
-      { no: 6,  author: '云间月',   content: '听说他爸爸是市委书记，他妈妈是市长' },
-      { no: 7,  author: '山海皆可平', content: '青山市的天黑了。' },
-      { no: 8,  author: '青柠不酸', content: '这人是谁啊？' },
-      { no: 9,  author: '南城以殇', content: '我知道，你们说的应该是高梓睿。我是二年八班的，我们班也有一个靠关系进来的，叫常峻硕。' },
-      { no: 10, author: '北岛不眠', content: '常峻硕？这人去年不就因为打架被劝退了吗？' },
-      { no: 11, author: '南城以殇', content: '公告上说是被劝退了，但据说给了校长不少好处，学校就把那个公告迅速隐藏了，本来也没几个人看见，再加上每个目击者都给了不少封口费，所以都不太知道这个事。' },
-      { no: 12, author: '南城以殇', content: '他们两个仗着自己有关系，十分嚣张，虽然说在尖刀班，但其实他俩的学习非常差，上课也只会睡觉，据说能考进咱们学校也是走后门了。' },
-      { no: 13, author: '山海皆可平', content: '常峻硕这人什么来头？' },
-      { no: 14, author: '南城以殇', content: '他爸爸是青山市公安局局长，他的大舅二舅是副局长。' },
-      { no: 15, author: '山海皆可平', content: '青山市的天还能再黑点吗。' },
-      { no: 16, author: '青柠不酸', content: '有这种人在那我们学习还有什么意义？' },
-      { no: 17, author: '南城以殇', content: '争取爬到比他们更高的位置整治他们呗。' }
-    ]
-  },
-
-  {
-    id: 117, page:1, _order:105,
-    title: '关于给予林圻同学记大过处分的通告',
-    excerpt: '经查，一年七班学生林圻，于2025年10月13日，违反学校学生管理规定，私自携带手机（违禁品名称）进入校园，被学校安全检查人员查获。',
-    author: '论坛管理员', category: '公告通知',
-    replies: 0, views: 6180, time: '2025年10月14日', likes: 0,
-    hidden: true, hasDetail: true, keywords: ['林圻'],
-    floors: [
-      { no: 1, author: '论坛管理员', content:
-`关于给予林圻同学记大过处分的通告
-
-青山市实验中学〔2025〕09号
-
-全校各班级、全体师生：
-
-经查，一年七班学生林圻，于2025年10月13日，违反学校学生管理规定，私自携带手机（违禁品名称）进入校园，被学校安全检查人员查获。
-
-该生行为严重违反了《青山市实验中学学生管理规定》第七条及《青山市实验中学学生住宿管理办法》第八条之规定，性质严重，影响恶劣。为严肃校纪校规，教育本人，警示他人，经学校学生工作处研究并报校领导批准，决定给予林圻同学以下处理：
-
-1. 给予林圻同学记大过处分，处分期限为12个月，记入本人学籍档案；
-2. 对林圻同学予以全校通报批评；
-3. 根据《青山市实验中学家庭经济困难学生资助管理办法》第3条之规定，取消林圻同学贫困生资助资格，自本通告发布之日起执行，已发放的资助款项按学校相关规定处理。
-
-希望全体同学引以为戒，严格遵守学校各项规章制度，不得携带任何违禁物品进入校园，自觉维护校园安全稳定。各班级要进一步加强安全教育和管理，杜绝此类事件再次发生。
-
-特此通告。
-
-青山市实验中学学生工作处
-2025年10月14日` }
-    ]
-  },
-
-  {
-    id: 118, page:1, _order:106,
-    title: '青山市实验高中贫困生补助名单',
-    excerpt: '青山市实验高中 2026-2027 学年度贫困生补助名单。制表部门：学生处 制表日期：2025年10月 编号：QSSY-2025-BZ-006',
-    author: '论坛管理员', category: '公告通知',
-    replies: 0, views: 7410, time: '2025年10月15日', likes: 0,
-    hidden: true, hasDetail: true, keywords: ['林圻'],
-    fileLink: '青山市实验高中贫困生补助名单.xlsx',
-    floors: [ { no: 1, author: '论坛管理员', content: '' } ]
-  }
-];
-
-/* ================= 私密帖子数据 ================= */
+/* ================= 私密帖数据 ================= */
 const privatePosts = [
   {
     id: 'private-1',
@@ -1976,85 +661,28 @@ const privatePosts = [
   }
 ];
 
-/* ================= 通用配置 ================= */
-const users = [
-  { name:'追风少年', desc:'今天也在刷题', online:true },
-  { name:'摄影社小林', desc:'分享校园日常', online:true },
-  { name:'物理课代表', desc:'笔记搬运工', online:true },
-  { name:'干饭第一名', desc:'食堂测评中', online:true },
-  { name:'阿哲', desc:'建模社招新中', online:false }
-];
-
-const categories = ['全部','公告通知','学习交流','校园生活','社团活动','二手市场','求助问答'];
-const BOLD_NAMES = ['常峻硕', '王乐韦', '高梓睿', '刘子轩', '林圻'];
-
 /* ================= 工具函数 ================= */
-const palette = ['#a81818','#c81e1e','#8a1010','#e04444','#7a1414','#a02020','#601010','#d03030'];
-
-function avatarColor(name){
-  let h = 0;
-  for (const c of name) h = (h * 31 + c.charCodeAt(0)) >>> 0;
-  return palette[h % palette.length];
-}
-
 function escapeHTML(str){
   return String(str).replace(/[&<>"']/g, s => ({
     '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
   }[s]));
 }
 
-function escapeRegExp(s){
-  return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-}
-
-function highlight(text, q){
-  const safe = escapeHTML(text);
-  if (!q) return safe;
-  const kw = escapeRegExp(escapeHTML(q));
-  if (!kw) return safe;
-  return safe.replace(new RegExp('(' + kw + ')', 'gi'), '<mark>$1</mark>');
-}
-
-function boldNames(escapedText){
-  let out = escapedText;
-  BOLD_NAMES.forEach(n => {
-    const safeName = escapeHTML(n);
-    out = out.split(safeName).join('<strong>' + safeName + '</strong>');
-  });
-  return out;
-}
-
 function renderFloors(p){
   if (!p.floors || !p.floors.length) return '';
 
   const items = p.floors.map(f => {
-    const isOp = f.author === p.author;
-
-    const imageHTML = (f.image && f.image.trim())
-      ? `<div class="floor-image"><img src="${escapeHTML(f.image)}" alt="配图" loading="lazy"></div>`
-      : '';
-
-    let contentHTML;
-    if (p.fileLink) {
-      contentHTML = `<a href="${escapeHTML(p.fileLink)}" target="_blank" rel="noopener" style="color:var(--red-700);text-decoration:underline;">${escapeHTML(p.fileLink)}</a>`;
-    } else {
-      contentHTML = escapeHTML(f.content);
-      if (p.boldNames){
-        contentHTML = boldNames(contentHTML);
-      }
-    }
-
     const contentClass = f.shake ? 'floor-content shake-content' : 'floor-content';
+    const contentHTML = escapeHTML(f.content);
 
     return `
       <div class="floor">
         <div class="floor-head">
           <span class="floor-no">${f.no}F</span>
           <span class="floor-author">${escapeHTML(f.author)}</span>
-          ${isOp ? '<span class="floor-tag">楼主</span>' : ''}
+          <span class="floor-tag">楼主</span>
         </div>
         <div class="${contentClass}">${contentHTML}</div>
-        ${imageHTML}
       </div>
     `;
   }).join('');
@@ -2067,361 +695,14 @@ function renderFloors(p){
   `;
 }
 
-/* ================= 状态 ================= */
-const TOTAL_PAGES = 3;
-const state = { cat:'全部', page:1 };
+/* ================= 渲染私密帖列表 ================= */
+const listView = document.getElementById('mainView');
+const detailView = document.getElementById('detailView');
+const privatePostsEl = document.getElementById('privatePosts');
+const detailContent = document.getElementById('detailContent');
+const backToList = document.getElementById('backToList');
 
-/* ================= 分类 ================= */
-const catsEl = document.getElementById('cats');
-catsEl.innerHTML = categories.map(c => {
-  const isAll = c === '全部';
-  return `<button class="cat-btn${isAll ? ' active' : ''}" data-cat="${c}" ${isAll ? '' : 'disabled'}>${c}</button>`;
-}).join('');
-
-catsEl.addEventListener('click', e => {
-  const btn = e.target.closest('.cat-btn');
-  if (!btn || btn.disabled) return;
-  state.cat = btn.dataset.cat;
-  state.page = 1;
-  renderHome();
-});
-
-/* ================= 帖子卡片 ================= */
-function postCardHTML(p, q){
-  const hl = t => highlight(t, q);
-
-  const canDetail = !!p.hasDetail;
-  const href = canDetail ? `#/post?id=${p.id}` : '#';
-  const cls  = canDetail ? 'post clickable' : 'post';
-  const detailAttr = canDetail ? ' data-detail="1"' : '';
-
-  return `
-    <article class="${cls}" data-post-id="${p.id}"${detailAttr}>
-      <div class="avatar" style="background:${avatarColor(p.author)}">${escapeHTML(p.author[0])}</div>
-      <div class="post-main">
-        <div class="post-title">
-          ${p.top ? '<span class="badge badge-top">置顶</span>' : ''}
-          ${p.essence ? '<span class="badge badge-essence">精华</span>' : ''}
-          ${p.hot ? '<span class="badge badge-hot">热</span>' : ''}
-          <a href="${href}">${hl(p.title)}</a>
-        </div>
-        <div class="post-meta">
-          <span class="cat">${escapeHTML(p.category)}</span>
-          <span>${escapeHTML(p.author)}</span>
-          <span>${escapeHTML(p.time)}</span>
-        </div>
-      </div>
-      <div class="post-stats">
-        <span><b>${p.replies}</b> 回复</span>
-        <span><b>${p.views}</b> 浏览</span>
-        <button class="like" data-id="${p.id}">
-          <span class="heart">♡</span><span class="num">${p.likes}</span>
-        </button>
-      </div>
-    </article>
-  `;
-}
-
-/* ================= 首页渲染 ================= */
-const postListEl = document.getElementById('postList');
-
-function renderHome(){
-  let list = posts.filter(p => !p.hidden && p.page === state.page);
-  if (state.cat !== '全部') list = list.filter(p => p.category === state.cat);
-
-  list.sort((a, b) => {
-    const topDiff = (b.top ? 1 : 0) - (a.top ? 1 : 0);
-    if (topDiff !== 0) return topDiff;
-    return a._order - b._order;
-  });
-
-  if (!list.length){
-    postListEl.innerHTML = `<div class="empty">😶 本页暂时没有相关帖子</div>`;
-  } else {
-    postListEl.innerHTML = list.map(p => postCardHTML(p, '')).join('');
-  }
-
-  updatePager();
-}
-
-/* ================= 分页 ================= */
-const pagerEl = document.getElementById('pager');
-
-function updatePager(){
-  pagerEl.querySelectorAll('button[data-page]').forEach(btn => {
-    const v = btn.dataset.page;
-    if (v === 'prev' || v === 'next') return;
-    btn.classList.toggle('on', Number(v) === state.page);
-  });
-}
-
-pagerEl.addEventListener('click', e => {
-  const btn = e.target.closest('button[data-page]');
-  if (!btn) return;
-
-  const v = btn.dataset.page;
-
-  if (v === 'prev'){
-    state.page = Math.max(1, state.page - 1);
-  } else if (v === 'next'){
-    state.page = Math.min(TOTAL_PAGES, state.page + 1);
-  } else {
-    state.page = Number(v);
-  }
-
-  renderHome();
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-});
-
-/* ================= 活跃用户 ================= */
-document.getElementById('userList').innerHTML = users.map(u => `
-  <div class="user-row">
-    <div class="avatar" style="background:${avatarColor(u.name)}">${escapeHTML(u.name[0])}</div>
-    <div>
-      <div class="u-name">${escapeHTML(u.name)}</div>
-      <div class="u-desc">${escapeHTML(u.desc)}</div>
-    </div>
-    ${u.online ? '<span class="dot"></span>' : ''}
-  </div>
-`).join('');
-
-/* ================= Toast ================= */
-const toastEl = document.getElementById('toast');
-let toastTimer;
-function toast(msg){
-  toastEl.textContent = msg;
-  toastEl.classList.add('show');
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => toastEl.classList.remove('show'), 2200);
-}
-
-/* ================= 闪屏 ================= */
-const flashEl = document.getElementById('screenFlash');
-function triggerFlash(callback){
-  flashEl.classList.remove('active');
-  void flashEl.offsetWidth;
-  flashEl.classList.add('active');
-  setTimeout(() => { if (callback) callback(); }, 380);
-  setTimeout(() => { flashEl.classList.remove('active'); }, 750);
-}
-
-/* ================= 发帖按钮 ================= */
-document.querySelectorAll('[data-dev]').forEach(b =>
-  b.addEventListener('click', () => toast('🚧 发帖功能正在开发中～'))
-);
-
-/* ================= 点赞 ================= */
-document.addEventListener('click', e => {
-  const btn = e.target.closest('.like');
-  if (!btn) return;
-  e.preventDefault();
-  e.stopPropagation();
-
-  const post = posts.find(p => p.id === Number(btn.dataset.id));
-  if (!post) return;
-
-  const active = btn.classList.toggle('active');
-  post.likes += active ? 1 : -1;
-
-  document.querySelectorAll('.like[data-id="' + post.id + '"]').forEach(b => {
-    b.classList.toggle('active', active);
-    b.querySelector('.heart').textContent = active ? '♥' : '♡';
-    b.querySelector('.num').textContent = post.likes;
-  });
-});
-
-/* ================= 进入详情 ================= */
-document.addEventListener('click', e => {
-  if (e.target.closest('.like')) return;
-  if (e.target.closest('.pager')) return;
-
-  const card = e.target.closest('.post[data-detail]');
-  if (!card) return;
-
-  location.hash = '#/post?id=' + card.dataset.postId;
-});
-
-/* ================= 拦截 href="#" ================= */
-document.addEventListener('click', e => {
-  const a = e.target.closest('a[href="#"]');
-  if (a) e.preventDefault();
-});
-
-/* ================= 搜索匹配 ================= */
-function matchPost(p, ql){
-  if (p.hidden){
-    if (!p.keywords || !p.keywords.length) return false;
-    return p.keywords.some(k => k.toLowerCase() === ql);
-  }
-  return p.title.toLowerCase().includes(ql) ||
-         p.excerpt.toLowerCase().includes(ql) ||
-         p.author.toLowerCase().includes(ql) ||
-         p.category.toLowerCase().includes(ql);
-}
-
-/* ================= 视图切换 ================= */
-const homeView      = document.getElementById('homeView');
-const searchView    = document.getElementById('searchView');
-const postView      = document.getElementById('postView');
-const postDetail    = document.getElementById('postDetail');
-const searchResults = document.getElementById('searchResults');
-const searchMeta    = document.getElementById('searchMeta');
-const searchForm    = document.getElementById('searchForm');
-const searchInput   = document.getElementById('searchInput');
-
-function hideAllViews(){
-  homeView.style.display   = 'none';
-  searchView.style.display = 'none';
-  postView.style.display   = 'none';
-}
-
-function showHome(){
-  hideAllViews();
-  homeView.style.display = '';
-  document.title = '青山实中论坛 · 私密频道';
-}
-
-function showSearch(q){
-  hideAllViews();
-  searchView.style.display = 'block';
-  searchInput.value = q;
-
-  const ql = q.trim().toLowerCase();
-  let list = [];
-  if (ql) list = posts.filter(p => matchPost(p, ql));
-
-  list.sort((a, b) => {
-    const topDiff = (b.top ? 1 : 0) - (a.top ? 1 : 0);
-    if (topDiff !== 0) return topDiff;
-    return a._order - b._order;
-  });
-
-  if (!list.length){
-    searchMeta.innerHTML = `关键词 <b>“${escapeHTML(q)}”</b> · 共 0 条结果`;
-    searchResults.innerHTML = `<div class="empty">😶 没有找到相关帖子，换个关键词试试吧</div>`;
-  } else {
-    searchMeta.innerHTML = `关键词 <b>“${escapeHTML(q)}”</b> · 共 ${list.length} 条结果`;
-    searchResults.innerHTML = list.map(p => postCardHTML(p, q)).join('');
-  }
-
-  document.title = `“${q}” 的搜索结果 · 青山实中论坛`;
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-function showPost(id){
-  hideAllViews();
-  postView.style.display = 'block';
-
-  const p = posts.find(x => x.id === Number(id));
-
-  if (!p || !p.hasDetail){
-    postDetail.innerHTML = `<div class="not-found"><b>帖子不存在</b>该帖子可能已被删除或链接有误</div>`;
-    document.title = '帖子不存在 · 青山实中论坛';
-    return;
-  }
-
-  const floorsHTML = renderFloors(p);
-
-  postDetail.innerHTML = `
-    <article class="detail">
-      <div class="detail-head">
-        <div class="avatar" style="background:${avatarColor(p.author)}">${escapeHTML(p.author[0])}</div>
-        <div class="dh-main">
-          <h1 class="detail-title">
-            ${p.top ? '<span class="badge badge-top">置顶</span>' : ''}
-            ${p.essence ? '<span class="badge badge-essence">精华</span>' : ''}
-            ${p.hot ? '<span class="badge badge-hot">热</span>' : ''}
-            ${escapeHTML(p.title)}
-          </h1>
-          <div class="post-meta">
-            <span class="cat">${escapeHTML(p.category)}</span>
-            <span>楼主：${escapeHTML(p.author)}</span>
-            <span>${escapeHTML(p.time)}</span>
-          </div>
-        </div>
-      </div>
-
-      ${floorsHTML}
-
-      <div class="detail-foot">
-        <span><b>${p.replies}</b> 回复 · <b>${p.views}</b> 浏览</span>
-        <button class="like" data-id="${p.id}">
-          <span class="heart">♡</span><span class="num">${p.likes}</span>
-        </button>
-      </div>
-    </article>
-  `;
-
-  document.title = p.title + ' · 青山实中论坛';
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-/* ================= 路由 ================= */
-function route(){
-  const hash = location.hash || '';
-
-  let m = hash.match(/^#\/search(?:\?(.*))?$/);
-  if (m){
-    const params = new URLSearchParams(m[1] || '');
-    showSearch(params.get('q') || '');
-    return;
-  }
-
-  m = hash.match(/^#\/post(?:\?(.*))?$/);
-  if (m){
-    const params = new URLSearchParams(m[1] || '');
-    showPost(params.get('id') || '');
-    return;
-  }
-
-  showHome();
-}
-
-window.addEventListener('hashchange', route);
-
-/* ================= 搜索提交 ================= */
-searchForm.addEventListener('submit', e => {
-  e.preventDefault();
-  const q = searchInput.value.trim();
-
-  if (!q){
-    toast('请输入搜索关键词～');
-    return;
-  }
-
-  const target = '#/search?q=' + encodeURIComponent(q);
-
-  if (q === '常峻硕' || q === '高梓睿'){
-    triggerFlash(() => {
-      if (location.hash === target){
-        showSearch(q);
-      } else {
-        location.hash = target;
-      }
-    });
-    return;
-  }
-
-  if (location.hash === target){
-    showSearch(q);
-  } else {
-    location.hash = target;
-  }
-});
-
-/* ================= 私密帖子面板 ================= */
-const privateMask      = document.getElementById('privateMask');
-const privateBack      = document.getElementById('privateBack');
-const privateBackToList= document.getElementById('privateBackToList');
-const userAvatar       = document.getElementById('userAvatar');
-const privateListView  = document.getElementById('privateListView');
-const privateDetailView= document.getElementById('privateDetailView');
-const privatePostsEl   = document.getElementById('privatePosts');
-const privateDetailTitle = document.getElementById('privateDetailTitle');
-const privateDetailContent = document.getElementById('privateDetailContent');
-
-/* 渲染私密帖子列表 */
-function renderPrivateList(){
+function renderList(){
   privatePostsEl.innerHTML = privatePosts.map(p => `
     <article class="private-post" data-pid="${p.id}">
       <div class="private-post-lock">
@@ -2435,21 +716,19 @@ function renderPrivateList(){
         <div class="private-post-title">${escapeHTML(p.title)}</div>
         <div class="private-post-meta">
           <span class="cat">${escapeHTML(p.category)}</span>
-          <span>${escapeHTML(p.author)}</span>
           <span>${escapeHTML(p.time)}</span>
           <span class="replies">${p.floors.length - 1} 回复</span>
         </div>
       </div>
+      <div class="private-post-arrow">›</div>
     </article>
   `).join('');
 }
 
-/* 渲染私密帖子详情 */
-function renderPrivateDetail(pid){
+/* ================= 渲染私密帖详情 ================= */
+function renderDetail(pid){
   const p = privatePosts.find(x => x.id === pid);
   if (!p) return;
-
-  privateDetailTitle.textContent = p.title;
 
   const choiceHTML = p.showChoiceBtn
     ? `
@@ -2460,27 +739,34 @@ function renderPrivateDetail(pid){
     `
     : '';
 
-  privateDetailContent.innerHTML = `
-    <div class="private-detail-inner">
-      <div class="detail-head">
-        <div class="avatar" style="background:${avatarColor(p.author)}">${escapeHTML(p.author[0])}</div>
-        <div class="dh-main">
-          <h1 class="detail-title">${escapeHTML(p.title)}</h1>
-          <div class="post-meta">
-            <span class="cat">${escapeHTML(p.category)}</span>
-            <span>楼主：${escapeHTML(p.author)}</span>
-            <span>${escapeHTML(p.time)}</span>
-          </div>
+  detailContent.innerHTML = `
+    <div class="detail-head">
+      <div class="avatar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+          <circle cx="12" cy="7" r="4"/>
+        </svg>
+      </div>
+      <div class="dh-main">
+        <h1 class="detail-title">${escapeHTML(p.title)}</h1>
+        <div class="post-meta">
+          <span class="cat">${escapeHTML(p.category)}</span>
+          <span>楼主：${escapeHTML(p.author)}</span>
+          <span>${escapeHTML(p.time)}</span>
         </div>
       </div>
-      ${renderFloors(p)}
-      ${choiceHTML}
     </div>
+    ${renderFloors(p)}
+    <div class="detail-foot">
+      <span><b>${p.floors.length}</b> 层回复</span>
+      <span>仅自己可见</span>
+    </div>
+    ${choiceHTML}
   `;
 
-  privateListView.style.display   = 'none';
-  privateDetailView.style.display = 'flex';
-  privateDetailContent.scrollTop = 0;
+  listView.style.display = 'none';
+  detailView.classList.add('show');
+  window.scrollTo(0, 0);
 
   const choiceBtn = document.getElementById('choiceBtn');
   if (choiceBtn){
@@ -2490,85 +776,22 @@ function renderPrivateDetail(pid){
   }
 }
 
-function showPrivateList(){
-  privateDetailView.style.display = 'none';
-  privateListView.style.display   = 'flex';
-}
-
-function openPrivate(){
-  showPrivateList();
-  privateMask.classList.add('show');
-  document.body.style.overflow = 'hidden';
-}
-
-function closePrivate(){
-  privateMask.classList.remove('show');
-  document.body.style.overflow = '';
-  showPrivateList();
-}
-
-userAvatar.addEventListener('click', openPrivate);
-privateBack.addEventListener('click', closePrivate);
-privateBackToList.addEventListener('click', showPrivateList);
-
+/* ================= 事件绑定 ================= */
 privatePostsEl.addEventListener('click', e => {
   const card = e.target.closest('.private-post');
   if (!card) return;
-  renderPrivateDetail(card.dataset.pid);
+  renderDetail(card.dataset.pid);
 });
 
-privateMask.addEventListener('click', e => {
-  if (e.target === privateMask) closePrivate();
-});
-
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape' && privateMask.classList.contains('show')){
-    if (privateDetailView.style.display !== 'none'){
-      showPrivateList();
-    } else {
-      closePrivate();
-    }
-  }
-});
-
-/* ================= 返回时刷新页面 ================= */
-
-/* 1) 浏览器后退 / 前进按钮 → 刷新页面 */
-window.addEventListener('popstate', () => {
-  location.reload();
-});
-
-/* 2) 页面内所有“返回”操作 → 先导航（设置 hash），再刷新页面 */
-document.addEventListener('click', e => {
-  /* 顶部返回链接（搜索视图“返回首页” / 帖子详情“返回”） */
-  const link = e.target.closest('a.back-link');
-  if (link){
-    const href = link.getAttribute('href') || '';
-
-    /* 帖子详情用的是 history.back()，由 popstate 触发刷新，这里放行 */
-    if (href === 'javascript:history.back()'){
-      return;
-    }
-
-    /* 其余 hash 返回链接：设置 hash 后强制刷新 */
-    if (href.startsWith('#')){
-      e.preventDefault();
-      location.hash = href;
-      location.reload();
-      return;
-    }
-  }
-
-  /* 私密面板「返回论坛」按钮：先关闭面板，再刷新页面 */
-  if (e.target.closest('#privateBack')){
-    setTimeout(() => location.reload(), 30);
-  }
+backToList.addEventListener('click', () => {
+  detailView.classList.remove('show');
+  listView.style.display = '';
+  window.scrollTo(0, 0);
 });
 
 /* ================= 初始化 ================= */
-renderHome();
-renderPrivateList();
-route();
+renderList();
 </script>
+
 </body>
 </html>
