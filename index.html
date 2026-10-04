@@ -34,12 +34,10 @@
     display:grid;place-items:center;color:#fff;box-shadow:0 6px 14px -6px rgba(27,127,91,.7)}
   .logo-text{font-size:18px;font-weight:700;letter-spacing:.4px;white-space:nowrap}
   .logo-text small{display:block;font-size:10px;font-weight:500;color:var(--muted);letter-spacing:1.6px}
-
   .nav{display:flex;gap:4px;margin-left:8px}
   .nav a{padding:8px 12px;border-radius:9px;font-size:14.5px;color:#42564e;transition:.18s}
   .nav a:hover{background:var(--green-50);color:var(--green-700)}
   .nav a.active{color:var(--green-700);font-weight:600;background:var(--green-100)}
-
   .header-right{margin-left:auto;display:flex;align-items:center;gap:10px;min-width:0}
   .search{display:flex;align-items:center;gap:8px;background:#f0f4f2;border:1px solid transparent;
     padding:8px 14px;border-radius:999px;transition:.2s;width:250px}
@@ -49,7 +47,6 @@
   .search-btn:hover{color:var(--green-600)}
   .search input{border:none;background:none;width:100%;font-size:14px;color:var(--ink)}
   .search input::placeholder{color:#9db0a8}
-
   .btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;
     padding:9px 18px;border-radius:10px;font-size:14px;font-weight:600;transition:.2s;white-space:nowrap}
   .btn-ghost{color:#42564e}
@@ -121,7 +118,6 @@
   .hero-stat small{font-size:12px;color:rgba(255,255,255,.72)}
 
   .layout{display:grid;grid-template-columns:minmax(0,1fr) 316px;gap:22px;padding:26px 0 56px}
-
   .toolbar{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
     padding:14px 16px;box-shadow:var(--shadow);display:flex;align-items:center;gap:12px;flex-wrap:wrap}
   .cats{display:flex;gap:6px;flex-wrap:wrap;flex:1}
@@ -137,42 +133,16 @@
   .post{display:flex;gap:14px;align-items:center;background:var(--card);border:1px solid var(--line);
     border-radius:var(--radius);padding:16px 18px;box-shadow:var(--shadow);cursor:default}
   .post.clickable{cursor:pointer}
-  /* 讣告帖 · 灰白褪色 */
-  .post.dying{
-    border-color:#c8c8c8;
-    background:linear-gradient(180deg,#fafafa,#f2f2f2);
-    filter:grayscale(.55);
-    box-shadow:0 1px 2px rgba(0,0,0,.04), 0 8px 20px -16px rgba(0,0,0,.2);
-  }
-  .post.dying:hover{
-    filter:grayscale(.3);
-    border-color:#a8a8a8;
-  }
-  .post.dying .post-title a{
-    color:#666;
-    font-weight:600;
-    letter-spacing:.5px;
-  }
-  .post.dying .avatar{
-    filter:grayscale(1);
-    opacity:.7;
-    box-shadow:none;
-  }
-  .post.dying .post-meta .cat{
-    background:#efefef;
-    color:#888;
-  }
-  .post.dying .post-stats b{
-    color:#999;
-    font-weight:500;
-  }
-  .post.dying .like{
-    color:#aaa;
-  }
-  .post.dying .like:hover{
-    background:#e8e8e8;
-    color:#888;
-  }
+  .post.dying{border-color:#c8c8c8;background:linear-gradient(180deg,#fafafa,#f2f2f2);
+    filter:grayscale(.55);box-shadow:0 1px 2px rgba(0,0,0,.04), 0 8px 20px -16px rgba(0,0,0,.2)}
+  .post.dying:hover{filter:grayscale(.3);border-color:#a8a8a8}
+  .post.dying .post-title a{color:#666;font-weight:600;letter-spacing:.5px}
+  .post.dying .avatar{filter:grayscale(1);opacity:.7;box-shadow:none}
+  .post.dying .post-meta .cat{background:#efefef;color:#888}
+  .post.dying .post-stats b{color:#999;font-weight:500}
+  .post.dying .like{color:#aaa}
+  .post.dying .like:hover{background:#e8e8e8;color:#888}
+
   .avatar{width:42px;height:42px;border-radius:12px;flex-shrink:0;
     display:grid;place-items:center;color:#fff;font-weight:600;font-size:16px;
     box-shadow:inset 0 -10px 20px -12px rgba(0,0,0,.4)}
@@ -235,14 +205,31 @@
   .floor-tag{font-size:10.5px;font-weight:700;color:#fff;background:var(--green-500);
     padding:1px 7px;border-radius:6px}
   .floor-content{font-size:14px;color:#33473f;line-height:1.9;white-space:pre-line;word-break:break-word}
-  .floor-content strong{font-weight:700;color:#0f1e17}
+  .floor-content strong{font-weight:700;color:#0f1e17;background:linear-gradient(180deg,transparent 60%, #ffe9a8 60%);
+    padding:0 2px;border-radius:2px}
   .floor-image{margin-top:10px;max-width:260px;border-radius:10px;overflow:hidden;
     border:1px solid var(--line);background:#f4f7f5}
   .floor-image img{display:block;width:100%;height:auto}
 
+  .file-link{display:inline-flex;align-items:center;gap:8px;
+    color:var(--green-700);text-decoration:underline;font-weight:600;
+    padding:6px 0;font-size:14px}
+  .file-link::before{content:"📎";font-size:14px;text-decoration:none}
+  .file-link:hover{color:var(--green-600)}
+
   .detail-foot{margin-top:26px;padding-top:18px;border-top:1px solid var(--line);
     display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;
     font-size:12.5px;color:#8ea29a}
+  .official-link{
+    display:inline-flex;align-items:center;gap:6px;
+    color:var(--green-700);font-size:12.5px;font-weight:600;
+    padding:6px 12px;border-radius:8px;
+    background:var(--green-50);border:1px solid rgba(34,160,107,.18);
+    transition:.18s;
+  }
+  .official-link:hover{background:var(--green-100);border-color:rgba(34,160,107,.4);transform:translateX(2px)}
+  .official-link::before{content:"🏫";font-size:12px}
+
   .not-found{text-align:center;padding:70px 20px;color:var(--muted);
     background:var(--card);border:1px dashed var(--line);border-radius:var(--radius)}
   .not-found b{display:block;font-size:16px;color:#3d554b;margin-bottom:6px}
@@ -288,6 +275,25 @@
     color:var(--muted);font-size:13px}
   .site-footer .f-links{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin-bottom:10px}
   .site-footer .f-links a:hover{color:var(--green-600)}
+
+  /* ★ 首页底部学校官网小字 */
+  .school-hint{
+    margin-top:14px;
+    padding-top:14px;
+    border-top:1px dashed var(--line);
+  }
+  .school-hint a{
+    font-size:11.5px;
+    letter-spacing:.5px;
+    color:#9db0a8;
+    transition:.2s;
+    border-bottom:1px dashed transparent;
+    padding-bottom:1px;
+  }
+  .school-hint a:hover{
+    color:var(--green-600);
+    border-bottom-color:var(--green-500);
+  }
 
   .toast{position:fixed;left:50%;bottom:34px;z-index:200;transform:translate(-50%,18px);
     background:var(--green-900);color:#fff;padding:12px 24px;border-radius:999px;font-size:13.5px;
@@ -491,7 +497,8 @@
           <div class="hot-item"><span class="no">2</span><a href="#">高二数学圆锥曲线大题有没有通用思路？</a></div>
           <div class="hot-item"><span class="no">3</span><a href="#">校运会照片合集｜青春就是要燃起来</a></div>
           <div class="hot-item"><span class="no">4</span><a href="#">求组队｜数学建模社招新啦，还差两位队友</a></div>
-          <div class="hot-item"><span class="no">5</span><a href="#">英语听力总是跟不上怎么办？</a></div>
+          <div class="hot-item"><span class="no">5</span><a href="#">打听一个二年级的漂亮小姑娘</a></div>
+          <div class="hot-item"><span class="no">6</span><a href="#">英语听力总是跟不上怎么办？</a></div>
         </div>
       </div>
       <div class="card">
@@ -540,6 +547,10 @@
       <a href="#">关于论坛</a><a href="#">版规</a><a href="#">意见反馈</a><a href="#">联系管理员</a>
     </div>
     <div>© 2025 青山实中论坛 · 青山实验中学学生自主运营 · 用心交流，共同成长</div>
+    <!-- ★ 学校官网小字入口 -->
+    <div class="school-hint">
+      <a href="school.html">青山市实验中学 · 官方网站 →</a>
+    </div>
   </div>
 </footer>
 
@@ -548,18 +559,20 @@
 <script>
 /* ================= 数据 ================= */
 const posts = [
+  /* ============ 第 1 页 ============ */
   { id:1, page:1, _order:0, title:'【版规】青山实中论坛发帖规范与新人必读',
-    excerpt:'欢迎来到青山实中论坛！为营造良好的交流氛围，请各位同学在发帖前仔细阅读以下规范。',
+    excerpt:'欢迎来到青山实中论坛！为营造良好的交流氛围，请各位同学在发帖前仔细阅读以下规范，共建友善、理性的讨论环境。',
     author:'论坛管理员', category:'公告通知', replies:236, views:15820, time:'3月1日', top:true, likes:512 },
 
   { id:6, page:1, _order:1, title:'食堂三楼新开的麻辣香锅好吃吗？在线等',
-    excerpt:'看朋友圈好多人去打卡，但排队好像很久，有吃过的同学说说味道怎么样？',
+    excerpt:'看朋友圈好多人去打卡，但排队好像很久，有吃过的同学说说味道怎么样，值不值得去？',
     author:'干饭第一名', category:'校园生活', replies:89, views:2417, time:'5小时前', hot:true, likes:156 },
 
   { id:2, page:1, _order:2, title:'高二数学圆锥曲线大题有没有通用思路？求大佬指点',
-    excerpt:'最近刷题总是卡在第二问，有没有总结好的方法或者笔记可以推荐？',
+    excerpt:'最近刷题总是卡在第二问，特别是求定值、定点那一类，有没有总结好的方法或者笔记可以推荐？',
     author:'追风少年', category:'学习交流', replies:48, views:1263, time:'12分钟前', hot:true, likes:67 },
 
+  /* ===== 羽毛球拍 · 埋常峻硕 + 青山市实验中学 ===== */
   { id:101, page:1, _order:3,
     title: '买了副羽毛球拍，卖家第二天自杀了，钱该要回来吗',
     excerpt: '我在别人那里买了一副羽毛球拍，钱都已经转给他了，结果第二天他就自杀了，我该把钱要回来吗？',
@@ -581,16 +594,16 @@ const posts = [
       { no: 13, author: '旧巷南栀', content: '那就更让人难受了……为了66块钱的东西，人就没了。' },
       { no: 14, author: '浩瀚的林', content: '你们别乱猜了，我也不知道到底是怎么回事。' },
       { no: 15, author: '青栀如初', content: '楼主你先别急，你确定他自杀跟这66块钱有关系吗？还是有别的原因？' },
-      { no: 16, author: '浩瀚的林', content: '我不知道。我是第二天想去问他球拍的事，才发现他账号注销了。' },
+      { no: 16, author: '浩瀚的林', content: '我不知道。我是第二天想去问他球拍的事，才发现他账号注销了，后来听群里人说他不在了。' },
       { no: 17, author: '浅笑心柔', content: '那跟你的钱可能也没什么直接关系，但这事确实挺让人唏嘘的。' },
-      { no: 18, author: '暮色孤舟', content: '我建议你联系一下他的同学或者老师，看能不能找到他家里人。' },
+      { no: 18, author: '暮色孤舟', content: '我建议你联系一下他的同学或者老师，看能不能找到他家里人，把这事说一下。' },
       { no: 19, author: '温酒叙余生', content: '对，但你要注意措辞，别让人家觉得你是在追债。' },
       { no: 20, author: '南风知我意', content: '说实话，如果是我的话，我可能就不要了。人都没了，66块钱真的不算什么。' },
       { no: 21, author: '长安烟火', content: '我也觉得，这种事还是看开点吧。' },
       { no: 22, author: '故人叹',   content: '楼主你如果实在想要，我帮你打听打听常峻硕是哪个班的。' },
-      { no: 23, author: '白衣渡江', content: '楼上好人，我也帮你问问。' },
-      { no: 24, author: '墨染青衣', content: '楼主，你要是去联系他家里人，最好找个中间人一起去。' },
-      { no: 25, author: '浩瀚的林', content: '谢谢大家，我想了想，还是算了吧。就当是给常峻硕随了个份子。' }
+      { no: 23, author: '白衣渡江', content: '楼上好人，我也帮你问问。不过说实话，我觉得这钱八成是要不回来了。' },
+      { no: 24, author: '墨染青衣', content: '楼主，你要是去联系他家里人，最好找个中间人一起去，别自己一个人上门，免得尴尬。' },
+      { no: 25, author: '浩瀚的林', content: '谢谢大家，我想了想，还是算了吧。就当是给常峻硕随了个份子，希望他在那边一切都好。' }
     ]
   },
 
@@ -599,7 +612,7 @@ const posts = [
     author:'广播站', category:'社团活动', replies:41, views:1105, time:'2天前', likes:88 },
 
   { id:3, page:1, _order:5, title:'校运会照片合集｜青春就是要燃起来',
-    excerpt:'这次秋季运动会拍了两千多张照片，需要原图的同学可以在评论区留下邮箱～',
+    excerpt:'这次秋季运动会拍了两千多张照片，先挑一部分发出来，需要原图的同学可以在评论区留下邮箱～',
     author:'摄影社小林', category:'校园生活', replies:126, views:3894, time:'1小时前', essence:true, hot:true, likes:389 },
 
   { id:7, page:1, _order:6, title:'英语听力总是跟不上怎么办',
@@ -611,21 +624,22 @@ const posts = [
     author: '好奇的小炜', category: '学习交流', replies: 73, views: 2145, time: '2天前', likes: 61 },
 
   { id:5, page:1, _order:7, title:'出二手教辅｜五三、必刷题、英语语法书（九成新）',
-    excerpt:'高三毕业清书柜，价格都很便宜，校内自提，多买可议价。',
+    excerpt:'高三毕业清书柜，价格都很便宜，校内自提，多买可议价，详情见图。',
     author:'毕业的学长', category:'二手市场', replies:56, views:1892, time:'3小时前', likes:44 },
 
   { id:10, page:1, _order:8, title:'图书馆自习室周末开放时间调整通知',
-    excerpt:'自本周起，图书馆自习室周末开放时间调整为 8:00—21:00。',
+    excerpt:'自本周起，图书馆自习室周末开放时间调整为 8:00—21:00，请大家合理安排时间。',
     author:'教务处', category:'公告通知', replies:12, views:2034, time:'3天前', likes:120 },
 
   { id:4, page:1, _order:9, title:'求组队｜数学建模社招新啦，还差两位队友',
-    excerpt:'准备参加下个月的市级比赛，目前已有三人，还缺一个擅长编程的同学。',
+    excerpt:'准备参加下个月的市级比赛，目前已有三人，还缺一个擅长编程的同学，有意向的私信我！',
     author:'阿哲', category:'社团活动', replies:23, views:645, time:'2小时前', likes:31 },
 
   { id:8, page:1, _order:10, title:'【物理】力学模型总结（附手写笔记扫描版）',
-    excerpt:'整理了高中阶段常见的十二种力学模型，每个模型都配了例题和易错点。',
+    excerpt:'整理了高中阶段常见的十二种力学模型，每个模型都配了例题和易错点，希望对大家有帮助。',
     author:'物理课代表', category:'学习交流', replies:74, views:3120, time:'昨天', essence:true, likes:278 },
 
+  /* ============ 第 2 页 ============ */
   { id:102, page:2, _order:1,
     title: '听说最近有人自杀了，什么情况', excerpt: '听说最近有人自杀了，什么情况？',
     author: '栖景室', category: '校园生活', replies: 10, views: 156, time: '4天前', likes: 18,
@@ -640,12 +654,13 @@ const posts = [
       { no: 7,  author: '南城以殇', content: '不知道，我问了和他俩同寝室的人，他们也不说。' },
       { no: 8,  author: '霏羽聆晞', content: '可能是因为高二学习压力变大了？' },
       { no: 9,  author: '南城以殇', content: '也有可能。我们老师每天都留比别的班多上一倍的作业，每天都要写到凌晨一点，每周还有周测。' },
-      { no: 10, author: '南城以殇', content: '但是就因为这个而自杀我觉得也太不值得了，写不完的作业不写就好了。' },
+      { no: 10, author: '南城以殇', content: '但是就因为这个而自杀我觉得也太不值得了，写不完的作业不写就好了，也没必要在意考试成绩，人生还有许多美丽的风景等着我们去欣赏呢。' },
       { no: 11, author: '霏羽聆晞', content: '楼上说得好有道理！' }
     ]
   },
 
-  { id:31, page:2, _order:2.5,
+  /* ===== 美食帖 · 引向公众号 ===== */
+   { id:31, page:2, _order:2.5,
     title: '学校周边的宝藏美食，你吃过几家？',
     excerpt: '最近挖到好几家学校附近的小店，川菜、烧烤、奶茶都有，学生党友好！还整理了一份本地美食地图，需要的自取～',
     author: '干饭第一名', category: '校园生活', replies: 68, views: 2431, time: '1天前', hot: true, likes: 187,
@@ -653,19 +668,19 @@ const posts = [
     floors: [
       { no:1, author:'干饭第一名', content:'最近挖到好几家学校附近的小店，川菜、烧烤、奶茶都有，学生党友好！还整理了一份本地美食地图，需要的自取～' },
       { no:2, author:'奶茶控',   content:'求具体位置！' },
-      { no:3, author:'干饭第一名', content:'后门那条巷子往里走 50 米，有家川菜馆，水煮鱼绝了。' },
+      { no:3, author:'干饭第一名', content:'嘿嘿，位置有点隐蔽，不太好描述。' },
       { no:4, author:'摄影社小林', content:'有图吗？' },
-      { no:5, author:'干饭第一名', content:'图放在公众号了，论坛传图太麻烦。' },
-      { no:6, author:'倾羽蔓喻', content:'说到美食，我推荐关注公众号【青山宝藏美食】，回复"探店"就能拿到完整美食地图，里面还有个饭店官网，能看到所有店的详情和优惠。' },
+      { no:5, author:'干饭第一名', content:'图我回头整理整理，论坛传图太麻烦了。' },
+      { no:6, author:'倾羽蔓喻', content:'说到美食，我最近发现咱们学校后面那条巷子里藏了不少好吃的，但有几家特别隐蔽，老板也不怎么做宣传，我在想怎么把它们挖出来。' },
       { no:7, author:'臭泡茶的', content:'还有这种好东西？' },
-      { no:8, author:'干饭第一名', content:'已关注，确实不错，公众号里那个官网做得挺用心的。' },
-      { no:9, author:'南巷听风', content:'刚去看了，那家川菜馆叫柳巷食堂，就在育才路后巷，周末就去。' },
+      { no:8, author:'干饭第一名', content:'对，越隐蔽的店越有惊喜。' },
+      { no:9, author:'南巷听风', content:'楼主别卖关子了，回头私下发我呗。' },
       { no:10, author:'早起鸟',  content:'收藏了，谢谢楼主。' }
     ]
   },
 
   { id:17, page:2, _order:3, title:'学校门口新开的奶茶店测评',
-    excerpt:'今天去尝了校门口新开的那家奶茶店，点了招牌芋泥波波，甜度刚好，推荐！',
+    excerpt:'今天去尝了校门口新开的那家奶茶店，点了招牌芋泥波波，甜度刚好，价格也不贵，推荐！',
     author:'奶茶控', category:'校园生活', replies:71, views:2189, time:'6天前', hot:true, likes:134 },
 
   { id:14, page:2, _order:4, title:'篮球场晚上几点关灯啊',
@@ -686,28 +701,49 @@ const posts = [
       { no: 6,  author: '科幻迷', content: '该不会是......' },
       { no: 7,  author: '南巷听风', content: '是什么？' },
       { no: 8,  author: '科幻迷', content: '之前总能听说职高有的女生不小心搞大了肚子，然后在厕所把孩子生出来后直接扔到马桶里丢掉。' },
-      { no: 9,  author: '倾羽蔓喻', content: '这个有意思！我们求真社接了！' },
-      { no: 10, author: '南巷听风', content: '不可能吧，咱们学校可是市里最好的学校了。' },
+      { no: 9,  author: '倾羽蔓喻', content: '这个有意思！我们**求真社**接了！' },
+      { no: 10, author: '南巷听风', content: '不可能吧，咱们学校可是市里最好的学校了，怎么会出现这么道德败坏的人？' },
       { no: 11, author: '阿哲', content: '这种人就是罪该万死！' },
-      { no: 12, author: '南巷听风', content: '今天我又听到了！我好害怕。' },
-      { no: 13, author: '小满', content: '那也太残忍了！' },
-      { no: 14, author: '摄影社小林', content: '要不咱们报警吧！' },
-      { no: 15, author: '倾羽蔓喻', content: '破案了！' },
-      { no: 16, author: '南巷听风', content: '什么破案了？警方介入调查了？' },
-      { no: 17, author: '科幻迷', content: '警察这么有速度？' },
-      { no: 18, author: '倾羽蔓喻', content: '不是，经过我们细心地调查，最终得出了结论。' },
-      { no: 19, author: '南巷听风', content: '什么结论？' },
-      { no: 20, author: '倾羽蔓喻', content: '学校里的流浪猫最近生了一窝小猫，你们听到的哭声应该是小猫的叫声。' },
-      { no: 21, author: '南巷听风', content: '什么嘛，原来只是这样，害我担惊受怕两天。' },
-      { no: 22, author: '阿哲', content: '没有人受伤就好。' },
-      { no: 23, author: '早起鸟', content: '话说之前也有过这事，之前上课总能听到咚咚咚的响声。' },
-      { no: 24, author: '南巷听风', content: '我知道这个，最后其实是工人在修管道吧。' },
-      { no: 25, author: '早起鸟', content: '对。' }
+      { no: 12, author: '南巷听风', content: '今天我又听到了！我好害怕，该不会有人虐待婴儿吧？' },
+      { no: 13, author: '南巷听风', content: '我感觉我昨天说的也有可能。' },
+      { no: 14, author: '小满', content: '那也太残忍了！' },
+      { no: 15, author: '摄影社小林', content: '要不咱们报警吧！' },
+      { no: 16, author: '倾羽蔓喻', content: '破案了！' },
+      { no: 17, author: '南巷听风', content: '什么破案了？警方介入调查了？' },
+      { no: 18, author: '科幻迷', content: '警察这么有速度？' },
+      { no: 19, author: '倾羽蔓喻', content: '不是，经过我们细心地调查，最终得出了结论。' },
+      { no: 20, author: '南巷听风', content: '什么结论？' },
+      { no: 21, author: '倾羽蔓喻', content: '学校里的流浪猫最近生了一窝小猫，你们听到的哭声应该是小猫的叫声。' },
+      { no: 22, author: '南巷听风', content: '什么嘛，原来只是这样，害我担惊受怕两天。' },
+      { no: 23, author: '阿哲', content: '没有人受伤就好。' },
+      { no: 24, author: '早起鸟', content: '话说之前也有过这事，之前上课总能听到咚咚咚的响声，像是在剁骨头。' },
+      { no: 25, author: '南巷听风', content: '我知道这个，最后其实是工人在修管道吧。' },
+      { no: 26, author: '早起鸟', content: '对。' }
+    ]
+  },
+
+  /* ===== 臭泡茶帖（首页可见 · 引王小满） ===== */
+  { id:109, page:2, _order:5.5,
+    title: '打听一个二年级的漂亮小姑娘',
+    excerpt: '求助，理科班第一排那个带绿色发箍的女生叫什么名字啊，我感觉她好好看。',
+    author: '臭泡茶的', category: '求助问答',
+    replies: 7, views: 583, time: '2天前', likes: 26,
+    hasDetail: true,
+    keywords: ['王小满'],
+    floors: [
+      { no: 1, author: '臭泡茶的', content: '求助，理科班第一排那个带绿色发箍的女生叫什么名字啊，我感觉她好好看。' },
+      { no: 2, author: '临东忆',   content: '绿色发箍？是不是头发有点卷、经常穿白色外套那个？我好像有印象。' },
+      { no: 3, author: '墨云遥',   content: '楼主你这是要展开追求了吗？板凳搬好，瓜子备好。' },
+      { no: 4, author: '归鹤隐',   content: '我好像知道，是不是二年七班的？姓王？但我不确定全名。' },
+      { no: 5, author: '南巷听风', content: '建议直接去问，别在这打听，小心被当成变态。' },
+      { no: 6, author: '霏羽聆晞', content: '我对这个人有印象！我之前跟她一个考场，人挺好的，学习也好。' },
+      { no: 7, author: '臭泡茶的', content: '谢谢大家！我就想认识一下，没别的意思，大家别误会。' },
+      { no: 8, author: '臭泡茶的', content: '知道名字的可以邮箱告诉我，我可以用劲爆消息换！我的邮箱：cpcd@jhk.ccwu.cc' }
     ]
   },
 
   { id:11, page:2, _order:6, title:'高二英语角活动报名开始啦',
-    excerpt:'每周五下午放学后在图书馆二楼，外教老师带我们一起练口语。',
+    excerpt:'每周五下午放学后在图书馆二楼，外教老师带我们一起练口语，感兴趣的扫码进群～',
     author:'英语社', category:'社团活动', replies:37, views:912, time:'3天前', likes:73 },
 
   { id:19, page:2, _order:7, title:'关于校服换季的通知',
@@ -715,7 +751,7 @@ const posts = [
     author:'德育处', category:'公告通知', replies:15, views:1876, time:'1周前', likes:56 },
 
   { id:16, page:2, _order:8, title:'出一双全新篮球鞋，42码',
-    excerpt:'网上买大了，全新没穿过，原价600，300出，有需要的私信我。',
+    excerpt:'网上买大了，全新没穿过，原价600，300出，有需要的私信我，可小刀。',
     author:'鞋子太多', category:'二手市场', replies:33, views:891, time:'5天前', likes:27 },
 
   { id:108, page:2, _order:8.5,
@@ -727,25 +763,27 @@ const posts = [
     author:'书虫小陈', category:'学习交流', replies:62, views:1438, time:'4天前', likes:91 },
 
   { id:20, page:2, _order:10, title:'高三学姐的错题本分享',
-    excerpt:'整理了三年的数学错题本，扫描成PDF了，需要的同学留邮箱。',
+    excerpt:'整理了三年的数学错题本，扫描成PDF了，需要的同学留邮箱，我发给你们。',
     author:'毕业的学姐', category:'学习交流', replies:98, views:3562, time:'1周前', essence:true, likes:312 },
 
   { id:18, page:2, _order:11, title:'有一起早起背单词的吗',
-    excerpt:'想找几个同学每天早上6点半在操场边背单词，互相监督。',
+    excerpt:'想找几个同学每天早上6点半在操场边背单词，互相监督，有意向的回复我。',
     author:'早起鸟', category:'学习交流', replies:52, views:1327, time:'6天前', likes:88 },
 
   { id:15, page:2, _order:12, title:'求助：化学实验题总是算错怎么办',
-    excerpt:'每次做化学实验计算题都会在最后一步出错，有没有什么好的检查方法？',
+    excerpt:'每次做化学实验计算题都会在最后一步出错，有没有什么好的检查方法或者练习建议？',
     author:'化学困难户', category:'求助问答', replies:45, views:1120, time:'5天前', likes:58 },
 
   { id:12, page:2, _order:0, title:'关于下周期中考试安排的通知',
-    excerpt:'下周三至周五进行期中考试，具体科目时间安排已发到各班班级群。',
+    excerpt:'下周三至周五进行期中考试，具体科目时间安排已发到各班班级群，请同学们提前做好复习准备。',
     author:'教务处', category:'公告通知', replies:19, views:2456, time:'3天前', top:true, likes:64 },
 
+  /* ============ 第 3 页 ============ */
   { id:24, page:3, _order:1, title:'食堂一楼的糖醋里脊今天特别好吃',
-    excerpt:'今天中午食堂一楼的糖醋里脊炸得特别酥，酸甜也刚刚好。',
+    excerpt:'今天中午食堂一楼的糖醋里脊炸得特别酥，酸甜也刚刚好，推荐大家去尝尝！',
     author:'干饭人', category:'校园生活', replies:47, views:1298, time:'1周前', likes:95 },
 
+  /* ===== 求真社招新帖 · 留邮箱 ===== */
   { id:103, page:3, _order:2,
     title: '我们求真社十分缺人！学弟学妹们快来报名加入吧',
     excerpt: '我们求真社十分缺人！学弟学妹们快来报名加入吧！我们社团很意思的！',
@@ -758,7 +796,7 @@ const posts = [
       { no: 4, author: '霏羽聆晞', content: '社团有什么活动吗？' },
       { no: 5, author: '倾羽蔓喻', content: '我们社团每天都会搜集身边许多反常的灵异事件，并互相分享和探讨这其中的真相。' },
       { no: 6, author: '墨云遥',   content: '谁家《走近科学》来了？' },
-      { no: 7, author: '蓝莲花',   content: '社长和副社长你俩就别在这自娱自乐了，零个人想加入我们求真社。' },
+      { no: 7, author: '蓝莲花',   content: '社长和副社长你俩就别在这自娱自乐了，零个人想加入我们**求真社**。' },
       { no: 8, author: '倾羽蔓喻', content: '有意向的邮箱联系我，想投稿的或者想询问最近的灵异事件也可以联系我！我的邮箱是：yqryx@jhk.ccwu.cc' }
     ]
   },
@@ -768,28 +806,28 @@ const posts = [
     author:'想看跳高', category:'校园生活', replies:24, views:678, time:'1周前', likes:41 },
 
   { id:28, page:3, _order:4, title:'有喜欢打羽毛球的同学吗，周末约',
-    excerpt:'周末想找人一起打羽毛球，水平一般，主要是锻炼身体。',
+    excerpt:'周末想找人一起打羽毛球，水平一般，主要是锻炼身体，有意向的留言。',
     author:'羽毛球爱好者', category:'社团活动', replies:53, views:1264, time:'1周前', likes:67 },
 
   { id:110, page:3, _order:5,
     title: '咱们学校怎么不创立个绝区零社',
-    excerpt: '咱们学校怎么不创立个绝区零社？有没有同好？举个手看看。',
+    excerpt: '咱们学校怎么不创立个绝区零社？《绝区零》是米哈游出的动作游戏，打击感和角色设计都很顶，要是能有个社团一起玩、一起讨论剧情和配队，肯定很有意思。有没有同好？举个手看看。',
     author: 'Aru', category: '社团活动', replies: 19, views: 1089, time: '2天前', likes: 52,
     hasDetail: true,
     floors: [
       { no: 1,  author: 'Aru',      content: '咱们学校怎么不创立个绝区零社？《绝区零》是米哈游出的动作游戏，打击感和角色设计都很顶，要是能有个社团一起玩、一起讨论剧情和配队，肯定很有意思。有没有同好？举个手看看。' },
       { no: 2,  author: '星野拾光',  content: '绝区零？我玩过一阵，战斗确实爽，但手机有点带不动，后来弃了。' },
       { no: 3,  author: '白泽不吃鱼', content: '楼主你先把社团申请流程搞清楚再说吧，学校社团不是想建就能建的。' },
-      { no: 4,  author: '雾岛听风',  content: '我倒是挺感兴趣的，不过咱们学校已经有动漫社和电竞社了，老师那边能批吗？' },
+      { no: 4,  author: '雾岛听风',  content: '我倒是挺感兴趣的，不过咱们学校已经有动漫社和电竞社了，再搞一个游戏社团，老师那边能批吗？' },
       { no: 5,  author: 'Aru',      content: '可以挂靠在电竞社下面，或者先做兴趣小组，不一定非要正式社团。' },
-      { no: 6,  author: '七海千秋',  content: '绝区零的剧情我挺喜欢的，尤其是那种都市怪谈加科幻的风格。' },
+      { no: 6,  author: '七海千秋',  content: '绝区零的剧情我挺喜欢的，尤其是那种都市怪谈加科幻的风格，比一般的二次元手游有味道。' },
       { no: 7,  author: '夜航星',    content: '我觉得可以！我身边好几个同学都在玩，只是平时没人组织。' },
       { no: 8,  author: '拾柒',      content: '问题是，玩绝区零的人多吗？别到时候社团建起来，每次活动就三四个人。' },
       { no: 9,  author: '清风揽月',  content: '我玩，但我主玩PC端，手机搓玻璃实在受不了。' },
       { no: 10, author: '半盏流年',  content: '如果社团要拍宣传片或者做海报，我可以帮忙，正好练练手。' },
       { no: 11, author: '橘子汽水',  content: '你们说的这个游戏，是不是就是那个有只叫"邦布"的？我刷到过视频，挺可爱的。' },
-      { no: 12, author: '云深不知处', content: '对，邦布是里面的智能设备，设定挺有意思的。' },
-      { no: 13, author: '沐雨橙风',  content: '我们求真社之前也讨论过绝区零里的"空洞"设定，感觉和灵异事件有点像。' },
+      { no: 12, author: '云深不知处', content: '对，邦布是里面的智能设备，设定挺有意思的。我还写过一篇关于绝区零世界观的解析，回头可以发出来。' },
+      { no: 13, author: '沐雨橙风',  content: '我们**求真社**之前也讨论过绝区零里的"空洞"设定，感觉和灵异事件有点像，都是未知空间。' },
       { no: 14, author: '沉默的螺旋', content: '社团活动可以分几块：剧情考据、战斗配队、同人创作，再加一个每周联机日。' },
       { no: 15, author: '糖分超标',  content: '联机日放在周末下午行吗？平时晚自习结束太晚了。' },
       { no: 16, author: '冬眠的熊',  content: '我提个现实问题：建社团要指导老师，你们谁去说服老师？' },
@@ -805,7 +843,7 @@ const posts = [
     author:'数学教研组', category:'公告通知', replies:38, views:1675, time:'1周前', likes:61 },
 
   { id:30, page:3, _order:7, title:'关于教室空调使用的建议',
-    excerpt:'最近天气变化大，有些教室空调开得太冷，建议各班统一一下温度。',
+    excerpt:'最近天气变化大，有些教室空调开得太冷，建议各班统一一下温度，谢谢。',
     author:'怕冷的同学', category:'校园生活', replies:29, views:876, time:'1周前', likes:48 },
 
   { id:22, page:3, _order:8, title:'求推荐好用的错题整理APP',
@@ -813,7 +851,7 @@ const posts = [
     author:'APP选择困难', category:'求助问答', replies:56, views:1543, time:'1周前', likes:72 },
 
   { id:27, page:3, _order:9, title:'出了几本九成新的教辅，便宜出',
-    excerpt:'数学物理化学的教辅都有，基本都是九成新，价格便宜。',
+    excerpt:'数学物理化学的教辅都有，基本都是九成新，价格便宜，需要的私信。',
     author:'清书柜', category:'二手市场', replies:41, views:1087, time:'1周前', likes:35 },
 
   { id:23, page:3, _order:10, title:'学校图书馆有没有《三体》',
@@ -833,19 +871,19 @@ const posts = [
     author:'爱唱歌的小王', category:'社团活动', replies:36, views:1156, time:'1周前', likes:54 },
 
   { id:26, page:3, _order:14, title:'问一下，高三的晚自习几点结束',
-    excerpt:'想了解一下高三晚自习的结束时间，方便安排接送。',
+    excerpt:'想了解一下高三晚自习的结束时间，方便安排接送，谢谢。',
     author:'家长一枚', category:'求助问答', replies:22, views:934, time:'1周前', likes:29 },
 
-  /* ===== 隐藏帖 ===== */
+  /* ===================== 隐藏帖 ===================== */
 
+  /* 尖刀班公告（保留） */
   {
     id: 100, page:1, _order:99,
     title: '关于成立"尖刀班"的公告',
-    excerpt: '为深入贯彻因材施教原则，经学校研究决定，自2026年8月30日起正式成立"尖刀班"。',
+    excerpt: '为深入贯彻因材施教原则，进一步挖掘学生潜能，提升拔尖创新人才培养质量，经学校研究决定，自2026年8月30日起正式成立"尖刀班"。',
     author: '论坛管理员', category: '公告通知',
     replies: 0, views: 1, time: '2026年8月23日', likes: 0,
     hidden: true, hasDetail: true, keywords: ['二年八班', '二年九班'],
-    officialLink: true,
     floors: [
       { no: 1, author: '论坛管理员', content:
 `全体师生、家长：
@@ -853,7 +891,7 @@ const posts = [
 为深入贯彻因材施教原则，进一步挖掘学生潜能，提升拔尖创新人才培养质量，经学校研究决定，自2026年8月30日起正式成立"尖刀班"，面向全校开展分层培优教学。现将有关事项公告如下：
 
 一、办班宗旨
-坚持"面向全体、尊重差异、因材施教、全面发展"，在开齐开足国家规定课程的基础上，为学有余力、学科特长突出的学生提供更高阶的学习内容与思维训练平台。
+坚持"面向全体、尊重差异、因材施教、全面发展"，在开齐开足国家规定课程的基础上，为学有余力、学科特长突出的学生提供更高阶的学习内容与思维训练平台，培养其自主学习能力、创新意识和综合素养，同时带动年级整体学风建设。
 
 二、组建原则
 录取原则：以考试排名作为录取标准，排名靠前者录取。
@@ -881,43 +919,7 @@ const posts = [
     ]
   },
 
-  {
-    id: 112, page:1, _order:100,
-    title: '青山市实验中学关于学生常峻硕打架斗殴、校园霸凌事件的处理通报',
-    excerpt: '2025年11月13日，我校学生常峻硕因琐事与同学发生冲突，实施殴打、欺凌行为，造成林圻同学受伤。',
-    author: '论坛管理员', category: '公告通知',
-    replies: 0, views: 1, time: '2025年11月14日', likes: 0,
-    hidden: true, hasDetail: true, keywords: ['常峻硕'],
-    officialLink: true,
-    floors: [
-      { no: 1, author: '论坛管理员', content:
-`青山市实验中学关于学生常峻硕打架斗殴、校园霸凌事件的处理通报
-
-（青山市实验中学〔2025〕16号）
-
-全校师生：
-
-2025年11月13日，我校学生常峻硕因琐事与同学发生冲突，实施殴打、欺凌行为，造成**林圻**同学受伤。事件发生后，学校高度重视，立即成立调查组，配合公安机关开展调查取证，并第一时间安排受伤学生就医、心理疏导及家校沟通。
-
-经调查核实，常峻硕的行为已构成打架斗殴、校园霸凌，并造成他人轻微伤，性质恶劣，情节严重，严重违反校规校纪，涉嫌违法。经学校学生欺凌治理委员会认定，并根据《青山市实验中学学生违纪处分办法》第十条及相关规定，经学校研究决定：
-
-一、给予常峻硕劝退处理，按程序办理离校手续。
-
-二、将该生涉嫌违法线索及相关材料移交公安机关依法处理，学校全力配合警方后续工作。
-
-三、对受伤学生**林圻**及家属做好安抚、医疗、心理辅导和后续帮扶工作。
-
-四、在全校开展防校园欺凌、法治教育专项活动，加强排查和预警，坚决防止类似事件再次发生。
-
-警方现已立案，案号为：QS20251113004。学校对校园霸凌、打架斗殴等暴力行为坚持"零容忍"。
-
-特此通报。
-
-青山市实验中学
-2025年11月14日` }
-    ]
-  },
-
+  /* 常峻硕讣告 */
   {
     id: 119, page:1, _order:999,
     title: '讣告',
@@ -929,6 +931,7 @@ const posts = [
     redirectTo: 'fugao1.html'
   },
 
+  /* 高梓睿讣告 */
   {
     id: 120, page:1, _order:999.5,
     title: '讣告',
@@ -940,6 +943,7 @@ const posts = [
     redirectTo: 'fugao2.html'
   },
 
+  /* 数学天才帖 */
   {
     id: 113, page:1, _order:101,
     title: '听说二年七班出了个数学天才，连尖刀班都没比过',
@@ -950,7 +954,7 @@ const posts = [
     floors: [
       { no: 1,  author: '青柠不酸', content: '听说**二年七班**出了个数学天才，连尖刀班都没比过，还去参加奥赛了。有人知道是谁吗？' },
       { no: 2,  author: '云间月',   content: '二年七班？我印象里那个班不是普通班吗，怎么还有这种大神。' },
-      { no: 3,  author: '夏天的风', content: '我也听说了，好像是上次月考，数学单科年级第一不在尖刀班，在二年七班。' },
+      { no: 3,  author: '夏天的风', content: '我也听说了，好像是上次月考，数学单科年级第一不在尖刀班，在二年七班，当时就炸了。' },
       { no: 4,  author: '北岛不眠', content: '这有什么好炸的，尖刀班又不是每科都碾压，偶尔被人超一次很正常。' },
       { no: 5,  author: '一杯凉白开', content: '问题是听说不是偶尔，是连续两次都超过了。' },
       { no: 6,  author: '落日航班', content: '真的假的？那这人不应该早就被挖到尖刀班去了吗？' },
@@ -961,7 +965,7 @@ const posts = [
       { no: 11, author: '夏天的风', content: '而且我听说她**奥赛**也拿奖了，是省级的那种。' },
       { no: 12, author: '北岛不眠', content: '哪个奥赛？数学联赛？' },
       { no: 13, author: '夏天的风', content: '应该是，具体我不太清楚，反正听说挺厉害的。' },
-      { no: 14, author: '一杯凉白开', content: '那她是不是偏科特别严重？' },
+      { no: 14, author: '一杯凉白开', content: '那她是不是偏科特别严重？一般人搞竞赛的，其他科目都拉胯。' },
       { no: 15, author: '柚子味的猫', content: '还真不是，听说她其他科也不差，就是不太爱说话，平时挺低调的。' },
       { no: 16, author: '落日航班', content: '这种人最可怕了，明明实力强还不显山不露水。' },
       { no: 17, author: '山海皆可平', content: '所以到底叫什么名字啊，说了半天没一个人说的。' },
@@ -971,6 +975,7 @@ const posts = [
     ]
   },
 
+  /* 王小满喜报 */
   {
     id: 114, page:1, _order:102,
     title: '喜报｜青山市实验中学王小满同学荣获全国中学生数学学科奥林匹克竞赛省级赛区一等奖',
@@ -996,42 +1001,7 @@ const posts = [
     ]
   },
 
-  {
-    id: 115, page:1, _order:103,
-    title: '住宿生寝室分配名单',
-    excerpt: '男生宿舍 A栋：A-101 常峻硕、王乐韦、高梓睿、刘子轩；A-102 林圻、杨泽宇、赵明远、黄博文……',
-    author: '论坛管理员', category: '公告通知',
-    replies: 0, views: 8620, time: '2025年8月21日', likes: 0,
-    hidden: true, hasDetail: true, keywords: ['寝室'],
-    officialLink: true,
-    floors: [
-      { no: 1, author: '论坛管理员', content:
-`住宿生寝室分配名单
-
-男生宿舍 A栋（50间，200人）
-
-A-101：常峻硕、**王乐韦**、高梓睿、刘子轩
-A-102：林圻、杨泽宇、赵明远、黄博文
-A-103：周凯旋、吴天佑、徐嘉豪、孙立诚
-A-104：马思远、朱瑞霖、胡俊熙、郭子涵
-A-105：何雨泽、王宇航、林嘉树、罗子豪
-A-106：郑一鸣、梁世豪、谢文昊、宋子骞
-A-107：唐宇轩、许景程、韩沐阳、冯浩宇
-A-108：邓嘉航、曹俊楠、彭子墨、曾令轩
-A-109：肖泽凯、田浩辰、董家豪、潘远航
-A-110：袁宇翔、蒋子昂、蔡文轩、余俊豪
-…
-A-160：潘宇轩、袁泽凯、蒋子豪、蔡明远
-
-女生宿舍 B栋（50间，200人）
-
-B-201：王诗涵、李雨桐、张梦琪、刘欣怡
-B-202：陈思妍、杨紫萱、赵语彤、黄雅静
-…
-B-250：陈欣妍、杨诗涵、赵佳宁、黄雨薇` }
-    ]
-  },
-
+  /* 高梓睿关系户帖 */
   {
     id: 116, page:1, _order:104,
     title: '你们知道二年九班有个靠关系进来的吗？',
@@ -1048,10 +1018,10 @@ B-250：陈欣妍、杨诗涵、赵佳宁、黄雨薇` }
       { no: 6,  author: '云间月',   content: '听说他爸爸是市委书记，他妈妈是市长' },
       { no: 7,  author: '山海皆可平', content: '青山市的天黑了。' },
       { no: 8,  author: '青柠不酸', content: '这人是谁啊？' },
-      { no: 9,  author: '南城以殇', content: '我知道，你们说的应该是**高梓睿**。我是二年八班的，我们班也有一个靠关系进来的，叫常峻硕。' },
+      { no: 9,  author: '南城以殇', content: '我知道，你们说的应该是**高梓睿**。我是**二年八班**的，我们班也有一个靠关系进来的，叫常峻硕。' },
       { no: 10, author: '北岛不眠', content: '常峻硕？这人去年不就因为打架被劝退了吗？' },
-      { no: 11, author: '南城以殇', content: '公告上说是被劝退了，但据说给了校长不少好处，学校就把那个公告迅速隐藏了。' },
-      { no: 12, author: '南城以殇', content: '他们两个仗着自己有关系，十分嚣张，虽然说在尖刀班，但其实他俩的学习非常差，上课也只会睡觉。' },
+      { no: 11, author: '南城以殇', content: '公告上说是被劝退了，但据说给了校长不少好处，学校就把那个公告迅速隐藏了，本来也没几个人看见，再加上每个目击者都给了不少封口费，所以都不太知道这个事。' },
+      { no: 12, author: '南城以殇', content: '他们两个仗着自己有关系，十分嚣张，虽然说在尖刀班，但其实他俩的学习非常差，上课也只会睡觉，据说能考进咱们学校也是走后门了。' },
       { no: 13, author: '山海皆可平', content: '常峻硕这人什么来头？' },
       { no: 14, author: '南城以殇', content: '他爸爸是青山市公安局局长，他的大舅二舅是副局长。' },
       { no: 15, author: '山海皆可平', content: '青山市的天还能再黑点吗。' },
@@ -1060,75 +1030,18 @@ B-250：陈欣妍、杨诗涵、赵佳宁、黄雨薇` }
     ]
   },
 
+  /* ===== 新增隐藏帖：青山市实验中学 → 跳学校官网 ===== */
   {
-    id: 117, page:1, _order:105,
-    title: '关于给予林圻同学记大过处分的通告',
-    excerpt: '经查，一年七班学生林圻，于2025年10月13日，违反学校学生管理规定，私自携带手机进入校园。',
+    id: 121, page:1, _order:9999,
+    title: '青山市实验中学',
+    excerpt: '青山市实验中学官方网站 —— 通知公告、德育管理、校园新闻',
     author: '论坛管理员', category: '公告通知',
-    replies: 0, views: 6180, time: '2025年10月14日', likes: 0,
-    hidden: true, hasDetail: true, keywords: ['林圻'],
-    officialLink: true,
-    floors: [
-      { no: 1, author: '论坛管理员', content:
-`关于给予林圻同学记大过处分的通告
-
-青山市实验中学〔2025〕09号
-
-全校各班级、全体师生：
-
-经查，一年七班学生林圻，于2025年10月13日，违反学校学生管理规定，私自携带手机进入校园，被学校安全检查人员查获。
-
-该生行为严重违反了《青山市实验中学学生管理规定》第七条及《青山市实验中学学生住宿管理办法》第八条之规定，性质严重，影响恶劣。为严肃校纪校规，教育本人，警示他人，经学校学生工作处研究并报校领导批准，决定给予林圻同学以下处理：
-
-1. 给予林圻同学记大过处分，处分期限为12个月，记入本人学籍档案；
-2. 对林圻同学予以全校通报批评；
-3. 根据《青山市实验中学家庭经济困难学生资助管理办法》第3条之规定，取消林圻同学**贫困生**资助资格，自本通告发布之日起执行。
-
-希望全体同学引以为戒，严格遵守学校各项规章制度。
-
-特此通告。
-
-青山市实验中学学生工作处
-2025年10月14日` }
-    ]
+    replies: 0, views: 1, time: '——', likes: 0,
+    hidden: true, hasDetail: true, keywords: ['青山市实验中学'],
+    redirectTo: 'school.html'
   },
 
-  {
-    id: 118, page:1, _order:106,
-    title: '青山市实验高中贫困生补助名单',
-    excerpt: '青山市实验高中 2026-2027 学年度贫困生补助名单。本次名单较上学期有所调整，新增高梓睿、常峻硕两位同学。',
-    author: '论坛管理员', category: '公告通知',
-    replies: 0, views: 7410, time: '2025年10月15日', likes: 0,
-    hidden: true, hasDetail: true, keywords: ['贫困生'],
-    officialLink: true,
-    fileLink: '青山市实验高中贫困生补助名单.xlsx',
-    floors: [
-      { no: 1, author: '论坛管理员', content:
-        '本次名单较上学期有所调整，新增**高梓睿**、常峻硕两位同学（接替林圻）。\n\n完整名单请见附件。' }
-    ]
-  },
-
-  /* 臭泡茶帖（首页可见 · 引王小满） */
-  {
-    id: 109, page:2, _order:5.5,
-    title: '打听一个二年级的漂亮小姑娘',
-    excerpt: '求助，理科班第一排那个带绿色发箍的女生叫什么名字啊，我感觉她好好看。',
-    author: '臭泡茶的', category: '求助问答',
-    replies: 7, views: 583, time: '2天前', likes: 26,
-    hasDetail: true,
-    keywords: ['王小满'],
-    floors: [
-      { no: 1, author: '臭泡茶的', content: '求助，理科班第一排那个带绿色发箍的女生叫什么名字啊，我感觉她好好看。' },
-      { no: 2, author: '临东忆',   content: '绿色发箍？是不是头发有点卷、经常穿白色外套那个？我好像有印象。' },
-      { no: 3, author: '墨云遥',   content: '楼主你这是要展开追求了吗？板凳搬好，瓜子备好。' },
-      { no: 4, author: '归鹤隐',   content: '我好像知道，是不是二年七班的？姓王？但我不确定全名。' },
-      { no: 5, author: '南巷听风', content: '建议直接去问，别在这打听，小心被当成变态。' },
-      { no: 6, author: '霏羽聆晞', content: '我对这个人有印象！我之前跟她一个考场，人挺好的，学习也好。' },
-      { no: 7, author: '臭泡茶的', content: '谢谢大家！我就想认识一下，没别的意思，大家别误会。' },
-      { no: 8, author: '臭泡茶的', content: '知道名字的可以邮箱告诉我，我可以用劲爆消息换！我的邮箱：cpcd@jhk.ccwu.cc' }
-    ]
-  },
-
+  /* 王乐韦跳楼旧事 */
   {
     id: 111, page:1, _order:108,
     title: '有人初中是北校的吗，还记着去年在三号楼六楼又哭又闹还要跳楼的那人吗',
@@ -1196,7 +1109,6 @@ function escapeHTML(str){
   }[s]));
 }
 
-/* ===== 关键：解析 **xxx** 为 <strong>xxx</strong> ===== */
 function parseMarkup(escapedText){
   return escapedText.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
 }
@@ -1227,7 +1139,6 @@ function renderFloors(p){
     if (p.fileLink) {
       contentHTML = `<a href="${escapeHTML(p.fileLink)}" target="_blank" rel="noopener" class="file-link">${escapeHTML(p.fileLink)}</a>`;
     } else {
-      /* 先转义 → 再解析 **xxx** */
       contentHTML = parseMarkup(escapeHTML(f.content));
     }
 
@@ -1280,7 +1191,6 @@ function postCardHTML(p, q){
     ? p.redirectTo
     : (canDetail ? `#/post?id=${p.id}` : '#');
 
-  /* 关键：dying 加 class */
   let cls = 'post';
   if (canDetail) cls += ' clickable';
   if (p.dying) cls += ' dying';
@@ -1436,13 +1346,11 @@ document.addEventListener('click', e => {
 
 /* ================= 搜索匹配 ================= */
 function matchPost(p, ql){
-  /* 隐藏帖：只能通过 keywords 精确匹配 */
   if (p.hidden){
     if (!p.keywords || !p.keywords.length) return false;
     return p.keywords.some(k => k.toLowerCase() === ql);
   }
 
-  /* 非隐藏帖：关键词命中 或 标题/摘要/作者/分类模糊匹配 */
   if (p.keywords && p.keywords.some(k => k.toLowerCase() === ql)) return true;
 
   return p.title.toLowerCase().includes(ql) ||
@@ -1508,9 +1416,6 @@ function showPost(id){
     return;
   }
   const floorsHTML = renderFloors(p);
-  const officialHTML = p.officialLink
-    ? `<a href="school.html" class="official-link">查看学校官网原文</a>`
-    : `<button class="like" data-id="${p.id}"><span class="heart">♡</span><span class="num">${p.likes}</span></button>`;
 
   postDetail.innerHTML = `
     <article class="detail">
@@ -1533,7 +1438,9 @@ function showPost(id){
       ${floorsHTML}
       <div class="detail-foot">
         <span><b>${p.replies}</b> 回复 · <b>${p.views}</b> 浏览</span>
-        ${officialHTML}
+        <button class="like" data-id="${p.id}">
+          <span class="heart">♡</span><span class="num">${p.likes}</span>
+        </button>
       </div>
     </article>
   `;
@@ -1563,6 +1470,11 @@ window.addEventListener('hashchange', route);
 /* ================= 搜索提交 ================= */
 searchForm.addEventListener('submit', e => {
   e.preventDefault();
+  try{
+    var all = JSON.parse(localStorage.getItem('qs_clues') || '{}');
+    all['searched_' + q] = 1;
+    localStorage.setItem('qs_clues', JSON.stringify(all));
+   }catch(e){}
   const q = searchInput.value.trim();
   if (!q){ toast('请输入搜索关键词～'); return; }
   const target = '#/search?q=' + encodeURIComponent(q);
@@ -1577,7 +1489,7 @@ searchForm.addEventListener('submit', e => {
   else { location.hash = target; }
 });
 
-/* ================= 登录 ================= */
+/* ================= 登录功能 ================= */
 const loginMask = document.getElementById('loginMask');
 const loginBtn = document.getElementById('loginBtn');
 const loginClose = document.getElementById('loginClose');

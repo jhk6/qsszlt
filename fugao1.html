@@ -365,6 +365,17 @@
     });
   })();
 </script>
+<script>
+(function(){
+  try{
+    var all = JSON.parse(localStorage.getItem('qs_clues') || '{}');
+    all['visited_fugao1'] = 1;
+    localStorage.setItem('qs_clues', JSON.stringify(all));
+  }catch(e){}
+})();
+</script>
+
+
 
 </body>
 </html>
