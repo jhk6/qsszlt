@@ -161,7 +161,6 @@
   .footer{margin-top:40px;text-align:center;font-size:11px;
     color:#3f464e;letter-spacing:4px}
 
-  /* ===== 全屏「恭喜」遮罩 ===== */
   .congrats{
     position:fixed;
     inset:0;
@@ -266,6 +265,9 @@
 <div class="scan"></div>
 <div class="vignette"></div>
 
+<!-- 环境音 -->
+<audio id="ambient" src="ambient.mp3" loop preload="auto"></audio>
+
 <div class="paper">
   <div class="head">
     <h1>讣告</h1>
@@ -273,7 +275,6 @@
   </div>
 
   <div class="body">
-    <!-- 遗像 -->
     <div class="portrait-wrap">
       <div class="portrait">
         <img src="常峻硕.png" alt="常峻硕"
@@ -314,19 +315,18 @@
   <div class="footer">— 论 坛 帖 子 · 禁 止 回 复 —</div>
 </div>
 
-<!-- 全屏「恭喜」 -->
 <div class="congrats" id="congrats">
   <div class="congrats-text">恭喜</div>
   <div class="congrats-hint">— 点击任意位置继续 —</div>
 </div>
 
+<!-- ============ 「恭喜」逻辑 ============ -->
 <script>
   (function(){
     var paper    = document.querySelector('.paper');
     var congrats = document.getElementById('congrats');
     var shown    = false;
 
-    /* 条件一：paper 底部滚入视口 */
     function checkScroll(){
       if (shown) return;
       var rect  = paper.getBoundingClientRect();
@@ -336,7 +336,6 @@
       }
     }
 
-    /* 条件二：页面不够长（没有滚动条） */
     function checkHeight(){
       if (shown) return;
       var docH  = document.documentElement.scrollHeight;
@@ -365,6 +364,101 @@
     });
   })();
 </script>
+
+<!-- ============ 环境音（修复版） ============ -->
+<script>
+(function(){
+  'use strict';
+  try {
+    var audio = document.getElementById('ambient');
+    if (!audio){
+      console.error('[Ambient] ❌ 找不到 audio#ambient');
+      return;
+    }
+
+    console.log('[Ambient] 找到 audio，src =', audio.src);
+
+    var TARGET_VOLUME = 0.28;
+    var FADE_DURATION = 3000;
+    var started = false;
+    var fadeTimer = null;
+
+    audio.volume = 0;
+
+    function fadeIn(){
+      if (fadeTimer) clearInterval(fadeTimer);
+      var step = 20;
+      var stepCount = FADE_DURATION / step;
+      var increment = TARGET_VOLUME / stepCount;
+      fadeTimer = setInterval(function(){
+        if (audio.volume + increment >= TARGET_VOLUME){
+          audio.volume = TARGET_VOLUME;
+          clearInterval(fadeTimer);
+          fadeTimer = null;
+        } else {
+          audio.volume += increment;
+        }
+      }, step);
+    }
+
+    var evs = ['click','pointerdown','keydown','touchstart','touchend','scroll','wheel'];
+
+    function removeAllListeners(){
+      evs.forEach(function(ev){
+        document.removeEventListener(ev, attemptPlay);
+        window.removeEventListener(ev, attemptPlay);
+      });
+    }
+
+    function attemptPlay(){
+      if (started) return;
+
+      console.log('[Ambient] 尝试播放...');
+
+      var p = audio.play();
+
+      if (p && p.then){
+        p.then(function(){
+          started = true;
+          fadeIn();
+          removeAllListeners();
+          console.log('[Ambient] ✅ 播放成功');
+        }).catch(function(err){
+          console.log('[Ambient] ⚠️ 被拒绝:', err.name, '-', err.message);
+        });
+      } else {
+        started = true;
+        fadeIn();
+        removeAllListeners();
+        console.log('[Ambient] ✅ 播放成功（旧 API）');
+      }
+    }
+
+    evs.forEach(function(ev){
+      document.addEventListener(ev, attemptPlay, { passive: true });
+      window.addEventListener(ev, attemptPlay, { passive: true });
+    });
+
+    attemptPlay();
+
+    window.addEventListener('load', attemptPlay);
+    document.addEventListener('DOMContentLoaded', attemptPlay);
+
+    document.addEventListener('visibilitychange', function(){
+      if (document.hidden){
+        audio.pause();
+      } else if (started){
+        audio.play().catch(function(){});
+      }
+    });
+
+  } catch(e){
+    console.error('[Ambient] ❌ 脚本异常:', e);
+  }
+})();
+</script>
+
+<!-- ============ 埋点 ============ -->
 <script>
 (function(){
   try{
@@ -374,8 +468,6 @@
   }catch(e){}
 })();
 </script>
-
-
 
 </body>
 </html>
